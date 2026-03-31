@@ -393,7 +393,7 @@
           `&city=Krak%C3%B3w&country=Polska` +
           `&format=json&addressdetails=1&limit=10&accept-language=pl`;
 
-        let searchRes  = await fetch(searchUrl, { headers });
+        let searchRes  = await fetch(searchUrl, { headers, mode: 'cors' });
         let allResults = await searchRes.json();
 
         // Fallback free-form jeśli structured nic nie zwrócił
@@ -401,7 +401,7 @@
           searchUrl = `https://nominatim.openstreetmap.org/search?` +
             `q=${encodeURIComponent(query + ', Kraków')}` +
             `&format=json&addressdetails=1&limit=10&accept-language=pl&countrycodes=pl`;
-          searchRes  = await fetch(searchUrl, { headers });
+          searchRes  = await fetch(searchUrl, { headers, mode: 'cors' });
           const raw  = await searchRes.json();
           allResults = raw.filter(r => {
             const city = (r.address || {}).city || (r.address || {}).town || '';
@@ -428,7 +428,7 @@
           const revUrl  = `https://nominatim.openstreetmap.org/reverse?` +
             `lat=${place.lat}&lon=${place.lon}&format=json&addressdetails=1` +
             `&accept-language=pl&zoom=13`;
-          const revRes  = await fetch(revUrl, { headers });
+          const revRes  = await fetch(revUrl, { headers, mode: 'cors' });
           const revData = await revRes.json();
           const revAddr = revData.address || {};
 
