@@ -367,40 +367,32 @@
 
       showResult('loading', 'Sprawdzam adres...', '', '');
 
-      const headers = { 'User-Agent': 'BookingHost-Kompendium/1.0' };
-
       try {
         // Rozbij na ulicę i numer
         const parts      = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
         const streetPart = parts[1] ? parts[1].trim() : query.trim();
         const numberPart = parts[2] || '';
+        const fullQuery  = (numberPart ? streetPart + ' ' + numberPart : streetPart) + ', Warszawa';
 
-        // Structured query — szukamy limit=10 żeby złapać wszystkie wystąpienia
-        let searchUrl = `https://nominatim.openstreetmap.org/search?` +
-          `street=${encodeURIComponent((numberPart ? numberPart + ' ' : '') + streetPart)}` +
-          `&city=Warszawa&country=Polska` +
-          `&format=json&addressdetails=1&limit=10&accept-language=pl`;
+        // Geoapify Geocoding API – brak rate limitów, stabilne
+        const searchUrl = `https://api.geoapify.com/v1/geocode/search?` +
+          `text=${encodeURIComponent(fullQuery)}` +
+          `&filter=countrycode:pl` +
+          `&bias=proximity:19.944544,50.049683` +
+          `&lang=pl&limit=10` +
+          `&apiKey=bd1229116680495c949ee4b6b64b6cfb`;
 
-        let searchRes  = await fetch(searchUrl, { headers, mode: 'cors' });
-        let allResults = await searchRes.json();
+        const searchRes  = await fetch(searchUrl, { mode: 'cors' });
+        const searchData = await searchRes.json();
+        const features   = (searchData.features || []).filter(f => {
+          const city = (f.properties.city || '').toLowerCase();
+          return city.includes('warszawa');
+        });
 
-        // Fallback free-form jeśli structured nic nie zwrócił
-        if (!allResults || allResults.length === 0) {
-          searchUrl = `https://nominatim.openstreetmap.org/search?` +
-            `q=${encodeURIComponent(query + ', Warszawa')}` +
-            `&format=json&addressdetails=1&limit=10&accept-language=pl&countrycodes=pl`;
-          searchRes  = await fetch(searchUrl, { headers, mode: 'cors' });
-          const raw  = await searchRes.json();
-          allResults = raw.filter(r => {
-            const city = (r.address || {}).city || (r.address || {}).town || '';
-            return city.toLowerCase().includes('warszawa') || city.toLowerCase().includes('warsaw');
-          });
-        }
-
-        if (!allResults || allResults.length === 0) {
+        if (!features || features.length === 0) {
           showResult('unknown',
-            'Nie znaleziono adresu w Warszawie',
-            '', 'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy w Warszawie.');
+            'Nie znaleziono adresu w Warszawa',
+            '', 'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy w Warszawa.');
           return;
         }
 
@@ -408,23 +400,20 @@
         const mode      = activeBtn ? activeBtn.dataset.mode : 'lead';
         const modeLabel = mode === 'lead' ? 'Lead' : 'nBot';
 
-        // Dla każdego wyniku zrób reverse geocoding żeby dostać dzielnicę
+        // Dla każdego wyniku pobierz dzielnicę z właściwości Geoapify
         const resolved = [];
         const seen     = new Set();
 
-        for (const place of allResults) {
-          const revUrl  = `https://nominatim.openstreetmap.org/reverse?` +
-            `lat=${place.lat}&lon=${place.lon}&format=json&addressdetails=1` +
-            `&accept-language=pl&zoom=13`;
-          const revRes  = await fetch(revUrl, { headers, mode: 'cors' });
-          const revData = await revRes.json();
-          const revAddr = revData.address || {};
+        for (const feature of features) {
+          const props = feature.properties || {};
 
+          // Geoapify zwraca district, suburb, neighbourhood, quarter
           const candidates = [
-            revAddr.city_district, revAddr.borough,
-            revAddr.quarter, revAddr.suburb,
-            (place.address || {}).city_district,
-            (place.address || {}).borough,
+            props.district,
+            props.suburb,
+            props.quarter,
+            props.neighbourhood,
+            props.county,
           ].filter(Boolean);
 
           let slug = null;
@@ -438,7 +427,8 @@
 
           const displayName = districtNames[slug] || slug;
           const status      = getCoverageStatus(slug, mode);
-          const shortAddr   = place.display_name.split(',').slice(0, 2).join(',').trim();
+          const shortAddr   = [props.street, props.housenumber, props.district || props.suburb]
+            .filter(Boolean).join(' ');
           resolved.push({ slug, displayName, status, shortAddr });
         }
 
@@ -448,7 +438,6 @@
           return;
         }
 
-        // Renderuj wszystkie wyniki
         renderMultiResult(resolved, modeLabel);
 
       } catch (err) {
