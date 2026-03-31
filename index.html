@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Kompendium Wiedzy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo-box">BH</div>
+      <div class="logo-text">
+        <div class="logo-title">BookingHost</div>
+        <div class="logo-subtitle">Kompendium wiedzy</div>
+      </div>
+    </div>
+    <div class="header-badge">Zespół Wsparcia Sprzedaży</div>
+  </header>
+
+  <nav class="top-nav" aria-label="Główna nawigacja">
+    <button class="tab active" data-tab="start">
+      <span class="tab-icon">🏠</span>
+      <span>Start</span>
+    </button>
+    <button class="tab" data-tab="lokalizacje">
+      <span class="tab-icon">📍</span>
+      <span>Obsługiwane lokalizacje</span>
+    </button>
+    <button class="tab" data-tab="faq">
+      <span class="tab-icon">❓</span>
+      <span>FAQ</span>
+    </button>
+    <button class="tab" data-tab="nagrania">
+      <span class="tab-icon">🎧</span>
+      <span>Nagrania rozmów</span>
+    </button>
+    <button class="tab" data-tab="kontakt">
+      <span class="tab-icon">👩‍💼</span>
+      <span>Kontakt do ekspertek</span>
+    </button>
+    <button class="tab" data-tab="nbot">
+      <span class="tab-icon">🤖</span>
+      <span>nBot</span>
+    </button>
+    <button class="tab" data-tab="salesforce">
+      <span class="tab-icon">☁️</span>
+      <span>Salesforce</span>
+    </button>
+  </nav>
+
+  <main class="layout">
+    <!-- START -->
+    <section id="start" class="page active">
+      <div class="page-header">
+        <h1>🏠 Start</h1>
+        <p>Wewnętrzne centrum wiedzy dla pracowników BookingHost.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-label">Kompendium wiedzy</div>
+        <h2>Jedno miejsce dla najważniejszych procesów, kontaktów i materiałów szkoleniowych</h2>
+        <p>
+          W tym miejscu zebrane są informacje operacyjne dla zespołu: zakres działania w poszczególnych
+          miastach, odpowiedzi na najczęstsze pytania, wzorcowe nagrania rozmów, kontakty do ekspertek
+          oraz instrukcje pracy z nBot i Salesforce.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <div class="card-label">Lokalizacje</div>
+          <div class="stat-value">16</div>
+          <div class="stat-desc">Aktywne miasta</div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="card-label">FAQ</div>
+          <div class="stat-value">8</div>
+          <div class="stat-desc">Najczęstsze pytania z codziennej pracy</div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="card-label">Nagrania</div>
+          <div class="stat-value">10</div>
+          <div class="stat-desc">Przykładowe rozmowy szkoleniowe</div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="card-label">Ekspertki</div>
+          <div class="stat-value">8</div>
+          <div class="stat-desc">Bezpośrednie kontakty do wsparcia</div>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="section-head">
+            <h3>Szybki dostęp</h3>
+          </div>
+          <div class="quick-links">
+            <button class="quick-link" data-go="lokalizacje">📍 Sprawdź lokalizacje</button>
+            <button class="quick-link" data-go="faq">❓ Otwórz FAQ</button>
+            <button class="quick-link" data-go="nagrania">🎧 Przejdź do nagrań</button>
+            <button class="quick-link" data-go="kontakt">👩‍💼 Zobacz kontakty</button>
+            <button class="quick-link" data-go="nbot">🤖 Instrukcja nBot</button>
+            <button class="quick-link" data-go="salesforce">☁️ Instrukcja Salesforce</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <h3>Najważniejsze informacje</h3>
+          </div>
+          <ul class="bullet-list">
+            <li>Wszystkie procesy operacyjne i sprzedażowe powinny być aktualizowane na bieżąco.</li>
+            <li>Po każdej rozmowie z właścicielem należy uzupełnić notatkę w systemie.</li>
+            <li>W sprawach pilnych eskalacja powinna następować zgodnie z priorytetem SLA.</li>
+            <li>Materiały w sekcjach nBot i Salesforce traktuj jako punkt odniesienia do codziennej pracy.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- LOKALIZACJE -->
+    <section id="lokalizacje" class="page">
+      <div class="page-header">
+        <h1>📍 Obsługiwane lokalizacje</h1>
+        <p>Lista miast i regionów, w których świadczymy usługi zarządzania najmem.</p>
+      </div>
+
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input id="city-search" type="text" placeholder="Szukaj lokalizacji..." />
+      </div>
+
+      <div class="grid-3" id="city-grid">
+        <a class="city-card city-link" data-city="Warszawa" href="warszawa.html">
+            <div class="city-icon">🏙️</div>
+            <div>
+                <h3>Warszawa</h3>
+                <p>Centrum, Śródmieście, Praga, Mokotów, Żoliborz</p>
+                <span class="city-tag">Aktywna</span>
+            </div>
+          </a>
+
+        <a class="city-card city-link" data-city="Kraków" href="krakow.html">
+          <div class="city-icon">🏰</div>
+          <div>
+            <h3>Kraków</h3>
+            <p>Stare Miasto, Kazimierz, Podgórze, Nowa Huta</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </a>
+
+        <article class="city-card" data-city="Wrocław">
+          <div class="city-icon">🌉</div>
+          <div>
+            <h3>Wrocław</h3>
+            <p>Stare Miasto, Krzyki, Fabryczna, Psie Pole</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Gdańsk">
+          <div class="city-icon">⚓</div>
+          <div>
+            <h3>Gdańsk / Trójmiasto</h3>
+            <p>Gdańsk, Gdynia, Sopot – całe Trójmiasto</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Poznań">
+          <div class="city-icon">🎠</div>
+          <div>
+            <h3>Poznań</h3>
+            <p>Stare Miasto, Jeżyce, Wilda, Grunwald</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Łódź">
+          <div class="city-icon">🏭</div>
+          <div>
+            <h3>Łódź</h3>
+            <p>Śródmieście, Widzew, Górna, Polesie</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Zakopane">
+          <div class="city-icon">⛰️</div>
+          <div>
+            <h3>Zakopane</h3>
+            <p>Centrum, Krupówki, Gubałówka</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Katowice">
+          <div class="city-icon">🏗️</div>
+          <div>
+            <h3>Katowice / GOP</h3>
+            <p>Katowice, Chorzów, Sosnowiec, Gliwice</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Szczecin">
+          <div class="city-icon">🌊</div>
+          <div>
+            <h3>Szczecin</h3>
+            <p>Śródmieście, Prawobrzeże, Pogodno</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="page">
+      <div class="page-header">
+        <h1>❓ Najczęściej zadawane pytania</h1>
+        <p>Odpowiedzi na pytania, z którymi najczęściej spotykamy się w pracy.</p>
+      </div>
+
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input id="faq-search" type="text" placeholder="Szukaj w FAQ..." />
+      </div>
+
+      <div id="faq-list">
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Co gwarantujemy w ramach 20% prowizji?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+  <p>
+    <strong>Wstęp (Budowanie wartości):</strong>
+    W ramach tej prowizji bierzemy na siebie pełną opiekę nad nieruchomością,
+    tak aby dla Pana/Pani ten najem był całkowicie bezobsługowy.
+    Krótko mówiąc: my pracujemy, Pan/Pani otrzymuje przelew.
+  </p>
+
+  <div class="faq-section">
+    <h4>1. Pełne bezpieczeństwo i odpowiedzialność</h4>
+    <p><strong>Gwarancja stanu lokalu:</strong> Przed startem spisujemy szczegółowy protokół zdawczo-odbiorczy. Od tego momentu to my bierzemy pełną odpowiedzialność za gości. Jeśli dojdzie do zniszczenia, uszkodzenia czy kradzieży – to my za to odpowiadamy i przywracamy mieszkanie do stanu pierwotnego.</p>
+    <p><strong>Ubezpieczenie:</strong> Posiadamy profesjonalne ubezpieczenie zarządcy, które dodatkowo chroni Pana/Pani interesy.</p>
+  </div>
+
+  <div class="faq-section">
+    <h4>2. Maksymalizacja zysków</h4>
+    <p><strong>Marketing i sprzedaż:</strong> Aktywne zarządzanie obejmuje pełny marketing na wszystkich portalach (Booking, Airbnb) oraz aktywne sterowanie cenami, aby mieszkanie zarabiało jak najwięcej w zależności od sezonu i wydarzeń w mieście.</p>
+  </div>
+
+  <div class="faq-section">
+    <h4>3. Perfekcyjny stan techniczny</h4>
+    <p><strong>Utrzymanie standardu:</strong> Nasi koordynatorzy są w terenie 7 dni w tygodniu. Regularnie sprawdzają jakość sprzątania i na bieżąco naprawiają drobne usterki, zanim staną się problemem. Dzięki temu po zakończeniu współpracy oddajemy mieszkanie w takim samym stanie, w jakim je odebraliśmy.</p>
+  </div>
+
+  <div class="faq-section">
+    <h4>4. Święty spokój</h4>
+    <p><strong>Obsługa gości:</strong> Przejmujemy całą komunikację z gośćmi. Pan/Pani nie musi odbierać telefonów o północy czy martwić się o przekazanie kluczy — nasze biuro obsługi czuwa nad tym przez cały tydzień.</p>
+  </div>
+</div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Ile zarobię na moim mieszkaniu?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            GWstęp (Konkret i profesjonalizm): "To kluczowe pytanie i podchodzimy do niego bardzo rzetelnie. Nie rzucamy kwot 'z sufitu', ponieważ każdy lokal jest inny. Naszym celem jest wyciśnięcie z Pana/Pani nieruchomości maksimum rynkowego potencjału."
+              1. Jak to sprawdzimy? (Proces analityczny)
+              Analiza : "Nasz analityk przygotuje dla Pana/Pani bezpłatną estymację przychodów. Robimy to na podstawie realnych danych z mieszkań o podobnym standardzie i lokalizacji, które już u nas zarabiają."
+              Personalizacja: "Bierzemy pod uwagę nie tylko metraż, ale też wyposażenie, widok z okna czy bliskość atrakcji. Dzięki temu otrzyma Pan/Pani realny prognozowany wynik finansowy, a nie tylko teoretyczne wyliczenia."
+              2. Dlaczego z nami zarobi Pan/Pani więcej? (Wartość dodana)
+              Dynamiczne Ceny: "Stosujemy systemy revenue management – codziennie dopasowujemy ceny do popytu (koncerty, targi, święta), aby mieszkanie nie stało puste i zarabiało więcej niż przy najmie długoterminowym."
+              Obłożenie: "Dzięki obecności na wielu portalach jednocześnie i statusowi Superhosta, utrzymujemy wysokie obłożenie nawet poza ścisłym sezonem."
+              3. Następny krok (Zamknięcie i wezwanie do działania)
+              Bezpłatna wycena: "Najlepiej będzie, jeśli nasz ekspert obejrzy mieszkanie (lub rzut lokalu) i przygotujemy dla Pana/Pani taką symulację zysków 'czarno na białym'."
+
+
+              💡 Wskazówki dla agenta:
+              Unikaj obietnic bez pokrycia: Nigdy nie podawaj kwoty "na oko" przez telefon (np. "na pewno 5000 zł"). Jeśli się nie sprawdzi, klient będzie rozczarowany.
+              Sprzedawaj spotkanie/analizę: Celem tej rozmowy nie jest wyliczenie zysku, ale umówienie klienta na kontakt z ekspertem, który tę analizę przedstawi.
+              Podkreślaj "Bezpłatność": Słowo "bezpłatna estymacja" zdejmuje z klienta presję i ułatwia podjęcie decyzji o kolejnym kroku.
+
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Jak obliczana jest prowizja BookingHost?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Prowizja wynosi standardowo 20–25% od przychodu netto po odjęciu opłat platform.
+            Dokładny poziom zależy od wybranego pakietu usług i warunków współpracy.
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Jak dodać nowe ogłoszenie do systemu?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Ogłoszenie dodaje się przez panel w Salesforce w sekcji nieruchomości. Należy uzupełnić
+            wymagane pola: adres, metraż, liczba sypialni, wyposażenie i cena bazowa. Ogłoszenie
+            trafia do recenzji przed publikacją.
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Kiedy właściciel otrzymuje raport miesięczny?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Raport miesięczny generuje się automatycznie i jest wysyłany do 5. dnia kolejnego miesiąca.
+            Zawiera przychody, obłożenie, liczbę rezerwacji i oceny gości.
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Jak działa dynamic pricing w ogłoszeniach?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Ceny są aktualizowane automatycznie z uwzględnieniem sezonowości, obłożenia rynkowego,
+            dni tygodnia, lokalnych wydarzeń i historii rezerwacji. Manager może ustawić progi
+            minimalne i maksymalne.
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Co zrobić w przypadku szkody wyrządzonej przez gościa?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            W ciągu 24 godzin od wymeldowania należy przygotować dokumentację zdjęciową, zgłosić szkodę
+            w systemie i oszacować koszt naprawy. Dokumentacja musi być złożona przed kolejnym meldunkiem.
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Jak wygląda proces rozwiązania umowy przez właściciela?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Właściciel składa wypowiedzenie zgodnie z zapisami umowy. Następnie sprawa trafia do opiekuna,
+            który prowadzi rozmowę retencyjną oraz koordynuje dalsze kroki operacyjne.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- NAGRANIA -->
+    <section id="nagrania" class="page">
+      <div class="page-header">
+        <h1>🎧 Nagrania rozmów</h1>
+        <p>Przykładowe rozmowy z właścicielami i gośćmi – materiał szkoleniowy.</p>
+      </div>
+
+      <div class="info-box">
+        <strong>Uwaga:</strong> podmień ścieżki plików audio w `main.js`, aby odtwarzacze działały z realnymi nagraniami.
+      </div>
+
+      <div class="grid-2" id="recordings-grid"></div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="page">
+      <div class="page-header">
+        <h1>👩‍💼 Kontakt do ekspertek</h1>
+        <p>Bezpośredni kontakt do specjalistek w poszczególnych miastach.</p>
+      </div>
+
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input id="expert-search" type="text" placeholder="Szukaj ekspertki lub miasta..." />
+      </div>
+
+      <div class="stack-list" id="expert-list"></div>
+    </section>
+
+    <!-- NBOT -->
+    <section id="nbot" class="page">
+      <div class="page-header">
+        <h1>🤖 nBot – instrukcja obsługi</h1>
+        <p>Jak efektywnie korzystać z aplikacji nBot w codziennej pracy.</p>
+      </div>
+
+      <div class="info-box">
+        <strong>📌 Czym jest nBot?</strong><br />
+        nBot to wewnętrzna platforma do zarządzania zgłoszeniami, komunikacją z gośćmi i koordynacji
+        zadań operacyjnych.
+      </div>
+
+      <div class="guide-section">
+        <h2>🚀 Pierwsze kroki</h2>
+        <div class="step-list">
+          <article class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Logowanie do nBot</h4>
+              <p>Przejdź na adres firmowej aplikacji, użyj firmowego e-maila i hasła nadanego przez IT.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Pulpit główny</h4>
+              <p>Po zalogowaniu widzisz otwarte zgłoszenia, zadania, priorytety i komunikację z gośćmi.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Nowe zgłoszenie</h4>
+              <p>Wybierz typ zgłoszenia, przypisz miasto, opisz problem i skieruj sprawę do właściwej kolejki.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Komunikacja z gościem</h4>
+              <p>Każda sprawa ma historię wiadomości i status, dzięki czemu łatwo zachować ciągłość obsługi.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <h2>⚙️ Kluczowe funkcje nBot</h2>
+        <div class="feature-grid">
+          <article class="feature-tile">
+            <div class="feature-tile-icon">📋</div>
+            <div>
+              <h4>Zarządzanie zgłoszeniami</h4>
+              <p>Rejestracja, kategoryzacja i śledzenie wszystkich spraw w jednym miejscu.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">📅</div>
+            <div>
+              <h4>Kalendarz operacyjny</h4>
+              <p>Harmonogram sprzątań, check-inów, inspekcji i zadań lokalnych.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">📊</div>
+            <div>
+              <h4>Raporty i statystyki</h4>
+              <p>Podgląd obłożenia, czasu reakcji i jakości obsługi dla wybranych okresów.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">🔔</div>
+            <div>
+              <h4>Powiadomienia</h4>
+              <p>Alerty dla zgłoszeń pilnych, przekroczonych SLA i nowych zadań.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SALESFORCE -->
+    <section id="salesforce" class="page">
+      <div class="page-header">
+        <h1>☁️ Salesforce – instrukcja</h1>
+        <p>Jak korzystamy z Salesforce CRM w procesach sprzedaży i obsługi właścicieli.</p>
+      </div>
+
+      <div class="info-box">
+        <strong>☁️ Czym jest Salesforce?</strong><br />
+        To główny system CRM do obsługi leadów, kontaktów, okazji sprzedażowych, historii komunikacji i raportowania.
+      </div>
+
+      <div class="guide-section">
+        <h2>🏁 Podstawy Salesforce</h2>
+        <div class="step-list">
+          <article class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Logowanie i nawigacja</h4>
+              <p>Pracuj na własnym widoku, aktualizuj zadania i kontroluj pipeline na bieżąco.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Lead – nowy właściciel</h4>
+              <p>Po wejściu leada przejmij go, zweryfikuj dane i ustaw właściwy status po pierwszym kontakcie.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Konwersja leada</h4>
+              <p>Po kwalifikacji tworzony jest kontakt i okazja, która trafia do lejka sprzedażowego.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Etapy lejka</h4>
+              <p>Kwalifikacja, prezentacja, oferta, negocjacje, podpisana umowa, wygrana lub przegrana.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>Logowanie aktywności</h4>
+              <p>Po każdej rozmowie lub mailu dodaj krótką notatkę i wynik kontaktu.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <h2>📊 Kluczowe widoki i raporty</h2>
+        <div class="feature-grid">
+          <article class="feature-tile">
+            <div class="feature-tile-icon">📌</div>
+            <div>
+              <h4>Mój pipeline</h4>
+              <p>Kanban okazji sprzedażowych w podziale na etapy.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">📈</div>
+            <div>
+              <h4>Raport konwersji</h4>
+              <p>Podgląd skuteczności lejka z podziałem na miesiące, miasta i konsultantów.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">⏰</div>
+            <div>
+              <h4>Zadania przeterminowane</h4>
+              <p>Lista spraw wymagających pilnego follow-upu.</p>
+            </div>
+          </article>
+
+          <article class="feature-tile">
+            <div class="feature-tile-icon">🏆</div>
+            <div>
+              <h4>KPI zespołu</h4>
+              <p>Dashboard ze spotkaniami, umowami, konwersją i realizacją celu.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

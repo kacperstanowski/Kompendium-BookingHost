@@ -1,0 +1,676 @@
+:root {
+  --teal: #00c2b3;
+  --teal-dark: #0b8f86;
+  --navy: #1a2535;
+  --bg: #eef5f7;
+  --card: #ffffff;
+  --border: #d7e5ea;
+  --text: #16202f;
+  --muted: #67778b;
+  --green: #24b86b;
+  --green-soft: #dff6e9;
+  --red: #e04a4a;
+  --red-soft: #fde6e6;
+  --selected: #0f1720;
+  --selected-soft: #dbe3ec;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── HEADER ─────────────────────────────── */
+.site-header {
+  height: 68px;
+  background: var(--navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.16);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 2px;
+}
+
+.back-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: #9cf2ea;
+}
+
+/* ── LAYOUT ──────────────────────────────── */
+.layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 24px 40px;
+}
+
+/* ── HERO + CONTROLS ─────────────────────── */
+.hero-card,
+.controls-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.hero-card {
+  padding: 28px;
+  margin-bottom: 18px;
+  background: linear-gradient(180deg, #f8ffff 0%, #ffffff 100%);
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e3fbf8;
+  color: var(--teal-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-card h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.hero-card p {
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 980px;
+}
+
+.controls-card {
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ── MODE SWITCH ─────────────────────────── */
+.mode-switch {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.mode-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--navy);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mode-btn:hover {
+  border-color: var(--teal);
+  background: #eefdff;
+}
+
+.mode-btn.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+/* ── LEGEND ──────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.legend-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+}
+
+.legend-color.covered   { background: var(--green); }
+.legend-color.uncovered { background: var(--red); }
+.legend-color.selected  { background: var(--selected); }
+
+/* ── MAP + INFO PANEL ────────────────────── */
+.city-body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.55fr;
+  gap: 18px;
+}
+
+.city-map-area,
+.city-info-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.city-map-area {
+  padding: 18px;
+}
+
+.city-map-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #eef4f6;
+  border: 1px solid #e6eef2;
+}
+
+#city-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── DISTRICT PATHS ──────────────────────── */
+.w-district {
+  cursor: pointer;
+  stroke: #f7fbfc;
+  stroke-width: 8;
+  vector-effect: non-scaling-stroke;
+  transition: filter 0.2s ease, opacity 0.2s ease, fill 0.2s ease;
+}
+
+.w-district:hover {
+  filter: brightness(0.93);
+}
+
+.w-district.covered {
+  fill: var(--green) !important;
+}
+
+.w-district.uncovered {
+  fill: var(--red) !important;
+}
+
+.w-district.selected {
+  stroke: var(--selected);
+  stroke-width: 11;
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 32, 0.14));
+}
+
+/* ── MAP LABELS ──────────────────────────── */
+.w-label {
+  font-size: 26px;
+  font-weight: 700;
+  fill: #ffffff;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.w-label-sm {
+  font-size: 19px;
+}
+
+/* ── INFO PANEL ──────────────────────────── */
+.city-info-panel {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.city-kicker {
+  color: var(--teal-dark);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.city-district-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.55rem;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.city-status-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.city-status-badge.covered {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.city-status-badge.uncovered {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.city-status-badge.neutral {
+  background: var(--selected-soft);
+  color: #5f6e7f;
+}
+
+.city-info-desc {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.city-info-box {
+  background: #f7fbfc;
+  border: 1px solid #e7eef2;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.city-info-box h4 {
+  font-size: 0.98rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.city-info-box ul {
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.city-mode-label {
+  color: var(--muted);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1150px) {
+  .city-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    height: auto;
+    min-height: 68px;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .layout {
+    padding: 18px 14px 30px;
+  }
+
+  .controls-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .w-label {
+    font-size: 18px;
+  }
+
+  .w-label-sm {
+    font-size: 14px;
+  }
+
+  .hero-card h1 {
+    font-size: 1.55rem;
+  }
+}
+
+/* ── DISTRICT LEGEND ─────────────────────── */
+.city-legend {
+  margin-top: 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.city-legend-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.city-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 16px;
+}
+
+.city-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.city-legend-num {
+  font-family: "Georgia", serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy);
+  min-width: 28px;
+  flex-shrink: 0;
+}
+
+.city-legend-name {
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .city-legend-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── ADDRESS SEARCH ──────────────────────── */
+.addr-search-section {
+  margin-top: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 32px;
+}
+
+.addr-search-kicker {
+  color: var(--teal-dark);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.addr-search-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.addr-search-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+
+.addr-search-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addr-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  max-width: 680px;
+}
+
+.addr-input-wrap:focus-within {
+  border-color: var(--teal);
+}
+
+.addr-input-icon {
+  padding: 0 14px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.addr-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.96rem;
+  color: var(--navy);
+  padding: 14px 0;
+  background: transparent;
+}
+
+.addr-btn {
+  border: none;
+  background: var(--teal);
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.addr-btn:hover {
+  background: var(--teal-dark);
+}
+
+.addr-examples {
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.addr-example {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--teal-dark);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.15s ease;
+  font-family: "DM Sans", sans-serif;
+}
+
+.addr-example:hover {
+  background: var(--teal-light);
+  border-color: var(--teal);
+}
+
+/* Result box */
+.addr-result {
+  margin-top: 18px;
+  border-radius: 14px;
+  padding: 18px 22px;
+  max-width: 680px;
+  transition: all 0.25s ease;
+}
+
+.addr-result--hidden   { display: none; }
+.addr-result--loading  { background: #f5f8fa; border: 1px solid var(--border); }
+.addr-result--covered  { background: var(--green-soft); border: 1.5px solid var(--green); }
+.addr-result--uncovered{ background: var(--red-soft); border: 1.5px solid var(--red); }
+.addr-result--unknown  { background: #f5f8fa; border: 1px solid var(--border); }
+.addr-result--lead-only{ background: #fff8e1; border: 1.5px solid #e08c00; }
+
+.addr-result-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.addr-result-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.addr-result-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.addr-result-district {
+  font-size: 0.88rem;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.addr-result-detail {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .addr-search-section {
+    padding: 20px 16px;
+  }
+  .addr-btn {
+    padding: 14px 16px;
+  }
+}
+
+/* ── MULTI-RESULT LIST ───────────────────── */
+.addr-result--multi {
+  background: #f7fbfc;
+  border: 1px solid var(--border);
+}
+
+.addr-result-multi-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.addr-multi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addr-multi-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+}
+
+.addr-multi-item--covered {
+  background: var(--green-soft);
+  border-color: var(--green);
+}
+
+.addr-multi-item--uncovered {
+  background: var(--red-soft);
+  border-color: var(--red);
+}
+
+.addr-multi-item--lead-only {
+  background: #fff8e1;
+  border-color: #e08c00;
+}
+
+.addr-multi-item--unknown {
+  background: #f5f8fa;
+  border-color: var(--border);
+}
+
+.addr-multi-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.addr-multi-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.addr-multi-info strong {
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+
+.addr-multi-info span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
