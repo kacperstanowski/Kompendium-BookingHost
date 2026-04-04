@@ -67,6 +67,39 @@
       </div>
     </section>
 
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Krakowie</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu — dzielnica zostanie podświetlona na mapie.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input"
+            placeholder="np. Floriańska 1, Dietla 50, Aleja Róż 10..."
+            autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Floriańska 1">Floriańska 1</button>
+          <button class="addr-example" data-val="Dietla 50">Dietla 50</button>
+          <button class="addr-example" data-val="Aleja Róż 10">Aleja Róż 10</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="city-body">
       <div class="city-map-area">
 
@@ -119,39 +152,6 @@
         </div>
       </aside>
     </div>
-
-    <section class="addr-search-section">
-      <div class="addr-search-header">
-        <div class="addr-search-kicker">Sprawdź adres</div>
-        <h2 class="addr-search-title">Wpisz adres w Krakowie</h2>
-        <p class="addr-search-desc">Wpisz ulicę i numer domu — dzielnica zostanie podświetlona na mapie.</p>
-      </div>
-      <div class="addr-search-box">
-        <div class="addr-input-wrap">
-          <span class="addr-input-icon">📍</span>
-          <input id="addr-input" type="text" class="addr-input"
-            placeholder="np. Floriańska 1, Dietla 50, Aleja Róż 10..."
-            autocomplete="off" />
-          <button id="addr-btn" class="addr-btn">Sprawdź</button>
-        </div>
-        <div class="addr-examples">
-          Przykłady:
-          <button class="addr-example" data-val="Floriańska 1">Floriańska 1</button>
-          <button class="addr-example" data-val="Dietla 50">Dietla 50</button>
-          <button class="addr-example" data-val="Aleja Róż 10">Aleja Róż 10</button>
-        </div>
-      </div>
-      <div id="addr-result" class="addr-result addr-result--hidden">
-        <div class="addr-result-inner">
-          <div id="addr-result-icon" class="addr-result-icon"></div>
-          <div class="addr-result-content">
-            <div id="addr-result-title" class="addr-result-title"></div>
-            <div id="addr-result-district" class="addr-result-district"></div>
-            <div id="addr-result-detail" class="addr-result-detail"></div>
-          </div>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -289,7 +289,45 @@
       }).addTo(map);
 
       map.fitBounds(gLayer.getBounds(), { padding: [10, 10] });
+      addRomanLabels();
       updateUncoveredList();
+    }
+
+    function addRomanLabels() {
+      var labels = [
+        { nr: 'I',     lat: 50.06622, lon: 19.93969 },
+        { nr: 'II',    lat: 50.06621, lon: 19.96344 },
+        { nr: 'III',   lat: 50.08688, lon: 19.97502 },
+        { nr: 'IV',    lat: 50.10599, lon: 19.92178 },
+        { nr: 'V',     lat: 50.07137, lon: 19.91766 },
+        { nr: 'VI',    lat: 50.08377, lon: 19.87521 },
+        { nr: 'VII',   lat: 50.06087, lon: 19.84375 },
+        { nr: 'VIII',  lat: 49.99797, lon: 19.86787 },
+        { nr: 'IX',    lat: 50.01525, lon: 19.92813 },
+        { nr: 'X',     lat: 49.98606, lon: 19.94878 },
+        { nr: 'XI',    lat: 50.01205, lon: 19.96713 },
+        { nr: 'XII',   lat: 50.01400, lon: 20.02844 },
+        { nr: 'XIII',  lat: 50.03673, lon: 20.02417 },
+        { nr: 'XIV',   lat: 50.06866, lon: 20.01323 },
+        { nr: 'XV',    lat: 50.09865, lon: 20.01025 },
+        { nr: 'XVI',   lat: 50.08562, lon: 20.03231 },
+        { nr: 'XVII',  lat: 50.10378, lon: 20.08989 },
+        { nr: 'XVIII', lat: 50.08293, lon: 20.12294 },
+      ];
+      labels.forEach(function(l) {
+        L.marker([l.lat, l.lon], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div style="font-family:Georgia,serif;font-size:11px;font-weight:800;' +
+              'color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.8),0 0 6px rgba(0,0,0,0.5);' +
+              'white-space:nowrap;pointer-events:none;user-select:none;">' + l.nr + '</div>',
+            iconSize: [32, 16],
+            iconAnchor: [16, 8]
+          }),
+          interactive: false,
+          zIndexOffset: 1000
+        }).addTo(map);
+      });
     }
 
     function selectDistrict(slug, layer) {
