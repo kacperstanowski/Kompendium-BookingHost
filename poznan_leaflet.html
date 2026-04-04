@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Poznań</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #leaflet-map {
+      width: 100%; height: 480px;
+      border-radius: 14px; background: #eef4f6; z-index: 0;
+    }
+    .district-tooltip {
+      background: rgba(15,25,40,0.88); border: none; border-radius: 6px;
+      color: #fff; font-size: 0.78rem; font-weight: 600;
+      font-family: "DM Sans", sans-serif; padding: 4px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2); white-space: nowrap;
+    }
+    .district-tooltip::before { display: none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Mapa obsługi – Poznań</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+
+    <section class="hero-card">
+      <div class="hero-badge">Poznań</div>
+      <h1>Mapa osiedli Poznania</h1>
+      <p>Wybierz tryb <strong>Lead</strong> albo <strong>nBot</strong>, aby sprawdzić zakres obsługi
+        w poszczególnych osiedlach. Kliknij wybrane osiedle, aby zobaczyć jego status.</p>
+    </section>
+
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead" type="button">Lead</button>
+        <button class="mode-btn" data-mode="nbot" type="button">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color selected"></span><span>Wybrane osiedle</span></div>
+      </div>
+    </section>
+
+    <!-- Wyszukiwarka NA GÓRZE -->
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Poznaniu</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu — osiedle zostanie podświetlone na mapie.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input"
+            placeholder="np. Święty Marcin 1, Półwiejska 10, Grunwaldzka 50..."
+            autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Święty Marcin 1">Święty Marcin 1</button>
+          <button class="addr-example" data-val="Półwiejska 10">Półwiejska 10</button>
+          <button class="addr-example" data-val="Grunwaldzka 50">Grunwaldzka 50</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mapa + panel -->
+    <div class="city-body">
+      <div class="city-map-area">
+        <div class="city-map-wrap">
+          <div id="leaflet-map"></div>
+        </div>
+        <div class="city-legend">
+          <div class="city-legend-title">Osiedla Poznania</div>
+          <div class="city-legend-grid">
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Antoninek-Zieliniec-Kobylepole</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Chartowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Fabianowo-Kotowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Głuszyna</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Górczyn</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Grunwald Południe</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Grunwald Północ</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Jeżyce</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Junikowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Kiekrz</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Krzesiny-Pokrzywno-Garaszewo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Krzyżowniki-Smochowice</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Kwiatowe</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Ławica</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Łazarz</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Morasko-Radojewo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Nowe Winogrady Południe</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Nowe Winogrady Północ</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Nowe Winogrady Wschód</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Ogrody</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Ostrów Tumski-Śródka-Zawady-Komandoria</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Piątkowo Północ</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Podolany</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Rataje</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Stare Miasto</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Stare Winogrady</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Starołęka-Minikowo-Marlewo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Stary Grunwald</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Strzeszyn</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Szczepankowo-Spławie-Krzesinki</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Umultowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Warszawskie-Pomet-Maltańskie</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Wilda</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Winiary</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Wola</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Żegrze</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="city-info-panel">
+        <div>
+          <div class="city-kicker">Szczegóły</div>
+          <h2 id="c-panel-name" class="city-district-name">Poznań</h2>
+        </div>
+        <div id="c-panel-status" class="city-status-badge neutral">Wybierz osiedle</div>
+        <p id="c-panel-desc" class="city-info-desc">
+          Kliknij dowolne osiedle, aby zobaczyć jego status obsługi w wybranym trybie.
+        </p>
+        <div class="city-info-box">
+          <h4>Aktualny tryb</h4>
+          <div id="c-panel-mode" class="city-mode-label">Lead</div>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+
+  <script>
+    var ALL_SLUGS = [
+      'antoninek-zieliniec-kobylepole','chartowo','fabianowo-kotowo','gluszyna',
+      'gorczyn','grunwald-poludnie','grunwald-polnoc','jezyce','junikowo','kiekrz',
+      'krzesiny-pokrzywno-garaszewo','krzyzowniki-smochowice','kwiatowe','lawica',
+      'lazarz','morasko-radojewo','nowe-winogrady-poludnie','nowe-winogrady-polnoc',
+      'nowe-winogrady-wschod','ogrody','ostrow-tumski-srodka','piatkowo-polnoc',
+      'podolany','rataje','stare-miasto','stare-winogrady','staroleka-minikowo-marlewo',
+      'stary-grunwald','strzeszyn','szczepankowo-splawiekrzesinki','umultowo',
+      'warszawskie-pomet-maltanskie','wilda','winiary','wola','zegrze'
+    ];
+
+    window.cityData = {
+      cityName: "Poznań",
+      coverage: {
+        lead: { covered: ALL_SLUGS.slice(), uncovered: [] },
+        nbot: { covered: ALL_SLUGS.slice(), uncovered: [] }
+      },
+      districtNames: {
+        'antoninek-zieliniec-kobylepole': 'Antoninek-Zieliniec-Kobylepole',
+        'chartowo':                       'Chartowo',
+        'fabianowo-kotowo':               'Fabianowo-Kotowo',
+        'gluszyna':                       'Głuszyna',
+        'gorczyn':                        'Górczyn',
+        'grunwald-poludnie':              'Grunwald Południe',
+        'grunwald-polnoc':                'Grunwald Północ',
+        'jezyce':                         'Jeżyce',
+        'junikowo':                       'Junikowo',
+        'kiekrz':                         'Kiekrz',
+        'krzesiny-pokrzywno-garaszewo':   'Krzesiny-Pokrzywno-Garaszewo',
+        'krzyzowniki-smochowice':         'Krzyżowniki-Smochowice',
+        'kwiatowe':                       'Kwiatowe',
+        'lawica':                         'Ławica',
+        'lazarz':                         'Łazarz',
+        'morasko-radojewo':               'Morasko-Radojewo',
+        'nowe-winogrady-poludnie':        'Nowe Winogrady Południe',
+        'nowe-winogrady-polnoc':          'Nowe Winogrady Północ',
+        'nowe-winogrady-wschod':          'Nowe Winogrady Wschód',
+        'ogrody':                         'Ogrody',
+        'ostrow-tumski-srodka':           'Ostrów Tumski-Śródka-Zawady-Komandoria',
+        'piatkowo-polnoc':                'Piątkowo Północ',
+        'podolany':                       'Podolany',
+        'rataje':                         'Rataje',
+        'stare-miasto':                   'Stare Miasto',
+        'stare-winogrady':                'Stare Winogrady',
+        'staroleka-minikowo-marlewo':     'Starołęka-Minikowo-Marlewo',
+        'stary-grunwald':                 'Stary Grunwald',
+        'strzeszyn':                      'Strzeszyn',
+        'szczepankowo-splawiekrzesinki':  'Szczepankowo-Spławie-Krzesinki',
+        'umultowo':                       'Umultowo',
+        'warszawskie-pomet-maltanskie':   'Warszawskie-Pomet-Maltańskie',
+        'wilda':                          'Wilda',
+        'winiary':                        'Winiary',
+        'wola':                           'Wola',
+        'zegrze':                         'Żegrze',
+      },
+      uncoveredLabel: []
+    };
+  </script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function() {
+    var COLOR_COVERED   = '#24b86b';
+    var COLOR_UNCOVERED = '#e04a4a';
+    var COLOR_LEAD_ONLY = '#f59e0b';
+    var COLOR_SELECTED  = '#0f1928';
+
+    var currentMode    = 'lead';
+    var districtLayers = {};
+    var selectedSlug   = null;
+    var addressMarker  = null;
+    var names          = window.cityData.districtNames;
+
+    function getColor(slug) {
+      var cov = window.cityData.coverage[currentMode];
+      if (cov.covered.indexOf(slug) !== -1) return COLOR_COVERED;
+      if (cov.uncovered.indexOf(slug) !== -1) {
+        if (currentMode === 'nbot' &&
+            window.cityData.coverage.lead.covered.indexOf(slug) !== -1) return COLOR_LEAD_ONLY;
+        return COLOR_UNCOVERED;
+      }
+      return COLOR_COVERED;
+    }
+
+    var map = L.map('leaflet-map', {
+      center: [52.409, 16.931], zoom: 12,
+      zoomControl: true, scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+
+    fetch('poznan_dzielnice.geojson')
+      .then(function(r) { return r.json(); })
+      .then(function(geojson) { loadDistricts(geojson); })
+      .catch(function(err) {
+        console.error('GeoJSON error:', err);
+        document.getElementById('leaflet-map').innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#67778b;font-size:0.9rem;">' +
+          'Mapa niedostępna — użyj wyszukiwarki adresów powyżej.</div>';
+      });
+
+    function loadDistricts(geojson) {
+      var gLayer = L.geoJSON(geojson, {
+        style: function(feature) {
+          return { fillColor: getColor(feature.properties.slug),
+            fillOpacity: 0.68, color: '#ffffff', weight: 2, opacity: 1 };
+        },
+        onEachFeature: function(feature, lyr) {
+          var slug  = feature.properties.slug;
+          var nazwa = feature.properties.nazwa;
+          lyr.bindTooltip(nazwa, { permanent: false, direction: 'center', className: 'district-tooltip' });
+          lyr.on('click',     function() { selectDistrict(slug, lyr); });
+          lyr.on('mouseover', function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity: 0.45 }); });
+          lyr.on('mouseout',  function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity: 0.68 }); });
+          districtLayers[slug] = lyr;
+        }
+      }).addTo(map);
+      map.fitBounds(gLayer.getBounds(), { padding: [10, 10] });
+      addLabels();
+    }
+
+    function addLabels() {
+      var labels = [
+        { slug: 'antoninek-zieliniec-kobylepole', lat: 52.39643, lon: 17.03046 },
+        { slug: 'chartowo',                       lat: 52.39160, lon: 16.98561 },
+        { slug: 'fabianowo-kotowo',               lat: 52.36571, lon: 16.85526 },
+        { slug: 'gluszyna',                       lat: 52.31811, lon: 16.96184 },
+        { slug: 'gorczyn',                        lat: 52.37816, lon: 16.87856 },
+        { slug: 'grunwald-poludnie',              lat: 52.39457, lon: 16.86977 },
+        { slug: 'grunwald-polnoc',                lat: 52.40712, lon: 16.87566 },
+        { slug: 'jezyce',                         lat: 52.41136, lon: 16.90403 },
+        { slug: 'junikowo',                       lat: 52.38611, lon: 16.83885 },
+        { slug: 'kiekrz',                         lat: 52.46998, lon: 16.78501 },
+        { slug: 'krzesiny-pokrzywno-garaszewo',   lat: 52.34681, lon: 16.98325 },
+        { slug: 'krzyzowniki-smochowice',         lat: 52.44229, lon: 16.82375 },
+        { slug: 'kwiatowe',                       lat: 52.38363, lon: 16.81929 },
+        { slug: 'lawica',                         lat: 52.40654, lon: 16.82602 },
+        { slug: 'lazarz',                         lat: 52.39693, lon: 16.89622 },
+        { slug: 'morasko-radojewo',               lat: 52.48562, lon: 16.93234 },
+        { slug: 'nowe-winogrady-poludnie',        lat: 52.43035, lon: 16.93429 },
+        { slug: 'nowe-winogrady-polnoc',          lat: 52.44020, lon: 16.93164 },
+        { slug: 'nowe-winogrady-wschod',          lat: 52.43713, lon: 16.94469 },
+        { slug: 'ogrody',                         lat: 52.41770, lon: 16.88262 },
+        { slug: 'ostrow-tumski-srodka',           lat: 52.41185, lon: 16.95922 },
+        { slug: 'piatkowo-polnoc',                lat: 52.46267, lon: 16.90679 },
+        { slug: 'podolany',                       lat: 52.45654, lon: 16.88111 },
+        { slug: 'rataje',                         lat: 52.38921, lon: 16.95492 },
+        { slug: 'stare-miasto',                   lat: 52.41143, lon: 16.92576 },
+        { slug: 'stare-winogrady',                lat: 52.42803, lon: 16.93690 },
+        { slug: 'staroleka-minikowo-marlewo',     lat: 52.34881, lon: 16.93738 },
+        { slug: 'stary-grunwald',                 lat: 52.40451, lon: 16.88240 },
+        { slug: 'strzeszyn',                      lat: 52.45677, lon: 16.84121 },
+        { slug: 'szczepankowo-splawiekrzesinki',  lat: 52.35505, lon: 17.02618 },
+        { slug: 'umultowo',                       lat: 52.46586, lon: 16.95557 },
+        { slug: 'warszawskie-pomet-maltanskie',   lat: 52.41021, lon: 16.98642 },
+        { slug: 'wilda',                          lat: 52.39003, lon: 16.91895 },
+        { slug: 'winiary',                        lat: 52.43242, lon: 16.91115 },
+        { slug: 'wola',                           lat: 52.42682, lon: 16.86136 },
+        { slug: 'zegrze',                         lat: 52.37759, lon: 16.96563 },
+      ];
+
+      var shortNames = {
+        'antoninek-zieliniec-kobylepole': 'Antoninek',
+        'krzesiny-pokrzywno-garaszewo':   'Krzesiny',
+        'krzyzowniki-smochowice':         'Krzyżowniki',
+        'nowe-winogrady-poludnie':        'NW Południe',
+        'nowe-winogrady-polnoc':          'NW Północ',
+        'nowe-winogrady-wschod':          'NW Wschód',
+        'ostrow-tumski-srodka':           'Ostrów Tumski',
+        'piatkowo-polnoc':                'Piątkowo Płn.',
+        'staroleka-minikowo-marlewo':     'Starołęka',
+        'stary-grunwald':                 'St. Grunwald',
+        'szczepankowo-splawiekrzesinki':  'Szczepankowo',
+        'warszawskie-pomet-maltanskie':   'Warszawskie',
+        'grunwald-poludnie':              'Grunwald Płd.',
+        'grunwald-polnoc':                'Grunwald Płn.',
+        'fabianowo-kotowo':               'Fabianowo',
+        'morasko-radojewo':               'Morasko',
+      };
+
+      labels.forEach(function(l) {
+        var label = shortNames[l.slug] || (names[l.slug] || l.slug);
+        L.marker([l.lat, l.lon], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div style="font-family:\'DM Sans\',sans-serif;font-size:8px;font-weight:700;' +
+              'color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.9),0 0 6px rgba(0,0,0,0.6);' +
+              'white-space:nowrap;pointer-events:none;user-select:none;text-align:center;">' +
+              label + '</div>',
+            iconSize: [80, 14], iconAnchor: [40, 7]
+          }),
+          interactive: false, zIndexOffset: 1000
+        }).addTo(map);
+      });
+    }
+
+    function selectDistrict(slug, layer) {
+      if (selectedSlug && districtLayers[selectedSlug]) {
+        districtLayers[selectedSlug].setStyle({
+          fillColor: getColor(selectedSlug), fillOpacity: 0.68, color: '#ffffff', weight: 2
+        });
+      }
+      selectedSlug = slug;
+      layer.setStyle({ fillColor: getColor(slug), fillOpacity: 0.88, color: COLOR_SELECTED, weight: 3.5 });
+      layer.bringToFront();
+
+      var dispName = names[slug] || slug;
+      var statusEl = document.getElementById('c-panel-status');
+      var cov      = window.cityData.coverage[currentMode];
+      var leadCov  = window.cityData.coverage.lead;
+
+      document.getElementById('c-panel-name').textContent = dispName;
+      document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+      statusEl.style.cssText = '';
+
+      if (cov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge covered';
+        statusEl.textContent = 'Obsługiwane';
+        document.getElementById('c-panel-desc').textContent =
+          dispName + ' jest obsługiwane w trybie ' + (currentMode === 'lead' ? 'Lead' : 'nBot') + '.';
+      } else if (currentMode === 'nbot' && leadCov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge';
+        statusEl.style.cssText = 'background:#fff8e1;color:#b45309;border-color:#fbbf24;';
+        statusEl.textContent = 'Tylko Lead (inbound)';
+        document.getElementById('c-panel-desc').textContent =
+          dispName + ' — obsługujemy tylko gdy właściciel sam się zgłosi.';
+      } else {
+        statusEl.className = 'city-status-badge uncovered';
+        statusEl.textContent = 'Nieobsługiwane';
+        document.getElementById('c-panel-desc').textContent =
+          dispName + ' nie jest obsługiwane w trybie ' + (currentMode === 'lead' ? 'Lead' : 'nBot') + '.';
+      }
+    }
+
+    document.querySelectorAll('.mode-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+        for (var slug in districtLayers) {
+          var isSel = slug === selectedSlug;
+          districtLayers[slug].setStyle({
+            fillColor: getColor(slug), fillOpacity: isSel ? 0.88 : 0.68,
+            color: isSel ? COLOR_SELECTED : '#ffffff', weight: isSel ? 3.5 : 2
+          });
+        }
+        if (selectedSlug && districtLayers[selectedSlug]) {
+          selectDistrict(selectedSlug, districtLayers[selectedSlug]);
+        } else {
+          document.getElementById('c-panel-name').textContent = 'Poznań';
+          var st = document.getElementById('c-panel-status');
+          st.className = 'city-status-badge neutral'; st.style.cssText = '';
+          st.textContent = 'Wybierz osiedle';
+          document.getElementById('c-panel-desc').textContent =
+            'Kliknij dowolne osiedle, aby zobaczyć jego status obsługi w wybranym trybie.';
+        }
+        document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+      });
+    });
+
+    // Wyszukiwarka
+    var input   = document.getElementById('addr-input');
+    var btn     = document.getElementById('addr-btn');
+    var result  = document.getElementById('addr-result');
+    var rIcon   = document.getElementById('addr-result-icon');
+    var rTitle  = document.getElementById('addr-result-title');
+    var rDist   = document.getElementById('addr-result-district');
+    var rDetail = document.getElementById('addr-result-detail');
+
+    function showResult(state, title, district, detail) {
+      result.className    = 'addr-result addr-result--' + state;
+      rIcon.textContent   = state==='covered'?'✅':state==='uncovered'?'❌':
+                            state==='lead-only'?'⚠️':state==='loading'?'⏳':'ℹ️';
+      rTitle.textContent  = title; rDist.textContent = district; rDetail.textContent = detail;
+    }
+
+    var districtMap = {
+      'stare miasto':           'stare-miasto',
+      'jezyce':                 'jezyce',
+      'wilda':                  'wilda',
+      'lazarz':                 'lazarz',
+      'gorczyn':                'gorczyn',
+      'rataje':                 'rataje',
+      'chartowo':               'chartowo',
+      'zegrze':                 'zegrze',
+      'winiary':                'winiary',
+      'ogrody':                 'ogrody',
+      'wola':                   'wola',
+      'lawica':                 'lawica',
+      'kwiatowe':               'kwiatowe',
+      'junikowo':               'junikowo',
+      'kiekrz':                 'kiekrz',
+      'podolany':               'podolany',
+      'strzeszyn':              'strzeszyn',
+      'umultowo':               'umultowo',
+      'gluszyna':               'gluszyna',
+      'morasko':                'morasko-radojewo',
+      'radojewo':               'morasko-radojewo',
+      'naramowice':             'morasko-radojewo',
+      'grunwald poludnie':      'grunwald-poludnie',
+      'grunwald polnoc':        'grunwald-polnoc',
+      'grunwald':               'grunwald-poludnie',
+      'stary grunwald':         'stary-grunwald',
+      'fabianowo':              'fabianowo-kotowo',
+      'kotowo':                 'fabianowo-kotowo',
+      'krzyzowniki':            'krzyzowniki-smochowice',
+      'smochowice':             'krzyzowniki-smochowice',
+      'krzesiny':               'krzesiny-pokrzywno-garaszewo',
+      'pokrzywno':              'krzesiny-pokrzywno-garaszewo',
+      'garaszewo':              'krzesiny-pokrzywno-garaszewo',
+      'nowe winogrady':         'nowe-winogrady-poludnie',
+      'stare winogrady':        'stare-winogrady',
+      'winogrady':              'stare-winogrady',
+      'piatkowo':               'piatkowo-polnoc',
+      'ostrow tumski':          'ostrow-tumski-srodka',
+      'srodka':                 'ostrow-tumski-srodka',
+      'antoninek':              'antoninek-zieliniec-kobylepole',
+      'zieliniec':              'antoninek-zieliniec-kobylepole',
+      'kobylepole':             'antoninek-zieliniec-kobylepole',
+      'staroleka':              'staroleka-minikowo-marlewo',
+      'minikowo':               'staroleka-minikowo-marlewo',
+      'marlewo':                'staroleka-minikowo-marlewo',
+      'szczepankowo':           'szczepankowo-splawiekrzesinki',
+      'splawiekrzesinki':       'szczepankowo-splawiekrzesinki',
+      'warszawskie':            'warszawskie-pomet-maltanskie',
+      'maltanskie':             'warszawskie-pomet-maltanskie',
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      var s = str.toLowerCase()
+        .replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o')
+        .replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z')
+        .replace(/ć/g,'c').replace(/ń/g,'n').replace(/ł/g,'l')
+        .replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
+      if (districtMap[s]) return districtMap[s];
+      for (var key in districtMap) {
+        if (s.indexOf(key) !== -1) return districtMap[key];
+      }
+      return null;
+    }
+
+    async function checkAddress() {
+      var query = input.value.trim();
+      if (!query) return;
+      showResult('loading', 'Sprawdzam adres...', '', '');
+      try {
+        var parts      = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
+        var streetPart = parts[1] ? parts[1].trim() : query.trim();
+        var numberPart = parts[2] || '';
+        var fullQuery  = (numberPart ? streetPart + ' ' + numberPart : streetPart) + ', Poznań';
+
+        var url = 'https://api.geoapify.com/v1/geocode/search?' +
+          'text=' + encodeURIComponent(fullQuery) +
+          '&filter=countrycode:pl&bias=proximity:16.931,52.409' +
+          '&lang=pl&limit=5&apiKey=bd1229116680495c949ee4b6b64b6cfb';
+
+        var res  = await fetch(url, { mode: 'cors' });
+        var data = await res.json();
+        var features = (data.features || []).filter(function(f) {
+          var city = (f.properties.city || '').toLowerCase();
+          return city.indexOf('pozna') !== -1;
+        });
+
+        if (!features.length) {
+          showResult('unknown', 'Nie znaleziono adresu w Poznaniu', '',
+            'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy w Poznaniu.');
+          return;
+        }
+
+        var best = features[0];
+        var p    = best.properties;
+        var lat  = best.geometry.coordinates[1];
+        var lon  = best.geometry.coordinates[0];
+
+        if (addressMarker) map.removeLayer(addressMarker);
+        addressMarker = L.circleMarker([lat, lon], {
+          radius: 9, fillColor: '#0f1928', fillOpacity: 1, color: '#ffffff', weight: 3
+        }).addTo(map);
+        addressMarker.bindPopup('<strong>' + (p.street||'') + ' ' + (p.housenumber||'') + '</strong>').openPopup();
+        map.setView([lat, lon], 14, { animate: true });
+
+        var candidates = [p.district, p.suburb, p.quarter, p.neighbourhood].filter(Boolean);
+        var slug = null;
+        for (var i = 0; i < candidates.length; i++) {
+          slug = normalizeDistrict(candidates[i]);
+          if (slug) break;
+        }
+
+        var modeLabel = currentMode === 'lead' ? 'Lead' : 'nBot';
+        var shortAddr = [p.street, p.housenumber].filter(Boolean).join(' ');
+
+        if (slug) {
+          if (districtLayers[slug]) selectDistrict(slug, districtLayers[slug]);
+          var dispName = names[slug] || slug;
+          var cov      = window.cityData.coverage[currentMode];
+          var leadCov  = window.cityData.coverage.lead;
+
+          if (cov.covered.indexOf(slug) !== -1) {
+            showResult('covered', 'Tak, ten adres obsługujemy!',
+              'Osiedle: ' + dispName, 'Tryb: ' + modeLabel + ' · ' + shortAddr);
+          } else if (currentMode === 'nbot' && leadCov.covered.indexOf(slug) !== -1) {
+            showResult('lead-only', 'Obsługujemy tylko gdy właściciel sam się zgłosi',
+              'Osiedle: ' + dispName + ' — tylko tryb Lead', 'Aktualny tryb: nBot · ' + shortAddr);
+          } else {
+            showResult('uncovered', 'Tego adresu nie obsługujemy',
+              'Osiedle: ' + dispName, 'Tryb: ' + modeLabel + ' · ' + shortAddr);
+          }
+        } else {
+          showResult('unknown', 'Adres znaleziony na mapie',
+            'Nie udało się automatycznie określić osiedla', shortAddr);
+        }
+      } catch(err) {
+        showResult('unknown', 'Błąd połączenia', '', 'Sprawdź połączenie z internetem.');
+      }
+    }
+
+    btn.addEventListener('click', checkAddress);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkAddress(); });
+    document.querySelectorAll('.addr-example').forEach(function(b) {
+      b.addEventListener('click', function() { input.value = b.dataset.val; checkAddress(); });
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
