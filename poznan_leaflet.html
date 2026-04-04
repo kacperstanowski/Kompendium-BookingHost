@@ -135,6 +135,12 @@
             <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Winiary</span></div>
             <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Wola</span></div>
             <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Żegrze</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Główna</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Naramowice</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Piątkowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Sołacz</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Świerczewo</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Zielony Dębiec</span></div>
           </div>
         </div>
       </div>
@@ -159,14 +165,14 @@
 
   <script>
     var ALL_SLUGS = [
-      'antoninek-zieliniec-kobylepole','chartowo','fabianowo-kotowo','gluszyna',
+      'antoninek-zieliniec-kobylepole','chartowo','fabianowo-kotowo','gluszyna','glowna',
       'gorczyn','grunwald-poludnie','grunwald-polnoc','jezyce','junikowo','kiekrz',
       'krzesiny-pokrzywno-garaszewo','krzyzowniki-smochowice','kwiatowe','lawica',
-      'lazarz','morasko-radojewo','nowe-winogrady-poludnie','nowe-winogrady-polnoc',
-      'nowe-winogrady-wschod','ogrody','ostrow-tumski-srodka','piatkowo-polnoc',
-      'podolany','rataje','stare-miasto','stare-winogrady','staroleka-minikowo-marlewo',
-      'stary-grunwald','strzeszyn','szczepankowo-splawiekrzesinki','umultowo',
-      'warszawskie-pomet-maltanskie','wilda','winiary','wola','zegrze'
+      'lazarz','morasko-radojewo','naramowice','nowe-winogrady-poludnie','nowe-winogrady-polnoc',
+      'nowe-winogrady-wschod','ogrody','ostrow-tumski-srodka','piatkowo','piatkowo-polnoc',
+      'podolany','rataje','solacz','stare-miasto','stare-winogrady','staroleka-minikowo-marlewo',
+      'stary-grunwald','strzeszyn','swierczewo','szczepankowo-splawiekrzesinki','umultowo',
+      'warszawskie-pomet-maltanskie','wilda','winiary','wola','zegrze','zielony-debiec'
     ];
 
     window.cityData = {
@@ -212,6 +218,12 @@
         'winiary':                        'Winiary',
         'wola':                           'Wola',
         'zegrze':                         'Żegrze',
+        'glowna':                         'Główna',
+        'naramowice':                     'Naramowice',
+        'piatkowo':                       'Piątkowo',
+        'solacz':                         'Sołacz',
+        'swierczewo':                     'Świerczewo',
+        'zielony-debiec':                 'Zielony Dębiec',
       },
       uncoveredLabel: []
     };
@@ -320,6 +332,12 @@
         { slug: 'winiary',                        lat: 52.43242, lon: 16.91115 },
         { slug: 'wola',                           lat: 52.42682, lon: 16.86136 },
         { slug: 'zegrze',                         lat: 52.37759, lon: 16.96563 },
+        { slug: 'glowna',                         lat: 52.43365, lon: 16.99368 },
+        { slug: 'naramowice',                     lat: 52.44848, lon: 16.95037 },
+        { slug: 'piatkowo',                       lat: 52.45398, lon: 16.91329 },
+        { slug: 'solacz',                         lat: 52.42648, lon: 16.89747 },
+        { slug: 'swierczewo',                     lat: 52.36611, lon: 16.88056 },
+        { slug: 'zielony-debiec',                 lat: 52.35931, lon: 16.90932 },
       ];
 
       var shortNames = {
@@ -339,6 +357,10 @@
         'grunwald-polnoc':                'Grunwald Płn.',
         'fabianowo-kotowo':               'Fabianowo',
         'morasko-radojewo':               'Morasko',
+        'zielony-debiec':                 'Ziel. Dębiec',
+        'nowe-winogrady-polnoc':          'NW Północ',
+        'nowe-winogrady-poludnie':        'NW Południe',
+        'nowe-winogrady-wschod':          'NW Wschód',
       };
 
       labels.forEach(function(l) {
