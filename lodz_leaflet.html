@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Łódź</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #leaflet-map {
+      width: 100%; height: 480px;
+      border-radius: 14px; background: #eef4f6; z-index: 0;
+    }
+    .district-tooltip {
+      background: rgba(15,25,40,0.88); border: none; border-radius: 6px;
+      color: #fff; font-size: 0.9rem; font-weight: 600;
+      font-family: "DM Sans", sans-serif; padding: 5px 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2); white-space: nowrap;
+    }
+    .district-tooltip::before { display: none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Mapa obsługi – Łódź</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+
+    <section class="hero-card">
+      <div class="hero-badge">Łódź</div>
+      <h1>Mapa dzielnic Łodzi</h1>
+      <p>Wybierz tryb <strong>Lead</strong> albo <strong>nBot</strong>, aby sprawdzić zakres obsługi
+        w poszczególnych dzielnicach. Kliknij wybraną dzielnicę, aby zobaczyć jej status.</p>
+    </section>
+
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead" type="button">Lead</button>
+        <button class="mode-btn" data-mode="nbot" type="button">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color selected"></span><span>Wybrana dzielnica</span></div>
+      </div>
+    </section>
+
+    <!-- Wyszukiwarka NA GÓRZE -->
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Łodzi</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu — dzielnica zostanie podświetlona na mapie.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input"
+            placeholder="np. Piotrkowska 1, Kilińskiego 50, Brzezińska 10..."
+            autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Piotrkowska 1">Piotrkowska 1</button>
+          <button class="addr-example" data-val="Kilińskiego 50">Kilińskiego 50</button>
+          <button class="addr-example" data-val="Brzezińska 10">Brzezińska 10</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mapa + panel -->
+    <div class="city-body">
+      <div class="city-map-area">
+        <div class="city-map-wrap">
+          <div id="leaflet-map"></div>
+        </div>
+        <div class="city-legend">
+          <div class="city-legend-title">Dzielnice Łodzi</div>
+          <div class="city-legend-grid">
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Bałuty</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Górna</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Polesie</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Śródmieście</span></div>
+            <div class="city-legend-item"><span class="city-legend-num">●</span><span class="city-legend-name">Widzew</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="city-info-panel">
+        <div>
+          <div class="city-kicker">Szczegóły</div>
+          <h2 id="c-panel-name" class="city-district-name">Łódź</h2>
+        </div>
+        <div id="c-panel-status" class="city-status-badge neutral">Wybierz dzielnicę</div>
+        <p id="c-panel-desc" class="city-info-desc">
+          Kliknij dowolną dzielnicę, aby zobaczyć jej status obsługi w wybranym trybie.
+        </p>
+        <div class="city-info-box">
+          <h4>Aktualny tryb</h4>
+          <div id="c-panel-mode" class="city-mode-label">Lead</div>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+
+  <script>
+    window.cityData = {
+      cityName: "Łódź",
+      coverage: {
+        lead: {
+          covered: ['baluty','gorna','polesie','srodmiescie','widzew'],
+          uncovered: []
+        },
+        nbot: {
+          covered: ['baluty','gorna','polesie','srodmiescie','widzew'],
+          uncovered: []
+        }
+      },
+      districtNames: {
+        'baluty':      'Bałuty',
+        'gorna':       'Górna',
+        'polesie':     'Polesie',
+        'srodmiescie': 'Śródmieście',
+        'widzew':      'Widzew',
+      },
+      uncoveredLabel: []
+    };
+  </script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function() {
+    var COLOR_COVERED   = '#24b86b';
+    var COLOR_UNCOVERED = '#e04a4a';
+    var COLOR_LEAD_ONLY = '#f59e0b';
+    var COLOR_SELECTED  = '#0f1928';
+
+    var currentMode    = 'lead';
+    var districtLayers = {};
+    var selectedSlug   = null;
+    var addressMarker  = null;
+    var names          = window.cityData.districtNames;
+
+    function getColor(slug) {
+      var cov = window.cityData.coverage[currentMode];
+      if (cov.covered.indexOf(slug) !== -1) return COLOR_COVERED;
+      if (cov.uncovered.indexOf(slug) !== -1) {
+        if (currentMode === 'nbot' &&
+            window.cityData.coverage.lead.covered.indexOf(slug) !== -1) return COLOR_LEAD_ONLY;
+        return COLOR_UNCOVERED;
+      }
+      return COLOR_COVERED;
+    }
+
+    var map = L.map('leaflet-map', {
+      center: [51.759, 19.456], zoom: 11,
+      zoomControl: true, scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+
+    fetch('lodz_dzielnice.geojson')
+      .then(function(r) { return r.json(); })
+      .then(function(geojson) { loadDistricts(geojson); })
+      .catch(function(err) {
+        console.error('GeoJSON error:', err);
+        document.getElementById('leaflet-map').innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#67778b;font-size:0.9rem;">' +
+          'Mapa niedostępna — użyj wyszukiwarki adresów powyżej.</div>';
+      });
+
+    function loadDistricts(geojson) {
+      var gLayer = L.geoJSON(geojson, {
+        style: function(feature) {
+          return { fillColor: getColor(feature.properties.slug),
+            fillOpacity: 0.65, color: '#ffffff', weight: 3, opacity: 1 };
+        },
+        onEachFeature: function(feature, lyr) {
+          var slug  = feature.properties.slug;
+          var nazwa = feature.properties.nazwa;
+          lyr.bindTooltip(nazwa, { permanent: false, direction: 'center', className: 'district-tooltip' });
+          lyr.on('click',     function() { selectDistrict(slug, lyr); });
+          lyr.on('mouseover', function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity: 0.45 }); });
+          lyr.on('mouseout',  function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity: 0.65 }); });
+          districtLayers[slug] = lyr;
+        }
+      }).addTo(map);
+      map.fitBounds(gLayer.getBounds(), { padding: [10, 10] });
+      addLabels();
+    }
+
+    function addLabels() {
+      var labels = [
+        { slug: 'baluty',      lat: 51.80659, lon: 19.45107 },
+        { slug: 'gorna',       lat: 51.72289, lon: 19.48422 },
+        { slug: 'polesie',     lat: 51.75535, lon: 19.41667 },
+        { slug: 'srodmiescie', lat: 51.76718, lon: 19.46654 },
+        { slug: 'widzew',      lat: 51.76118, lon: 19.54278 },
+      ];
+      labels.forEach(function(l) {
+        L.marker([l.lat, l.lon], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:800;' +
+              'color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.9),0 0 8px rgba(0,0,0,0.7);' +
+              'white-space:nowrap;pointer-events:none;user-select:none;text-align:center;">' +
+              (names[l.slug] || l.slug) + '</div>',
+            iconSize: [100, 20], iconAnchor: [50, 10]
+          }),
+          interactive: false, zIndexOffset: 1000
+        }).addTo(map);
+      });
+    }
+
+    function selectDistrict(slug, layer) {
+      if (selectedSlug && districtLayers[selectedSlug]) {
+        districtLayers[selectedSlug].setStyle({
+          fillColor: getColor(selectedSlug), fillOpacity: 0.65, color: '#ffffff', weight: 3
+        });
+      }
+      selectedSlug = slug;
+      layer.setStyle({ fillColor: getColor(slug), fillOpacity: 0.88, color: COLOR_SELECTED, weight: 4 });
+      layer.bringToFront();
+
+      var dispName = names[slug] || slug;
+      var statusEl = document.getElementById('c-panel-status');
+      var cov      = window.cityData.coverage[currentMode];
+      var leadCov  = window.cityData.coverage.lead;
+
+      document.getElementById('c-panel-name').textContent = dispName;
+      document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+      statusEl.style.cssText = '';
+
+      if (cov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge covered';
+        statusEl.textContent = 'Obsługiwana';
+        document.getElementById('c-panel-desc').textContent =
+          'Dzielnica ' + dispName + ' jest obsługiwana w trybie ' + (currentMode === 'lead' ? 'Lead' : 'nBot') + '.';
+      } else if (currentMode === 'nbot' && leadCov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge';
+        statusEl.style.cssText = 'background:#fff8e1;color:#b45309;border-color:#fbbf24;';
+        statusEl.textContent = 'Tylko Lead (inbound)';
+        document.getElementById('c-panel-desc').textContent =
+          dispName + ' — obsługujemy tylko gdy właściciel sam się zgłosi.';
+      } else {
+        statusEl.className = 'city-status-badge uncovered';
+        statusEl.textContent = 'Nieobsługiwana';
+        document.getElementById('c-panel-desc').textContent =
+          'Dzielnica ' + dispName + ' nie jest obsługiwana w trybie ' + (currentMode === 'lead' ? 'Lead' : 'nBot') + '.';
+      }
+    }
+
+    document.querySelectorAll('.mode-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+        for (var slug in districtLayers) {
+          var isSel = slug === selectedSlug;
+          districtLayers[slug].setStyle({
+            fillColor: getColor(slug), fillOpacity: isSel ? 0.88 : 0.65,
+            color: isSel ? COLOR_SELECTED : '#ffffff', weight: isSel ? 4 : 3
+          });
+        }
+        if (selectedSlug && districtLayers[selectedSlug]) {
+          selectDistrict(selectedSlug, districtLayers[selectedSlug]);
+        } else {
+          document.getElementById('c-panel-name').textContent = 'Łódź';
+          var st = document.getElementById('c-panel-status');
+          st.className = 'city-status-badge neutral'; st.style.cssText = '';
+          st.textContent = 'Wybierz dzielnicę';
+          document.getElementById('c-panel-desc').textContent =
+            'Kliknij dowolną dzielnicę, aby zobaczyć jej status obsługi w wybranym trybie.';
+        }
+        document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+      });
+    });
+
+    // Wyszukiwarka
+    var input   = document.getElementById('addr-input');
+    var btn     = document.getElementById('addr-btn');
+    var result  = document.getElementById('addr-result');
+    var rIcon   = document.getElementById('addr-result-icon');
+    var rTitle  = document.getElementById('addr-result-title');
+    var rDist   = document.getElementById('addr-result-district');
+    var rDetail = document.getElementById('addr-result-detail');
+
+    function showResult(state, title, district, detail) {
+      result.className    = 'addr-result addr-result--' + state;
+      rIcon.textContent   = state==='covered'?'✅':state==='uncovered'?'❌':
+                            state==='lead-only'?'⚠️':state==='loading'?'⏳':'ℹ️';
+      rTitle.textContent  = title; rDist.textContent = district; rDetail.textContent = detail;
+    }
+
+    var districtMap = {
+      'baluty':      'baluty',
+      'gorna':       'gorna',
+      'polesie':     'polesie',
+      'srodmiescie': 'srodmiescie',
+      'widzew':      'widzew',
+      'centrum':     'srodmiescie',
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      var s = str.toLowerCase()
+        .replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o')
+        .replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z')
+        .replace(/ć/g,'c').replace(/ń/g,'n').replace(/ł/g,'l')
+        .replace(/[–—-]/g,' ').replace(/\s+/g,' ').trim();
+      if (districtMap[s]) return districtMap[s];
+      // Sprawdź czy zawiera nazwę dzielnicy
+      if (s.indexOf('balut') !== -1) return 'baluty';
+      if (s.indexOf('gorn') !== -1) return 'gorna';
+      if (s.indexOf('polesi') !== -1) return 'polesie';
+      if (s.indexOf('srodmies') !== -1 || s.indexOf('centrum') !== -1) return 'srodmiescie';
+      if (s.indexOf('widzew') !== -1) return 'widzew';
+      return null;
+    }
+
+    async function checkAddress() {
+      var query = input.value.trim();
+      if (!query) return;
+      showResult('loading', 'Sprawdzam adres...', '', '');
+      try {
+        var parts      = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
+        var streetPart = parts[1] ? parts[1].trim() : query.trim();
+        var numberPart = parts[2] || '';
+        var fullQuery  = (numberPart ? streetPart + ' ' + numberPart : streetPart) + ', Łódź';
+
+        var url = 'https://api.geoapify.com/v1/geocode/search?' +
+          'text=' + encodeURIComponent(fullQuery) +
+          '&filter=countrycode:pl&bias=proximity:19.456,51.759' +
+          '&lang=pl&limit=5&apiKey=bd1229116680495c949ee4b6b64b6cfb';
+
+        var res  = await fetch(url, { mode: 'cors' });
+        var data = await res.json();
+        var features = (data.features || []).filter(function(f) {
+          var city = (f.properties.city || '').toLowerCase();
+          return city.indexOf('lodz') !== -1 || city.indexOf('łódź') !== -1;
+        });
+
+        if (!features.length) {
+          showResult('unknown', 'Nie znaleziono adresu w Łodzi', '',
+            'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy w Łodzi.');
+          return;
+        }
+
+        var best = features[0];
+        var p    = best.properties;
+        var lat  = best.geometry.coordinates[1];
+        var lon  = best.geometry.coordinates[0];
+
+        if (addressMarker) map.removeLayer(addressMarker);
+        addressMarker = L.circleMarker([lat, lon], {
+          radius: 9, fillColor: '#0f1928', fillOpacity: 1, color: '#ffffff', weight: 3
+        }).addTo(map);
+        addressMarker.bindPopup('<strong>' + (p.street||'') + ' ' + (p.housenumber||'') + '</strong>').openPopup();
+        map.setView([lat, lon], 13, { animate: true });
+
+        var candidates = [p.district, p.suburb, p.quarter, p.neighbourhood, p.county].filter(Boolean);
+        var slug = null;
+        for (var i = 0; i < candidates.length; i++) {
+          slug = normalizeDistrict(candidates[i]);
+          if (slug) break;
+        }
+
+        var modeLabel = currentMode === 'lead' ? 'Lead' : 'nBot';
+        var shortAddr = [p.street, p.housenumber].filter(Boolean).join(' ');
+
+        if (slug) {
+          if (districtLayers[slug]) selectDistrict(slug, districtLayers[slug]);
+          var dispName = names[slug] || slug;
+          var cov      = window.cityData.coverage[currentMode];
+          var leadCov  = window.cityData.coverage.lead;
+
+          if (cov.covered.indexOf(slug) !== -1) {
+            showResult('covered', 'Tak, ten adres obsługujemy!',
+              'Dzielnica: ' + dispName, 'Tryb: ' + modeLabel + ' · ' + shortAddr);
+          } else if (currentMode === 'nbot' && leadCov.covered.indexOf(slug) !== -1) {
+            showResult('lead-only', 'Obsługujemy tylko gdy właściciel sam się zgłosi',
+              'Dzielnica: ' + dispName + ' — tylko tryb Lead', 'Aktualny tryb: nBot · ' + shortAddr);
+          } else {
+            showResult('uncovered', 'Tego adresu nie obsługujemy',
+              'Dzielnica: ' + dispName, 'Tryb: ' + modeLabel + ' · ' + shortAddr);
+          }
+        } else {
+          showResult('unknown', 'Adres znaleziony na mapie',
+            'Nie udało się automatycznie określić dzielnicy', shortAddr);
+        }
+      } catch(err) {
+        showResult('unknown', 'Błąd połączenia', '', 'Sprawdź połączenie z internetem.');
+      }
+    }
+
+    btn.addEventListener('click', checkAddress);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkAddress(); });
+    document.querySelectorAll('.addr-example').forEach(function(b) {
+      b.addEventListener('click', function() { input.value = b.dataset.val; checkAddress(); });
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
