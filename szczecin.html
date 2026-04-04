@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Szczecin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+  <style>
+    .lodz-legend-group { margin-bottom: 20px; }
+    .lodz-legend-group-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--teal-dark); margin-bottom: 8px;
+      padding-bottom: 6px; border-bottom: 2px solid var(--teal-light);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Sprawdź obsługę – Szczecin</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+    <section class="hero-card">
+      <div class="hero-badge">Szczecin</div>
+      <h1>Czy obsługujemy Twój adres?</h1>
+      <p>Wpisz ulicę i numer domu, aby sprawdzić czy dany adres w Szczecinie
+        znajduje się w obsługiwanym przez nas obszarze.
+        Obecnie obsługujemy <strong>wszystkie 37 osiedli Szczecina</strong>.</p>
+    </section>
+
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead" type="button">Lead</button>
+        <button class="mode-btn" data-mode="nbot" type="button">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+      </div>
+    </section>
+
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Szczecinie</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu, aby sprawdzić czy dany adres znajduje się w obsługiwanej przez nas dzielnicy Szczecina.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input"
+            placeholder="np. Aleja Niepodległości 1, Piłsudskiego 10, Jagiellońska 5..."
+            autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Aleja Niepodległości 1">Al. Niepodległości 1</button>
+          <button class="addr-example" data-val="Piłsudskiego 10">Piłsudskiego 10</button>
+          <button class="addr-example" data-val="Jagiellońska 5">Jagiellońska 5</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="addr-search-section" style="margin-top:18px;">
+      <div class="addr-search-kicker">Obsługiwane osiedla</div>
+      <h2 class="addr-search-title" style="font-size:1.1rem;margin-bottom:18px;">Wszystkie 37 osiedli Szczecina</h2>
+      <div class="lodz-legend-group"><div class="lodz-legend-group-title">Śródmieście</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Śródmieście</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Nowe Miasto</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Turzyn</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Niebuszewo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Niebuszewo-Boleszkowice</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stare Miasto</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Drzetowo-Grabowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Łasztownia</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Międzyodrze-Wyspa Pucka</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Północ</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pogodno</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Głębokie-Pilchowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Wielgowo-Sławociesze-Zdunowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Gumieńce</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Osów</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Łukasińka</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Gołęcino-Gocław</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stocznia</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Skolwin</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Zachód</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pomorzany</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Grabowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Słoneczne</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bukowe-Clstocie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bukowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Krzekowo-Bezrzecze</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Wielgowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Gumieńce Zachód</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zdroje</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zawadzkiego-Klonowica</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Prawobrzeże</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Dąbie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Majowe</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Kijewo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zdunowo</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zalesie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Przylep</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Klucz</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stołczyn</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pilchowo</span></div></div></div>
+    </section>
+  </main>
+
+  <script>
+    window.cityData = {
+      cityName: "Szczecin",
+      coverage: {
+        lead: { covered: ["srodmiescie",
+            "nowe-miasto",
+            "turzyn",
+            "niebuszewo",
+            "niebuszewo-boleszkowice",
+            "stare-miasto",
+            "drzetowo-grabowo",
+            "lasztownia",
+            "miedzyodrze-wyspa-pucka",
+            "pogodno",
+            "glebokie-pilchowo",
+            "wielgowo-slawociesze-zdunowo",
+            "gumience",
+            "osow",
+            "lukasinka",
+            "golecino-goclaw",
+            "stocznia",
+            "skolwin",
+            "pomorzany",
+            "grabowo",
+            "sloneczne",
+            "bukowe-clstocie",
+            "bukowo",
+            "krzekowo-bezrzecze",
+            "wielgowo",
+            "gumience-zachod",
+            "zdroje",
+            "zawadzkiego-klonowica",
+            "dabie",
+            "majowe",
+            "kijewo",
+            "zdunowo",
+            "zalesie",
+            "przylep",
+            "klucz",
+            "stolczyn",
+            "pilchowo"], uncovered: [] },
+        nbot: { covered: ["srodmiescie",
+            "nowe-miasto",
+            "turzyn",
+            "niebuszewo",
+            "niebuszewo-boleszkowice",
+            "stare-miasto",
+            "drzetowo-grabowo",
+            "lasztownia",
+            "miedzyodrze-wyspa-pucka",
+            "pogodno",
+            "glebokie-pilchowo",
+            "wielgowo-slawociesze-zdunowo",
+            "gumience",
+            "osow",
+            "lukasinka",
+            "golecino-goclaw",
+            "stocznia",
+            "skolwin",
+            "pomorzany",
+            "grabowo",
+            "sloneczne",
+            "bukowe-clstocie",
+            "bukowo",
+            "krzekowo-bezrzecze",
+            "wielgowo",
+            "gumience-zachod",
+            "zdroje",
+            "zawadzkiego-klonowica",
+            "dabie",
+            "majowe",
+            "kijewo",
+            "zdunowo",
+            "zalesie",
+            "przylep",
+            "klucz",
+            "stolczyn",
+            "pilchowo"], uncovered: [] }
+      },
+      districtNames: {
+        "srodmiescie": "Śródmieście",
+        "nowe-miasto": "Nowe Miasto",
+        "turzyn": "Turzyn",
+        "niebuszewo": "Niebuszewo",
+        "niebuszewo-boleszkowice": "Niebuszewo-Boleszkowice",
+        "stare-miasto": "Stare Miasto",
+        "drzetowo-grabowo": "Drzetowo-Grabowo",
+        "lasztownia": "Łasztownia",
+        "miedzyodrze-wyspa-pucka": "Międzyodrze-Wyspa Pucka",
+        "pogodno": "Pogodno",
+        "glebokie-pilchowo": "Głębokie-Pilchowo",
+        "wielgowo-slawociesze-zdunowo": "Wielgowo-Sławociesze-Zdunowo",
+        "gumience": "Gumieńce",
+        "osow": "Osów",
+        "lukasinka": "Łukasińka",
+        "golecino-goclaw": "Gołęcino-Gocław",
+        "stocznia": "Stocznia",
+        "skolwin": "Skolwin",
+        "pomorzany": "Pomorzany",
+        "grabowo": "Grabowo",
+        "sloneczne": "Słoneczne",
+        "bukowe-clstocie": "Bukowe-Clstocie",
+        "bukowo": "Bukowo",
+        "krzekowo-bezrzecze": "Krzekowo-Bezrzecze",
+        "wielgowo": "Wielgowo",
+        "gumience-zachod": "Gumieńce Zachód",
+        "zdroje": "Zdroje",
+        "zawadzkiego-klonowica": "Zawadzkiego-Klonowica",
+        "dabie": "Dąbie",
+        "majowe": "Majowe",
+        "kijewo": "Kijewo",
+        "zdunowo": "Zdunowo",
+        "zalesie": "Zalesie",
+        "przylep": "Przylep",
+        "klucz": "Klucz",
+        "stolczyn": "Stołczyn",
+        "pilchowo": "Pilchowo",
+      },
+      uncoveredLabel: []
+    };
+  </script>
+
+  <script>
+  (function() {
+    let currentMode = 'lead';
+    const input  = document.getElementById('addr-input');
+    const btn    = document.getElementById('addr-btn');
+    const result = document.getElementById('addr-result');
+    const rIcon  = document.getElementById('addr-result-icon');
+    const rTitle = document.getElementById('addr-result-title');
+    const rDist  = document.getElementById('addr-result-district');
+    const rDetail= document.getElementById('addr-result-detail');
+    const districtNames = window.cityData.districtNames;
+
+    function getCoverageStatus(slug, mode) {
+      const cov = window.cityData.coverage[mode];
+      if (cov.covered.includes(slug)) return 'covered';
+      if (cov.uncovered.includes(slug)) {
+        if (mode==='nbot' && window.cityData.coverage['lead'].covered.includes(slug)) return 'lead-only';
+        return 'uncovered';
+      }
+      return 'unknown';
+    }
+
+    const nominatimMap = {
+            'śródmieście': 'srodmiescie',
+      'centrum': 'srodmiescie',
+      'nowe miasto': 'nowe-miasto',
+      'turzyn': 'turzyn',
+      'niebuszewo': 'niebuszewo',
+      'stare miasto': 'stare-miasto',
+      'stare-miasto': 'stare-miasto',
+      'drzetowo': 'drzetowo-grabowo',
+      'grabowo': 'drzetowo-grabowo',
+      'łasztownia': 'lasztownia',
+      'międzyodrze': 'miedzyodrze-wyspa-pucka',
+      'wyspa pucka': 'miedzyodrze-wyspa-pucka',
+      'pogodno': 'pogodno',
+      'głębokie': 'glebokie-pilchowo',
+      'pilchowo': 'pilchowo',
+      'wielgowo': 'wielgowo-slawociesze-zdunowo',
+      'sławociesze': 'wielgowo-slawociesze-zdunowo',
+      'zdunowo': 'zdunowo',
+      'gumieńce': 'gumience',
+      'osów': 'osow',
+      'łukasińka': 'lukasinka',
+      'gołęcino': 'golecino-goclaw',
+      'gocław': 'golecino-goclaw',
+      'stocznia': 'stocznia',
+      'skolwin': 'skolwin',
+      'pomorzany': 'pomorzany',
+      'słoneczne': 'sloneczne',
+      'bukowo': 'bukowo',
+      'krzekowo': 'krzekowo-bezrzecze',
+      'bezrzecze': 'krzekowo-bezrzecze',
+      'zdroje': 'zdroje',
+      'zawadzkiego': 'zawadzkiego-klonowica',
+      'klonowica': 'zawadzkiego-klonowica',
+      'dąbie': 'dabie',
+      'majowe': 'majowe',
+      'kijewo': 'kijewo',
+      'zalesie': 'zalesie',
+      'przylep': 'przylep',
+      'klucz': 'klucz',
+      'stołczyn': 'stolczyn',
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      const s = str.toLowerCase().trim().replace(/[–—]/g,'-').replace(/\s+/g,' ');
+      if (nominatimMap[s]) return nominatimMap[s];
+      const c = s.replace(/^(osiedle|os\.|im\.|nowe|stare)\s+/,'').trim();
+      if (nominatimMap[c]) return nominatimMap[c];
+      for (const [k,v] of Object.entries(nominatimMap)) { if (s.includes(k)) return v; }
+      for (const [k,v] of Object.entries(nominatimMap)) { if (k.includes(s) && s.length>4) return v; }
+      return null;
+    }
+
+    function showResult(state,t,d,dt) {
+      result.className='addr-result addr-result--'+state;
+      rIcon.textContent=state==='covered'?'✅':state==='uncovered'?'❌':state==='lead-only'?'⚠️':state==='loading'?'⏳':'ℹ️';
+      rTitle.textContent=t; rDist.textContent=d; rDetail.textContent=dt;
+    }
+
+    async function checkAddress() {
+      const query=input.value.trim();
+      if (!query) return;
+      showResult('loading','Sprawdzam adres...','','');
+      try {
+        const parts=query.match(/^(.+?)\s+(\d+\w*)\s*$/)||[];
+        const sp=parts[1]?parts[1].trim():query.trim();
+        const np=parts[2]||'';
+        const fq=(np?sp+' '+np:sp)+', Szczecin';
+        const url=`https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(fq)}&filter=countrycode:pl&bias=proximity:14.552812,53.428543&lang=pl&limit=10&apiKey=bd1229116680495c949ee4b6b64b6cfb`;
+        const data=await (await fetch(url,{mode:'cors'})).json();
+        const features=(data.features||[]).filter(f=>{
+          const city=(f.properties.city||'').toLowerCase();
+          return city.includes('szczecin');
+        });
+        if (!features.length) { showResult('unknown','Nie znaleziono adresu w Szczecinie','','Sprawdź pisownię.'); return; }
+        const mode=currentMode, modeLabel=mode==='lead'?'Lead':'nBot';
+        const resolved=[], seen=new Set();
+        for (const f of features) {
+          const p=f.properties||{};
+          const candidates=[p.district,p.suburb,p.quarter,p.neighbourhood,p.county].filter(Boolean);
+          let slug=null;
+          for (const c of candidates) { const s=normalizeDistrict(c); if(s){slug=s;break;} }
+          if (!slug||seen.has(slug)) continue;
+          seen.add(slug);
+          resolved.push({slug,displayName:districtNames[slug]||slug,status:getCoverageStatus(slug,mode),shortAddr:[p.street,p.housenumber,p.district||p.suburb].filter(Boolean).join(' ')});
+        }
+        if (!resolved.length) { showResult('unknown','Adres znaleziony, osiedle nierozpoznane','',''); return; }
+        renderMultiResult(resolved,modeLabel);
+      } catch(e) { showResult('unknown','Błąd połączenia','','Sprawdź połączenie z internetem.'); }
+    }
+
+    function renderMultiResult(results,modeLabel) {
+      if (results.length===1) {
+        const r=results[0];
+        if (r.status==='covered') showResult('covered','Tak, ten adres obsługujemy!',`Osiedle: ${r.displayName}`,`Tryb: ${modeLabel} · ${r.shortAddr}`);
+        else if (r.status==='lead-only') showResult('lead-only','Obsługujemy tylko gdy właściciel sam się zgłosi',`Osiedle: ${r.displayName} — tylko tryb Lead`,`Aktualny tryb: nBot · ${r.shortAddr}`);
+        else showResult('uncovered','Tego adresu nie obsługujemy',`Osiedle: ${r.displayName}`,`Tryb: ${modeLabel} · ${r.shortAddr}`);
+        return;
+      }
+      result.className='addr-result addr-result--multi';
+      const hasCov=results.some(r=>r.status==='covered'||r.status==='lead-only');
+      let h=`<div class="addr-result-multi-header"><div class="addr-result-icon">${hasCov?'ℹ️':'❌'}</div><div><div class="addr-result-title">Znaleziono ${results.length} lokalizacje</div><div class="addr-result-detail">Sprawdź które osiedle Cię dotyczy:</div></div></div><div class="addr-multi-list">`;
+      for (const r of results) {
+        const icon=r.status==='covered'?'✅':r.status==='lead-only'?'⚠️':'❌';
+        const label=r.status==='covered'?'Obsługiwana':r.status==='lead-only'?'Tylko Lead':'Nieobsługiwana';
+        h+=`<div class="addr-multi-item addr-multi-item--${r.status}"><span class="addr-multi-icon">${icon}</span><div class="addr-multi-info"><strong>${r.displayName}</strong><span>${label}</span></div></div>`;
+      }
+      h+=`</div>`;
+      result.innerHTML=h;
+    }
+
+    document.querySelectorAll('.mode-btn').forEach(b=>{
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active'); currentMode=b.dataset.mode;
+        if(result) result.className='addr-result addr-result--hidden';
+      });
+    });
+    btn.addEventListener('click',checkAddress);
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAddress();});
+    document.querySelectorAll('.addr-example').forEach(b=>{
+      b.addEventListener('click',()=>{input.value=b.dataset.val;checkAddress();});
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Łódź</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+  <style>
+    .lodz-legend-group { margin-bottom: 20px; }
+    .lodz-legend-group-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal-dark);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--teal-light);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Sprawdź obsługę – Łódź</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+
+    <section class="hero-card">
+      <div class="hero-badge">Łódź</div>
+      <h1>Czy obsługujemy Twój adres?</h1>
+      <p>
+        Wpisz ulicę i numer domu, aby sprawdzić czy dany adres w Łodzi
+        znajduje się w obsługiwanym przez nas obszarze.
+        Obecnie obsługujemy <strong>wszystkie 36 osiedli Łodzi</strong>.
+      </p>
+    </section>
+
+    <!-- Tryb Lead / nBot -->
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead" type="button">Lead</button>
+        <button class="mode-btn" data-mode="nbot" type="button">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+      </div>
+    </section>
+
+    <!-- Wyszukiwarka adresu -->
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Łodzi</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu, aby sprawdzić czy dany adres znajduje się w obsługiwanej przez nas dzielnicy Łodzi.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input"
+            placeholder="np. Piotrkowska 1, Kilińskiego 50, Brzezińska 10..."
+            autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Piotrkowska 1">Piotrkowska 1</button>
+          <button class="addr-example" data-val="Kilińskiego 50">Kilińskiego 50</button>
+          <button class="addr-example" data-val="Brzezińska 10">Brzezińska 10</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Osiedla -->
+    <section class="addr-search-section" style="margin-top:18px;">
+      <div class="addr-search-kicker">Obsługiwane osiedla</div>
+      <h2 class="addr-search-title" style="font-size:1.1rem;margin-bottom:18px;">Wszystkie 36 osiedli Łodzi</h2>
+      <div class="lodz-legend-group"><div class="lodz-legend-group-title">Śródmieście</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Katedralna</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Śródmieście-Wschód</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Bałuty</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bałuty-Doły</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bałuty-Centrum</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Teofilów-Wielkopolska</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bałuty Zachodnie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Radogoszcz</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Julianów-Marysin-Rogi</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Łagiewniki</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Osiedle Wzniesień Łódzkich</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Polesie</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Lublinek-Pienista</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Retkinia Zachód-Smulsko</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Karolew-Retkinia Wschód</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stare Polesie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Koziny</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zdrowie-Mania</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Złotno</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Osiedle im. J. Montwiłła-Mireckiego</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Górna</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Nad Nerem</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Ruda Pabianicka</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Rokicie</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Piastów-Kurak</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Górniak</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Chojny</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Chojny-Dąbrowa</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Wiskitno</span></div></div></div><div class="lodz-legend-group"><div class="lodz-legend-group-title">Widzew</div><div class="city-legend-grid"><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stary Widzew</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zarzew</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Widzew-Wschód</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Olechów-Janów</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Osiedle Nr 33</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Andrzejów</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Mileszki</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stoki-Sikawa-Podgórze</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Dolina Łódki</span></div><div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Nowosolna</span></div></div></div>
+    </section>
+
+  </main>
+
+  <script>
+    window.cityData = {
+      cityName: "Łódź",
+      coverage: {
+        lead: {
+          covered: ["katedralna",
+            "srodmiescie-wschod",
+            "baluty-doly",
+            "baluty-centrum",
+            "teofilow-wielkopolska",
+            "baluty-zachodnie",
+            "radogoszcz",
+            "julianow-marysin-rogi",
+            "lagiewniki",
+            "osiedle-wzniesien-lodzkich",
+            "lublinek-pienista",
+            "retkinia-zachod-smulsko",
+            "karolew-retkinia-wschod",
+            "stare-polesie",
+            "koziny",
+            "zdrowie-mania",
+            "zlotno",
+            "mireckiego",
+            "nad-nerem",
+            "ruda-pabianicka",
+            "rokicie",
+            "piastow-kurak",
+            "gorniak",
+            "chojny",
+            "chojny-dabrowa",
+            "wiskitno",
+            "stary-widzew",
+            "zarzew",
+            "widzew-wschod",
+            "olechow-janow",
+            "osiedle-nr-33",
+            "andrzejow",
+            "mileszki",
+            "stoki-sikawa-podgorze",
+            "dolina-lodki",
+            "nowosolna"],
+          uncovered: []
+        },
+        nbot: {
+          covered: ["katedralna",
+            "srodmiescie-wschod",
+            "baluty-doly",
+            "baluty-centrum",
+            "teofilow-wielkopolska",
+            "baluty-zachodnie",
+            "radogoszcz",
+            "julianow-marysin-rogi",
+            "lagiewniki",
+            "osiedle-wzniesien-lodzkich",
+            "lublinek-pienista",
+            "retkinia-zachod-smulsko",
+            "karolew-retkinia-wschod",
+            "stare-polesie",
+            "koziny",
+            "zdrowie-mania",
+            "zlotno",
+            "mireckiego",
+            "nad-nerem",
+            "ruda-pabianicka",
+            "rokicie",
+            "piastow-kurak",
+            "gorniak",
+            "chojny",
+            "chojny-dabrowa",
+            "wiskitno",
+            "stary-widzew",
+            "zarzew",
+            "widzew-wschod",
+            "olechow-janow",
+            "osiedle-nr-33",
+            "andrzejow",
+            "mileszki",
+            "stoki-sikawa-podgorze",
+            "dolina-lodki",
+            "nowosolna"],
+          uncovered: []
+        }
+      },
+      districtNames: {
+        "katedralna": "Katedralna",
+        "srodmiescie-wschod": "Śródmieście-Wschód",
+        "baluty-doly": "Bałuty-Doły",
+        "baluty-centrum": "Bałuty-Centrum",
+        "teofilow-wielkopolska": "Teofilów-Wielkopolska",
+        "baluty-zachodnie": "Bałuty Zachodnie",
+        "radogoszcz": "Radogoszcz",
+        "julianow-marysin-rogi": "Julianów-Marysin-Rogi",
+        "lagiewniki": "Łagiewniki",
+        "osiedle-wzniesien-lodzkich": "Osiedle Wzniesień Łódzkich",
+        "lublinek-pienista": "Lublinek-Pienista",
+        "retkinia-zachod-smulsko": "Retkinia Zachód-Smulsko",
+        "karolew-retkinia-wschod": "Karolew-Retkinia Wschód",
+        "stare-polesie": "Stare Polesie",
+        "koziny": "Koziny",
+        "zdrowie-mania": "Zdrowie-Mania",
+        "zlotno": "Złotno",
+        "mireckiego": "Osiedle im. J. Montwiłła-Mireckiego",
+        "nad-nerem": "Nad Nerem",
+        "ruda-pabianicka": "Ruda Pabianicka",
+        "rokicie": "Rokicie",
+        "piastow-kurak": "Piastów-Kurak",
+        "gorniak": "Górniak",
+        "chojny": "Chojny",
+        "chojny-dabrowa": "Chojny-Dąbrowa",
+        "wiskitno": "Wiskitno",
+        "stary-widzew": "Stary Widzew",
+        "zarzew": "Zarzew",
+        "widzew-wschod": "Widzew-Wschód",
+        "olechow-janow": "Olechów-Janów",
+        "osiedle-nr-33": "Osiedle Nr 33",
+        "andrzejow": "Andrzejów",
+        "mileszki": "Mileszki",
+        "stoki-sikawa-podgorze": "Stoki-Sikawa-Podgórze",
+        "dolina-lodki": "Dolina Łódki",
+        "nowosolna": "Nowosolna",
+      },
+      uncoveredLabel: []
+    };
+  </script>
+
+  <script>
+  (function() {
+    let currentMode = 'lead';
+
+    const input  = document.getElementById('addr-input');
+    const btn    = document.getElementById('addr-btn');
+    const result = document.getElementById('addr-result');
+    const rIcon  = document.getElementById('addr-result-icon');
+    const rTitle = document.getElementById('addr-result-title');
+    const rDist  = document.getElementById('addr-result-district');
+    const rDetail= document.getElementById('addr-result-detail');
+
+    const districtNames = window.cityData.districtNames;
+
+    function getCoverageStatus(slug, mode) {
+      const cov = window.cityData.coverage[mode];
+      if (cov.covered.includes(slug)) return 'covered';
+      if (cov.uncovered.includes(slug)) {
+        const leadCov = window.cityData.coverage['lead'];
+        if (mode === 'nbot' && leadCov.covered.includes(slug)) return 'lead-only';
+        return 'uncovered';
+      }
+      return 'unknown';
+    }
+
+    const nominatimMap = {
+            'katedralna': 'katedralna',
+      'śródmieście': 'srodmiescie-wschod',
+      'śródmieście-wschód': 'srodmiescie-wschod',
+      'centrum': 'katedralna',
+      'bałuty': 'baluty-centrum',
+      'bałuty-doły': 'baluty-doly',
+      'bałuty doły': 'baluty-doly',
+      'bałuty-centrum': 'baluty-centrum',
+      'bałuty centrum': 'baluty-centrum',
+      'teofilów-wielkopolska': 'teofilow-wielkopolska',
+      'teofilów': 'teofilow-wielkopolska',
+      'bałuty zachodnie': 'baluty-zachodnie',
+      'bałuty-zachodnie': 'baluty-zachodnie',
+      'radogoszcz': 'radogoszcz',
+      'julianów-marysin-rogi': 'julianow-marysin-rogi',
+      'julianów': 'julianow-marysin-rogi',
+      'marysin': 'julianow-marysin-rogi',
+      'łagiewniki': 'lagiewniki',
+      'wzniesień łódzkich': 'osiedle-wzniesien-lodzkich',
+      'lublinek': 'lublinek-pienista',
+      'lublinek-pienista': 'lublinek-pienista',
+      'retkinia': 'karolew-retkinia-wschod',
+      'retkinia zachód': 'retkinia-zachod-smulsko',
+      'retkinia-zachód': 'retkinia-zachod-smulsko',
+      'smulsko': 'retkinia-zachod-smulsko',
+      'karolew': 'karolew-retkinia-wschod',
+      'karolew-retkinia': 'karolew-retkinia-wschod',
+      'stare polesie': 'stare-polesie',
+      'polesie': 'stare-polesie',
+      'koziny': 'koziny',
+      'zdrowie': 'zdrowie-mania',
+      'mania': 'zdrowie-mania',
+      'złotno': 'zlotno',
+      'mireckiego': 'mireckiego',
+      'nad nerem': 'nad-nerem',
+      'ruda pabianicka': 'ruda-pabianicka',
+      'rokicie': 'rokicie',
+      'piastów-kurak': 'piastow-kurak',
+      'piastów': 'piastow-kurak',
+      'górniak': 'gorniak',
+      'chojny': 'chojny',
+      'chojny-dąbrowa': 'chojny-dabrowa',
+      'dąbrowa': 'chojny-dabrowa',
+      'wiskitno': 'wiskitno',
+      'widzew': 'stary-widzew',
+      'stary widzew': 'stary-widzew',
+      'zarzew': 'zarzew',
+      'widzew-wschód': 'widzew-wschod',
+      'widzew wschód': 'widzew-wschod',
+      'olechów': 'olechow-janow',
+      'janów': 'olechow-janow',
+      'olechów-janów': 'olechow-janow',
+      'andrzejów': 'andrzejow',
+      'mileszki': 'mileszki',
+      'stoki': 'stoki-sikawa-podgorze',
+      'sikawa': 'stoki-sikawa-podgorze',
+      'dolina łódki': 'dolina-lodki',
+      'nowosolna': 'nowosolna',
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      const s = str.toLowerCase().trim().replace(/[–—]/g, '-').replace(/\s+/g, ' ');
+      if (nominatimMap[s]) return nominatimMap[s];
+      const cleaned = s.replace(/^(osiedle|os\.|im\.|nowe|stare)\s+/, '').trim();
+      if (nominatimMap[cleaned]) return nominatimMap[cleaned];
+      for (const [key, slug] of Object.entries(nominatimMap)) {
+        if (s.includes(key)) return slug;
+      }
+      for (const [key, slug] of Object.entries(nominatimMap)) {
+        if (key.includes(s) && s.length > 4) return slug;
+      }
+      return null;
+    }
+
+    function showResult(state, titleText, districtText, detailText) {
+      result.className = 'addr-result addr-result--' + state;
+      rIcon.textContent   = state === 'covered' ? '✅' : state === 'uncovered' ? '❌' :
+                            state === 'lead-only' ? '⚠️' : state === 'loading' ? '⏳' : 'ℹ️';
+      rTitle.textContent  = titleText;
+      rDist.textContent   = districtText;
+      rDetail.textContent = detailText;
+    }
+
+    async function checkAddress() {
+      const query = input.value.trim();
+      if (!query) return;
+      showResult('loading', 'Sprawdzam adres...', '', '');
+
+      try {
+        const parts      = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
+        const streetPart = parts[1] ? parts[1].trim() : query.trim();
+        const numberPart = parts[2] || '';
+        const fullQuery  = (numberPart ? streetPart + ' ' + numberPart : streetPart) + ', Łódź';
+
+        const searchUrl = `https://api.geoapify.com/v1/geocode/search?` +
+          `text=${encodeURIComponent(fullQuery)}` +
+          `&filter=countrycode:pl` +
+          `&bias=proximity:19.455983,51.759445` +
+          `&lang=pl&limit=10` +
+          `&apiKey=bd1229116680495c949ee4b6b64b6cfb`;
+
+        const searchRes  = await fetch(searchUrl, { mode: 'cors' });
+        const searchData = await searchRes.json();
+        const features   = (searchData.features || []).filter(f => {
+          const city = (f.properties.city || '').toLowerCase();
+          return city.includes('łódź') || city.includes('lodz');
+        });
+
+        if (!features || features.length === 0) {
+          showResult('unknown', 'Nie znaleziono adresu w Łodzi', '',
+            'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy w Łodzi.');
+          return;
+        }
+
+        const mode      = currentMode;
+        const modeLabel = currentMode === 'lead' ? 'Lead' : 'nBot';
+        const resolved  = [];
+        const seen      = new Set();
+
+        for (const feature of features) {
+          const props = feature.properties || {};
+          const candidates = [props.district, props.suburb, props.quarter,
+                              props.neighbourhood, props.county].filter(Boolean);
+          let slug = null;
+          for (const c of candidates) {
+            const s = normalizeDistrict(c);
+            if (s) { slug = s; break; }
+          }
+          if (!slug || seen.has(slug)) continue;
+          seen.add(slug);
+          const displayName = districtNames[slug] || slug;
+          const status      = getCoverageStatus(slug, mode);
+          const shortAddr   = [props.street, props.housenumber, props.district || props.suburb]
+            .filter(Boolean).join(' ');
+          resolved.push({ slug, displayName, status, shortAddr });
+        }
+
+        if (resolved.length === 0) {
+          showResult('unknown', 'Adres znaleziony, osiedle nierozpoznane', '', '');
+          return;
+        }
+
+        renderMultiResult(resolved, modeLabel);
+
+      } catch (err) {
+        showResult('unknown', 'Błąd połączenia', '', 'Sprawdź połączenie z internetem i spróbuj ponownie.');
+      }
+    }
+
+    function renderMultiResult(results, modeLabel) {
+      if (results.length === 1) {
+        const r = results[0];
+        if (r.status === 'covered') {
+          showResult('covered', 'Tak, ten adres obsługujemy!',
+            `Osiedle: ${r.displayName}`, `Tryb: ${modeLabel} · ${r.shortAddr}`);
+        } else if (r.status === 'lead-only') {
+          showResult('lead-only', 'Obsługujemy tylko gdy właściciel sam się zgłosi',
+            `Osiedle: ${r.displayName} — tylko tryb Lead (inbound)`,
+            `Aktualny tryb: nBot · ${r.shortAddr}`);
+        } else {
+          showResult('uncovered', 'Tego adresu nie obsługujemy',
+            `Osiedle: ${r.displayName}`, `Tryb: ${modeLabel} · ${r.shortAddr}`);
+        }
+        return;
+      }
+      result.className = 'addr-result addr-result--multi';
+      const hasCovered = results.some(r => r.status === 'covered' || r.status === 'lead-only');
+      let html = `
+        <div class="addr-result-multi-header">
+          <div class="addr-result-icon">${hasCovered ? 'ℹ️' : '❌'}</div>
+          <div>
+            <div class="addr-result-title">Znaleziono ${results.length} lokalizacje dla tego adresu</div>
+            <div class="addr-result-detail">Sprawdź które osiedle Cię dotyczy:</div>
+          </div>
+        </div>
+        <div class="addr-multi-list">`;
+      for (const r of results) {
+        const icon  = r.status === 'covered' ? '✅' : r.status === 'lead-only' ? '⚠️' : '❌';
+        const label = r.status === 'covered' ? 'Obsługiwana' :
+                      r.status === 'lead-only' ? 'Tylko Lead (inbound)' : 'Nieobsługiwana';
+        html += `
+          <div class="addr-multi-item addr-multi-item--${r.status}">
+            <span class="addr-multi-icon">${icon}</span>
+            <div class="addr-multi-info">
+              <strong>${r.displayName}</strong>
+              <span>${label}</span>
+            </div>
+          </div>`;
+      }
+      html += `</div>`;
+      result.innerHTML = html;
+    }
+
+    // Mode buttons
+    document.querySelectorAll('.mode-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        currentMode = b.dataset.mode;
+        if (result) result.className = 'addr-result addr-result--hidden';
+      });
+    });
+
+    btn.addEventListener('click', checkAddress);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') checkAddress(); });
+    document.querySelectorAll('.addr-example').forEach(b => {
+      b.addEventListener('click', () => { input.value = b.dataset.val; checkAddress(); });
+    });
+  })();
+  </script>
+</body>
+</html>

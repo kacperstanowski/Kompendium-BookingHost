@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Wrocław</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Sprawdź obsługę – Wrocław</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+
+    <section class="hero-card">
+      <div class="hero-badge">Wrocław</div>
+      <h1>Czy obsługujemy Twój adres?</h1>
+      <p>
+        Wpisz ulicę i numer domu, aby sprawdzić czy dany adres we Wrocławiu
+        znajduje się w obsługiwanym przez nas obszarze.
+        Obecnie obsługujemy <strong>wszystkie dzielnice Wrocławia</strong>.
+      </p>
+    </section>
+
+
+    <!-- Tryb Lead / nBot -->
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead" type="button">Lead</button>
+        <button class="mode-btn" data-mode="nbot" type="button">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+      </div>
+    </section>
+
+    <!-- Wyszukiwarka adresu -->
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres we Wrocławiu</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu, aby sprawdzić czy dany adres znajduje się w obsługiwanej przez nas dzielnicy Wrocławia.</p>
+      </div>
+
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input
+            id="addr-input"
+            type="text"
+            class="addr-input"
+            placeholder="np. Świdnicka 1, Legnicka 50, Krupnicza 10..."
+            autocomplete="off"
+          />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Świdnicka 1">Świdnicka 1</button>
+          <button class="addr-example" data-val="Legnicka 50">Legnicka 50</button>
+          <button class="addr-example" data-val="Powstańców Śląskich 5">Powstańców Śląskich 5</button>
+        </div>
+      </div>
+
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Informacja o dzielnicach -->
+    <section class="addr-search-section" style="margin-top:18px;">
+      <div class="addr-search-kicker">Obsługiwane dzielnice</div>
+      <h2 class="addr-search-title" style="font-size:1.1rem;margin-bottom:14px;">Wszystkie 48 dzielnic Wrocławia</h2>
+      <div class="city-legend-grid">
+        <div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Stare Miasto</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Śródmieście</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Przedmieście Świdnickie</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Przedmieście Oławskie</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Nadodrze</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Plac Grunwaldzki</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Biskupin-Sępolno-Dąbie-Bartoszowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Księże Małe i Wielkie</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Huby</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Gajowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Grabiszyn-Grabiszynek</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Powstańców Śląskich</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Ołtaszyn</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Krzyki-Partynice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Bieńkowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Kłokoczyce</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Wojszyce</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Jagodno</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Kowale</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Opatowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Tarnogaj</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Borek</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Gaj</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Krzeszów</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Brochów</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Swojczyce-Strachocin-Wojnów</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Świniary</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Psie Pole-Zawidawie</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Polanowice-Poświętne-Ligota</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Karłowice-Różanka</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Ołbin</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Szczepin</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pilczyce-Kozanów-Popowice Północne</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Maślice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Marszowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Jerzmanowo-Jarnołtów-Strachowice-Osiniec</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pracze Odrzańskie</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Widawa</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Lipa Piotrowska</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Pawłowice</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Złotniki</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Zacisze-Zalesie-Szczytniki</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Żerniki</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Muchobór Mały</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Muchobór Wielki</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Oporów</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Słowik</span></div>
+<div class="city-legend-item"><span class="city-legend-num">✅</span><span class="city-legend-name">Skowronie</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    window.cityData = {
+      cityName: "Wrocław",
+      coverage: {
+        lead: {
+          covered: [
+            "stare-miasto",
+            "srodmiescie",
+            "przedmiescie-swidnickie",
+            "przedmiescie-olawskie",
+            "nadodrze",
+            "pl-grunwaldzki",
+            "biskupin-sepolno-dabie-bartoszowice",
+            "ksieze-male-wielkie",
+            "huby",
+            "gajowice",
+            "grabiszyn-grabiszynek",
+            "powstancow-slaskich",
+            "oltaszyn",
+            "krzyki-partynice",
+            "bienkowice",
+            "klokoczyce",
+            "wojszyce",
+            "jagodno",
+            "kowale",
+            "opatowice",
+            "tarnogaj",
+            "borek",
+            "gaj",
+            "krzeszow",
+            "brochow",
+            "swojczyce-strachocin-wojnow",
+            "swiniary",
+            "psie-pole-zawidawie",
+            "polanowice-poswietne-ligota",
+            "karlowice-rozanka",
+            "olbin",
+            "szczepin",
+            "pilczyce-kozanow-popowice-polnocne",
+            "maslice",
+            "marszowice",
+            "jerzmanowo-jarnoltow-strachowice-osiniec",
+            "pracze-odrzanskie",
+            "widawa",
+            "lipa-piotrowska",
+            "pawlowice",
+            "zlotniki",
+            "zacisze-zalesie-szczytniki",
+            "zerniki",
+            "muchobor-maly",
+            "muchobor-wielki",
+            "oporow",
+            "slowik",
+            "skowronie"
+          ],
+          uncovered: []
+        },
+        nbot: {
+          covered: [
+            "stare-miasto",
+            "srodmiescie",
+            "przedmiescie-swidnickie",
+            "przedmiescie-olawskie",
+            "nadodrze",
+            "pl-grunwaldzki",
+            "biskupin-sepolno-dabie-bartoszowice",
+            "ksieze-male-wielkie",
+            "huby",
+            "gajowice",
+            "grabiszyn-grabiszynek",
+            "powstancow-slaskich",
+            "oltaszyn",
+            "krzyki-partynice",
+            "bienkowice",
+            "klokoczyce",
+            "wojszyce",
+            "jagodno",
+            "kowale",
+            "opatowice",
+            "tarnogaj",
+            "borek",
+            "gaj",
+            "krzeszow",
+            "brochow",
+            "swojczyce-strachocin-wojnow",
+            "swiniary",
+            "psie-pole-zawidawie",
+            "polanowice-poswietne-ligota",
+            "karlowice-rozanka",
+            "olbin",
+            "szczepin",
+            "pilczyce-kozanow-popowice-polnocne",
+            "maslice",
+            "marszowice",
+            "jerzmanowo-jarnoltow-strachowice-osiniec",
+            "pracze-odrzanskie",
+            "widawa",
+            "lipa-piotrowska",
+            "pawlowice",
+            "zlotniki",
+            "zacisze-zalesie-szczytniki",
+            "zerniki",
+            "muchobor-maly",
+            "muchobor-wielki",
+            "oporow",
+            "slowik",
+            "skowronie"
+          ],
+          uncovered: []
+        }
+      },
+      districtNames: {
+        "stare-miasto": "Stare Miasto",
+        "srodmiescie": "Śródmieście",
+        "przedmiescie-swidnickie": "Przedmieście Świdnickie",
+        "przedmiescie-olawskie": "Przedmieście Oławskie",
+        "nadodrze": "Nadodrze",
+        "pl-grunwaldzki": "Plac Grunwaldzki",
+        "biskupin-sepolno-dabie-bartoszowice": "Biskupin-Sępolno-Dąbie-Bartoszowice",
+        "ksieze-male-wielkie": "Księże Małe i Wielkie",
+        "huby": "Huby",
+        "gajowice": "Gajowice",
+        "grabiszyn-grabiszynek": "Grabiszyn-Grabiszynek",
+        "powstancow-slaskich": "Powstańców Śląskich",
+        "oltaszyn": "Ołtaszyn",
+        "krzyki-partynice": "Krzyki-Partynice",
+        "bienkowice": "Bieńkowice",
+        "klokoczyce": "Kłokoczyce",
+        "wojszyce": "Wojszyce",
+        "jagodno": "Jagodno",
+        "kowale": "Kowale",
+        "opatowice": "Opatowice",
+        "tarnogaj": "Tarnogaj",
+        "borek": "Borek",
+        "gaj": "Gaj",
+        "krzeszow": "Krzeszów",
+        "brochow": "Brochów",
+        "swojczyce-strachocin-wojnow": "Swojczyce-Strachocin-Wojnów",
+        "swiniary": "Świniary",
+        "psie-pole-zawidawie": "Psie Pole-Zawidawie",
+        "polanowice-poswietne-ligota": "Polanowice-Poświętne-Ligota",
+        "karlowice-rozanka": "Karłowice-Różanka",
+        "olbin": "Ołbin",
+        "szczepin": "Szczepin",
+        "pilczyce-kozanow-popowice-polnocne": "Pilczyce-Kozanów-Popowice Północne",
+        "maslice": "Maślice",
+        "marszowice": "Marszowice",
+        "jerzmanowo-jarnoltow-strachowice-osiniec": "Jerzmanowo-Jarnołtów-Strachowice-Osiniec",
+        "pracze-odrzanskie": "Pracze Odrzańskie",
+        "widawa": "Widawa",
+        "lipa-piotrowska": "Lipa Piotrowska",
+        "pawlowice": "Pawłowice",
+        "zlotniki": "Złotniki",
+        "zacisze-zalesie-szczytniki": "Zacisze-Zalesie-Szczytniki",
+        "zerniki": "Żerniki",
+        "muchobor-maly": "Muchobór Mały",
+        "muchobor-wielki": "Muchobór Wielki",
+        "oporow": "Oporów",
+        "slowik": "Słowik",
+        "skowronie": "Skowronie",
+      },
+      uncoveredLabel: []
+    };
+  </script>
+
+  <script>
+  // ── Wyszukiwarka adresów – Geoapify API ──────────────────────────────
+  (function() {
+    let currentMode = 'lead';
+
+    const input  = document.getElementById('addr-input');
+    const btn    = document.getElementById('addr-btn');
+    const result = document.getElementById('addr-result');
+    const rIcon  = document.getElementById('addr-result-icon');
+    const rTitle = document.getElementById('addr-result-title');
+    const rDist  = document.getElementById('addr-result-district');
+    const rDetail= document.getElementById('addr-result-detail');
+
+    const districtNames = window.cityData.districtNames;
+
+    function getCoverageStatus(slug, mode) {
+      const cov = window.cityData.coverage[mode];
+      if (cov.covered.includes(slug)) return 'covered';
+      if (cov.uncovered.includes(slug)) {
+        const leadCov = window.cityData.coverage['lead'];
+        if (mode === 'nbot' && leadCov.covered.includes(slug)) return 'lead-only';
+        return 'uncovered';
+      }
+      return 'unknown';
+    }
+
+    const nominatimMap = {
+      'stare miasto':                           'stare-miasto',
+      'śródmieście':                            'srodmiescie',
+      'centrum':                                'srodmiescie',
+      'przedmieście świdnickie':                'przedmiescie-swidnickie',
+      'przedmieście oławskie':                  'przedmiescie-olawskie',
+      'nadodrze':                               'nadodrze',
+      'plac grunwaldzki':                       'pl-grunwaldzki',
+      'biskupin':                               'biskupin-sepolno-dabie-bartoszowice',
+      'sępolno':                                'biskupin-sepolno-dabie-bartoszowice',
+      'dąbie':                                  'biskupin-sepolno-dabie-bartoszowice',
+      'bartoszowice':                           'biskupin-sepolno-dabie-bartoszowice',
+      'księże małe':                            'ksieze-male-wielkie',
+      'księże wielkie':                         'ksieze-male-wielkie',
+      'huby':                                   'huby',
+      'gajowice':                               'gajowice',
+      'grabiszyn':                              'grabiszyn-grabiszynek',
+      'grabiszynek':                            'grabiszyn-grabiszynek',
+      'powstańców śląskich':                    'powstancow-slaskich',
+      'ołtaszyn':                               'oltaszyn',
+      'krzyki':                                 'krzyki-partynice',
+      'partynice':                              'krzyki-partynice',
+      'bieńkowice':                             'bienkowice',
+      'kłokoczyce':                             'klokoczyce',
+      'wojszyce':                               'wojszyce',
+      'jagodno':                                'jagodno',
+      'kowale':                                 'kowale',
+      'opatowice':                              'opatowice',
+      'tarnogaj':                               'tarnogaj',
+      'borek':                                  'borek',
+      'gaj':                                    'gaj',
+      'krzeszów':                               'krzeszow',
+      'brochów':                                'brochow',
+      'swojczyce':                              'swojczyce-strachocin-wojnow',
+      'strachocin':                             'swojczyce-strachocin-wojnow',
+      'wojnów':                                 'swojczyce-strachocin-wojnow',
+      'świniary':                               'swiniary',
+      'psie pole':                              'psie-pole-zawidawie',
+      'zawidawie':                              'psie-pole-zawidawie',
+      'polanowice':                             'polanowice-poswietne-ligota',
+      'poświętne':                              'polanowice-poswietne-ligota',
+      'ligota':                                 'polanowice-poswietne-ligota',
+      'karłowice':                              'karlowice-rozanka',
+      'różanka':                                'karlowice-rozanka',
+      'ołbin':                                  'olbin',
+      'szczepin':                               'szczepin',
+      'pilczyce':                               'pilczyce-kozanow-popowice-polnocne',
+      'kozanów':                                'pilczyce-kozanow-popowice-polnocne',
+      'popowice':                               'pilczyce-kozanow-popowice-polnocne',
+      'maślice':                                'maslice',
+      'marszowice':                             'marszowice',
+      'jerzmanowo':                             'jerzmanowo-jarnoltow-strachowice-osiniec',
+      'jarnołtów':                              'jerzmanowo-jarnoltow-strachowice-osiniec',
+      'strachowice':                            'jerzmanowo-jarnoltow-strachowice-osiniec',
+      'osiniec':                                'jerzmanowo-jarnoltow-strachowice-osiniec',
+      'pracze odrzańskie':                      'pracze-odrzanskie',
+      'widawa':                                 'widawa',
+      'lipa piotrowska':                        'lipa-piotrowska',
+      'pawłowice':                              'pawlowice',
+      'złotniki':                               'zlotniki',
+      'zacisze':                                'zacisze-zalesie-szczytniki',
+      'zalesie':                                'zacisze-zalesie-szczytniki',
+      'szczytniki':                             'zacisze-zalesie-szczytniki',
+      'żerniki':                                'zerniki',
+      'muchobór mały':                          'muchobor-maly',
+      'muchobór wielki':                        'muchobor-wielki',
+      'oporów':                                 'oporow',
+      'słowik':                                 'slowik',
+      'skowronie':                              'skowronie',
+
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      const s = str.toLowerCase().trim().replace(/[–—]/g, '-').replace(/\s+/g, ' ');
+      if (nominatimMap[s]) return nominatimMap[s];
+      const cleaned = s.replace(/^(osiedle|os\.|nowe|stare|wielkie|małe)\s+/, '').trim();
+      if (nominatimMap[cleaned]) return nominatimMap[cleaned];
+      for (const [key, slug] of Object.entries(nominatimMap)) {
+        if (s.includes(key)) return slug;
+      }
+      for (const [key, slug] of Object.entries(nominatimMap)) {
+        if (key.includes(s) && s.length > 4) return slug;
+      }
+      return null;
+    }
+
+    function showResult(state, titleText, districtText, detailText) {
+      result.className = 'addr-result addr-result--' + state;
+      rIcon.textContent   = state === 'covered'   ? '✅' :
+                            state === 'uncovered' ? '❌' :
+                            state === 'loading'   ? '⏳' : 'ℹ️';
+      rTitle.textContent  = titleText;
+      rDist.textContent   = districtText;
+      rDetail.textContent = detailText;
+    }
+
+    async function checkAddress() {
+      const query = input.value.trim();
+      if (!query) return;
+
+      showResult('loading', 'Sprawdzam adres...', '', '');
+
+      try {
+        const parts      = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
+        const streetPart = parts[1] ? parts[1].trim() : query.trim();
+        const numberPart = parts[2] || '';
+        const fullQuery  = (numberPart ? streetPart + ' ' + numberPart : streetPart) + ', Wrocław';
+
+        const searchUrl = `https://api.geoapify.com/v1/geocode/search?` +
+          `text=${encodeURIComponent(fullQuery)}` +
+          `&filter=countrycode:pl` +
+          `&bias=proximity:17.038538,51.107883` +
+          `&lang=pl&limit=10` +
+          `&apiKey=bd1229116680495c949ee4b6b64b6cfb`;
+
+        const searchRes  = await fetch(searchUrl, { mode: 'cors' });
+        const searchData = await searchRes.json();
+        const features   = (searchData.features || []).filter(f => {
+          const city = (f.properties.city || '').toLowerCase();
+          return city.includes('wrocław') || city.includes('wroclaw');
+        });
+
+        if (!features || features.length === 0) {
+          showResult('unknown', 'Nie znaleziono adresu we Wrocławiu', '',
+            'Sprawdź pisownię. Wyszukiwarka obsługuje tylko adresy we Wrocławiu.');
+          return;
+        }
+
+        const mode      = currentMode;
+        const modeLabel = currentMode === 'lead' ? 'Lead' : 'nBot';
+        const resolved = [];
+        const seen     = new Set();
+
+        for (const feature of features) {
+          const props = feature.properties || {};
+          const candidates = [
+            props.district, props.suburb, props.quarter,
+            props.neighbourhood, props.county,
+          ].filter(Boolean);
+
+          let slug = null;
+          for (const c of candidates) {
+            const s = normalizeDistrict(c);
+            if (s) { slug = s; break; }
+          }
+
+          if (!slug || seen.has(slug)) continue;
+          seen.add(slug);
+
+          const displayName = districtNames[slug] || slug;
+          const status      = getCoverageStatus(slug, currentMode);
+          const shortAddr   = [props.street, props.housenumber, props.district || props.suburb]
+            .filter(Boolean).join(' ');
+          resolved.push({ slug, displayName, status, shortAddr });
+        }
+
+        if (resolved.length === 0) {
+          showResult('unknown', 'Adres znaleziony, dzielnica nierozpoznana', '', '');
+          return;
+        }
+
+        renderMultiResult(resolved, modeLabel);
+
+      } catch (err) {
+        showResult('unknown', 'Błąd połączenia', '',
+          'Sprawdź połączenie z internetem i spróbuj ponownie.');
+      }
+    }
+
+    function renderMultiResult(results, modeLabel) {
+      if (results.length === 1) {
+        const r = results[0];
+        if (r.status === 'covered') {
+          showResult('covered', 'Tak, ten adres obsługujemy!',
+            `Dzielnica: ${r.displayName}`, `Tryb: ${modeLabel} · ${r.shortAddr}`);
+        } else if (r.status === 'lead-only') {
+          showResult('lead-only', 'Obsługujemy tylko gdy właściciel sam się zgłosi',
+            `Dzielnica: ${r.displayName} — tylko tryb Lead (inbound)`,
+            `Aktualny tryb: nBot · ${r.shortAddr}`);
+        } else {
+          showResult('uncovered', 'Tego adresu nie obsługujemy',
+            `Dzielnica: ${r.displayName}`, `Tryb: ${modeLabel} · ${r.shortAddr}`);
+        }
+        return;
+      }
+      result.className = 'addr-result addr-result--multi';
+      let html = `
+        <div class="addr-result-multi-header">
+          <div class="addr-result-icon">ℹ️</div>
+          <div>
+            <div class="addr-result-title">Znaleziono ${results.length} lokalizacje dla tego adresu</div>
+            <div class="addr-result-detail">Sprawdź która dzielnica Cię dotyczy:</div>
+          </div>
+        </div>
+        <div class="addr-multi-list">`;
+      for (const r of results) {
+        html += `
+          <div class="addr-multi-item addr-multi-item--covered">
+            <span class="addr-multi-icon">✅</span>
+            <div class="addr-multi-info">
+              <strong>${r.displayName}</strong>
+              <span>Obsługiwana</span>
+            </div>
+          </div>`;
+      }
+      html += `</div>`;
+      result.innerHTML = html;
+    }
+
+    // Przełącznik Lead / nBot
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+        // Wyczyść wynik przy zmianie trybu
+        const result = document.getElementById('addr-result');
+        if (result) result.className = 'addr-result addr-result--hidden';
+      });
+    });
+
+    btn.addEventListener('click', checkAddress);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') checkAddress(); });
+    document.querySelectorAll('.addr-example').forEach(b => {
+      b.addEventListener('click', () => { input.value = b.dataset.val; checkAddress(); });
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -76,7 +76,7 @@
       <div class="stats-grid">
         <article class="card stat-card">
           <div class="card-label">Lokalizacje</div>
-          <div class="stat-value">16</div>
+          <div class="stat-value">34</div>
           <div class="stat-desc">Aktywne miasta</div>
         </article>
 
@@ -141,16 +141,18 @@
       </div>
 
       <div class="grid-3" id="city-grid">
-        <a class="city-card city-link" data-city="Warszawa" href="warszawa.html">
-            <div class="city-icon">🏙️</div>
-            <div>
-                <h3>Warszawa</h3>
-                <p>Centrum, Śródmieście, Praga, Mokotów, Żoliborz</p>
-                <span class="city-tag">Aktywna</span>
-            </div>
-          </a>
 
-        <a class="city-card city-link" data-city="Kraków" href="krakow.html">
+        <!-- ── GOTOWE (z wyszukiwarką) ── -->
+        <a class="city-card city-link" data-city="Warszawa" href="warszawa.html">
+          <div class="city-icon">🏙️</div>
+          <div>
+            <h3>Warszawa</h3>
+            <p>Centrum, Śródmieście, Praga, Mokotów, Żoliborz</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </a>
+
+        <a class="city-card city-link" data-city="Kraków" href="krakow_leaflet.html">
           <div class="city-icon">🏰</div>
           <div>
             <h3>Kraków</h3>
@@ -159,38 +161,264 @@
           </div>
         </a>
 
-        <article class="city-card" data-city="Wrocław">
+        <a class="city-card city-link" data-city="Wrocław" href="wroclaw.html">
           <div class="city-icon">🌉</div>
           <div>
             <h3>Wrocław</h3>
             <p>Stare Miasto, Krzyki, Fabryczna, Psie Pole</p>
             <span class="city-tag">Aktywna</span>
           </div>
-        </article>
+        </a>
 
-        <article class="city-card" data-city="Gdańsk">
-          <div class="city-icon">⚓</div>
-          <div>
-            <h3>Gdańsk / Trójmiasto</h3>
-            <p>Gdańsk, Gdynia, Sopot – całe Trójmiasto</p>
-            <span class="city-tag">Aktywna</span>
-          </div>
-        </article>
-
-        <article class="city-card" data-city="Poznań">
+        <a class="city-card city-link" data-city="Poznań" href="poznan.html">
           <div class="city-icon">🎠</div>
           <div>
             <h3>Poznań</h3>
             <p>Stare Miasto, Jeżyce, Wilda, Grunwald</p>
             <span class="city-tag">Aktywna</span>
           </div>
-        </article>
+        </a>
 
-        <article class="city-card" data-city="Łódź">
+        <a class="city-card city-link" data-city="Łódź" href="lodz.html">
           <div class="city-icon">🏭</div>
           <div>
             <h3>Łódź</h3>
             <p>Śródmieście, Widzew, Górna, Polesie</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </a>
+
+        <a class="city-card city-link" data-city="Szczecin" href="szczecin.html">
+          <div class="city-icon">🌊</div>
+          <div>
+            <h3>Szczecin</h3>
+            <p>Śródmieście, Prawobrzeże, Pogodno</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </a>
+
+        <!-- ── DO ZROBIENIA ── -->
+        <a class="city-card city-link" data-city="Gdańsk" href="gdansk.html">
+          <div class="city-icon">⚓</div>
+          <div>
+            <h3>Gdańsk</h3>
+            <p>Śródmieście, Wrzeszcz, Oliwa, Przymorze</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </a>
+
+        <article class="city-card" data-city="Gdynia">
+          <div class="city-icon">🚢</div>
+          <div>
+            <h3>Gdynia</h3>
+            <p>Śródmieście, Redłowo, Orłowo, Chylonia</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Sopot">
+          <div class="city-icon">🏖️</div>
+          <div>
+            <h3>Sopot</h3>
+            <p>Centrum, Górny Sopot, Dolny Sopot</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Reda">
+          <div class="city-icon">🏘️</div>
+          <div>
+            <h3>Reda</h3>
+            <p>Centrum, Obwodnica</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Rumia">
+          <div class="city-icon">🏘️</div>
+          <div>
+            <h3>Rumia</h3>
+            <p>Centrum, Biała Rzeka</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Władysławowo">
+          <div class="city-icon">🎣</div>
+          <div>
+            <h3>Władysławowo</h3>
+            <p>Centrum, Chałupy, Jastrzębia Góra</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Katowice">
+          <div class="city-icon">🏗️</div>
+          <div>
+            <h3>Katowice</h3>
+            <p>Śródmieście, Ligota, Brynów, Ochojec</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Sosnowiec">
+          <div class="city-icon">🏙️</div>
+          <div>
+            <h3>Sosnowiec</h3>
+            <p>Centrum, Pogoń, Milowice</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Gliwice">
+          <div class="city-icon">⚙️</div>
+          <div>
+            <h3>Gliwice</h3>
+            <p>Śródmieście, Trynek, Łabędy</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Chorzów">
+          <div class="city-icon">🏟️</div>
+          <div>
+            <h3>Chorzów</h3>
+            <p>Centrum, Chorzów II, Maciejkowice</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Zabrze">
+          <div class="city-icon">⛏️</div>
+          <div>
+            <h3>Zabrze</h3>
+            <p>Centrum, Biskupice, Rokitnica</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Będzin">
+          <div class="city-icon">🏰</div>
+          <div>
+            <h3>Będzin</h3>
+            <p>Centrum, Łagisza, Grodziec</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Mysłowice">
+          <div class="city-icon">🏘️</div>
+          <div>
+            <h3>Mysłowice</h3>
+            <p>Centrum, Wesoła, Brzęczkowice</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Bielsko-Biała">
+          <div class="city-icon">🏔️</div>
+          <div>
+            <h3>Bielsko-Biała</h3>
+            <p>Centrum, Lipnik, Wapienica, Stare Bielsko</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Oświęcim">
+          <div class="city-icon">🏛️</div>
+          <div>
+            <h3>Oświęcim</h3>
+            <p>Centrum, Stare Miasto, Zasole</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Jelenia Góra">
+          <div class="city-icon">🏔️</div>
+          <div>
+            <h3>Jelenia Góra</h3>
+            <p>Centrum, Cieplice, Sobieszów</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Karpacz">
+          <div class="city-icon">⛷️</div>
+          <div>
+            <h3>Karpacz</h3>
+            <p>Centrum, Bierutowice, Wilcza Poręba</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Szklarska Poręba">
+          <div class="city-icon">🌲</div>
+          <div>
+            <h3>Szklarska Poręba</h3>
+            <p>Centrum, Dolna, Górna</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Kołobrzeg">
+          <div class="city-icon">🌊</div>
+          <div>
+            <h3>Kołobrzeg</h3>
+            <p>Centrum, Port, Uzdrowisko</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Police">
+          <div class="city-icon">🏭</div>
+          <div>
+            <h3>Police</h3>
+            <p>Centrum, Jasienica, Tanowo</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Międzyzdroje">
+          <div class="city-icon">🏝️</div>
+          <div>
+            <h3>Międzyzdroje</h3>
+            <p>Centrum, Wapnica</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Świnoujście">
+          <div class="city-icon">⚓</div>
+          <div>
+            <h3>Świnoujście</h3>
+            <p>Centrum, Łunowo, Przytór</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Koszalin">
+          <div class="city-icon">🌲</div>
+          <div>
+            <h3>Koszalin</h3>
+            <p>Centrum, Rokosowo, Jamno</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Toruń">
+          <div class="city-icon">🏰</div>
+          <div>
+            <h3>Toruń</h3>
+            <p>Stare Miasto, Bydgoskie, Rubinkowo</p>
+            <span class="city-tag">Aktywna</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="Rzeszów">
+          <div class="city-icon">🏙️</div>
+          <div>
+            <h3>Rzeszów</h3>
+            <p>Centrum, Nowe Miasto, Drabinianka</p>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -204,23 +432,15 @@
           </div>
         </article>
 
-        <article class="city-card" data-city="Katowice">
-          <div class="city-icon">🏗️</div>
+        <article class="city-card" data-city="Lublin">
+          <div class="city-icon">🏛️</div>
           <div>
-            <h3>Katowice / GOP</h3>
-            <p>Katowice, Chorzów, Sosnowiec, Gliwice</p>
+            <h3>Lublin</h3>
+            <p>Stare Miasto, Czuby, Śródmieście, Wieniawa</p>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
 
-        <article class="city-card" data-city="Szczecin">
-          <div class="city-icon">🌊</div>
-          <div>
-            <h3>Szczecin</h3>
-            <p>Śródmieście, Prawobrzeże, Pogodno</p>
-            <span class="city-tag">Aktywna</span>
-          </div>
-        </article>
       </div>
     </section>
 
