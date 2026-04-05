@@ -21,39 +21,59 @@
         <div class="logo-subtitle">Kompendium wiedzy</div>
       </div>
     </div>
+
+    <!-- Nawigacja w headerze -->
+    <nav class="top-nav" aria-label="Główna nawigacja">
+      <div class="top-nav-scroll">
+        <button class="tab active" data-tab="start">Start</button>
+        <button class="tab" data-tab="lokalizacje">Lokalizacje</button>
+        <button class="tab" data-tab="faq">FAQ</button>
+        <button class="tab" data-tab="nagrania">Nagrania</button>
+        <button class="tab" data-tab="kontakt">Ekspertki</button>
+      </div>
+
+      <!-- Dropdown Narzędzia — hover -->
+      <div class="tools-wrapper" id="toolsWrapper">
+        <button class="tools-tab" type="button" tabindex="0">
+          Narzędzia
+          <span class="tools-tab-arrow">▼</span>
+        </button>
+      <div class="tools-menu">
+        <div class="tools-menu-header">Wybierz narzędzie</div>
+        <button class="tool-item" data-tab="nbot" type="button">
+          <div class="tool-icon">🤖</div>
+          <div class="tool-info">
+            <div class="tool-name">nBot</div>
+            <div class="tool-desc">Asystent AI dla zespołu</div>
+          </div>
+        </button>
+        <button class="tool-item" data-tab="salesforce" type="button">
+          <div class="tool-icon">☁️</div>
+          <div class="tool-info">
+            <div class="tool-name">Salesforce</div>
+            <div class="tool-desc">CRM i zarządzanie leadami</div>
+          </div>
+        </button>
+        <a class="tool-item" href="https://www.cloudtalk.io" target="_blank" rel="noopener">
+          <div class="tool-icon">📞</div>
+          <div class="tool-info">
+            <div class="tool-name">CloudTalk</div>
+            <div class="tool-desc">Centrala telefoniczna</div>
+          </div>
+        </a>
+        <a class="tool-item" href="https://calendar.google.com" target="_blank" rel="noopener">
+          <div class="tool-icon">📅</div>
+          <div class="tool-info">
+            <div class="tool-name">Google Kalendarz</div>
+            <div class="tool-desc">Planowanie spotkań</div>
+          </div>
+        </a>
+        </div>
+      </div>
+    </nav>
+
     <div class="header-badge">Zespół Wsparcia Sprzedaży</div>
   </header>
-
-  <nav class="top-nav" aria-label="Główna nawigacja">
-    <button class="tab active" data-tab="start">
-      <span class="tab-icon">🏠</span>
-      <span>Start</span>
-    </button>
-    <button class="tab" data-tab="lokalizacje">
-      <span class="tab-icon">📍</span>
-      <span>Obsługiwane lokalizacje</span>
-    </button>
-    <button class="tab" data-tab="faq">
-      <span class="tab-icon">❓</span>
-      <span>FAQ</span>
-    </button>
-    <button class="tab" data-tab="nagrania">
-      <span class="tab-icon">🎧</span>
-      <span>Nagrania rozmów</span>
-    </button>
-    <button class="tab" data-tab="kontakt">
-      <span class="tab-icon">👩‍💼</span>
-      <span>Kontakt do ekspertek</span>
-    </button>
-    <button class="tab" data-tab="nbot">
-      <span class="tab-icon">🤖</span>
-      <span>nBot</span>
-    </button>
-    <button class="tab" data-tab="salesforce">
-      <span class="tab-icon">☁️</span>
-      <span>Salesforce</span>
-    </button>
-  </nav>
 
   <main class="layout">
     <!-- START -->
@@ -143,47 +163,47 @@
       <div class="grid-3" id="city-grid">
 
         <!-- ── GOTOWE (z wyszukiwarką) ── -->
-        <a class="city-card city-link" data-city="Warszawa" href="warszawa_leaflet.html">
+        <a class="city-card city-link" data-city="Warszawa" href="warszawa.html">
           <div class="city-icon">🏙️</div>
           <div>
             <h3>Warszawa</h3>
-            <p>Centrum, Śródmieście, Praga, Mokotów, Żoliborz</p>
+            <div class="city-count">887 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
 
-        <a class="city-card city-link" data-city="Kraków" href="krakow_leaflet.html">
+        <a class="city-card city-link" data-city="Kraków" href="krakow.html">
           <div class="city-icon">🏰</div>
           <div>
             <h3>Kraków</h3>
-            <p>Stare Miasto, Kazimierz, Podgórze, Nowa Huta</p>
+            <div class="city-count">283 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
 
-        <a class="city-card city-link" data-city="Wrocław" href="wroclaw_leaflet.html">
+        <a class="city-card city-link" data-city="Wrocław" href="wroclaw.html">
           <div class="city-icon">🌉</div>
           <div>
             <h3>Wrocław</h3>
-            <p>Stare Miasto, Krzyki, Fabryczna, Psie Pole</p>
+            <div class="city-count">117 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
 
-        <a class="city-card city-link" data-city="Poznań" href="poznan_leaflet.html">
+        <a class="city-card city-link" data-city="Poznań" href="poznan.html">
           <div class="city-icon">🎠</div>
           <div>
             <h3>Poznań</h3>
-            <p>Stare Miasto, Jeżyce, Wilda, Grunwald</p>
+            <div class="city-count">140 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
 
-        <a class="city-card city-link" data-city="Łódź" href="lodz_leaflet.html">
+        <a class="city-card city-link" data-city="Łódź" href="lodz.html">
           <div class="city-icon">🏭</div>
           <div>
             <h3>Łódź</h3>
-            <p>Śródmieście, Widzew, Górna, Polesie</p>
+            <div class="city-count">95 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
@@ -192,7 +212,7 @@
           <div class="city-icon">🌊</div>
           <div>
             <h3>Szczecin</h3>
-            <p>Śródmieście, Prawobrzeże, Pogodno</p>
+            <div class="city-count">62 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
@@ -202,7 +222,7 @@
           <div class="city-icon">⚓</div>
           <div>
             <h3>Gdańsk</h3>
-            <p>Śródmieście, Wrzeszcz, Oliwa, Przymorze</p>
+            <div class="city-count">78 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </a>
@@ -211,7 +231,7 @@
           <div class="city-icon">🚢</div>
           <div>
             <h3>Gdynia</h3>
-            <p>Śródmieście, Redłowo, Orłowo, Chylonia</p>
+            <div class="city-count">45 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -220,7 +240,7 @@
           <div class="city-icon">🏖️</div>
           <div>
             <h3>Sopot</h3>
-            <p>Centrum, Górny Sopot, Dolny Sopot</p>
+            <div class="city-count">34 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -229,7 +249,7 @@
           <div class="city-icon">🏘️</div>
           <div>
             <h3>Reda</h3>
-            <p>Centrum, Obwodnica</p>
+            <div class="city-count">8 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -238,7 +258,7 @@
           <div class="city-icon">🏘️</div>
           <div>
             <h3>Rumia</h3>
-            <p>Centrum, Biała Rzeka</p>
+            <div class="city-count">12 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -247,7 +267,7 @@
           <div class="city-icon">🎣</div>
           <div>
             <h3>Władysławowo</h3>
-            <p>Centrum, Chałupy, Jastrzębia Góra</p>
+            <div class="city-count">22 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -256,7 +276,7 @@
           <div class="city-icon">🏗️</div>
           <div>
             <h3>Katowice</h3>
-            <p>Śródmieście, Ligota, Brynów, Ochojec</p>
+            <div class="city-count">51 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -265,7 +285,7 @@
           <div class="city-icon">🏙️</div>
           <div>
             <h3>Sosnowiec</h3>
-            <p>Centrum, Pogoń, Milowice</p>
+            <div class="city-count">28 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -274,7 +294,7 @@
           <div class="city-icon">⚙️</div>
           <div>
             <h3>Gliwice</h3>
-            <p>Śródmieście, Trynek, Łabędy</p>
+            <div class="city-count">19 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -283,7 +303,7 @@
           <div class="city-icon">🏟️</div>
           <div>
             <h3>Chorzów</h3>
-            <p>Centrum, Chorzów II, Maciejkowice</p>
+            <div class="city-count">14 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -292,7 +312,7 @@
           <div class="city-icon">⛏️</div>
           <div>
             <h3>Zabrze</h3>
-            <p>Centrum, Biskupice, Rokitnica</p>
+            <div class="city-count">11 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -301,7 +321,7 @@
           <div class="city-icon">🏰</div>
           <div>
             <h3>Będzin</h3>
-            <p>Centrum, Łagisza, Grodziec</p>
+            <div class="city-count">9 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -310,7 +330,7 @@
           <div class="city-icon">🏘️</div>
           <div>
             <h3>Mysłowice</h3>
-            <p>Centrum, Wesoła, Brzęczkowice</p>
+            <div class="city-count">7 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -319,7 +339,7 @@
           <div class="city-icon">🏔️</div>
           <div>
             <h3>Bielsko-Biała</h3>
-            <p>Centrum, Lipnik, Wapienica, Stare Bielsko</p>
+            <div class="city-count">31 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -328,7 +348,7 @@
           <div class="city-icon">🏛️</div>
           <div>
             <h3>Oświęcim</h3>
-            <p>Centrum, Stare Miasto, Zasole</p>
+            <div class="city-count">15 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -337,7 +357,7 @@
           <div class="city-icon">🏔️</div>
           <div>
             <h3>Jelenia Góra</h3>
-            <p>Centrum, Cieplice, Sobieszów</p>
+            <div class="city-count">18 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -346,7 +366,7 @@
           <div class="city-icon">⛷️</div>
           <div>
             <h3>Karpacz</h3>
-            <p>Centrum, Bierutowice, Wilcza Poręba</p>
+            <div class="city-count">24 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -355,7 +375,7 @@
           <div class="city-icon">🌲</div>
           <div>
             <h3>Szklarska Poręba</h3>
-            <p>Centrum, Dolna, Górna</p>
+            <div class="city-count">17 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -364,7 +384,7 @@
           <div class="city-icon">🌊</div>
           <div>
             <h3>Kołobrzeg</h3>
-            <p>Centrum, Port, Uzdrowisko</p>
+            <div class="city-count">33 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -373,7 +393,7 @@
           <div class="city-icon">🏭</div>
           <div>
             <h3>Police</h3>
-            <p>Centrum, Jasienica, Tanowo</p>
+            <div class="city-count">6 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -382,7 +402,7 @@
           <div class="city-icon">🏝️</div>
           <div>
             <h3>Międzyzdroje</h3>
-            <p>Centrum, Wapnica</p>
+            <div class="city-count">14 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -391,7 +411,7 @@
           <div class="city-icon">⚓</div>
           <div>
             <h3>Świnoujście</h3>
-            <p>Centrum, Łunowo, Przytór</p>
+            <div class="city-count">21 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -400,7 +420,7 @@
           <div class="city-icon">🌲</div>
           <div>
             <h3>Koszalin</h3>
-            <p>Centrum, Rokosowo, Jamno</p>
+            <div class="city-count">9 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -409,7 +429,7 @@
           <div class="city-icon">🏰</div>
           <div>
             <h3>Toruń</h3>
-            <p>Stare Miasto, Bydgoskie, Rubinkowo</p>
+            <div class="city-count">27 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -418,7 +438,7 @@
           <div class="city-icon">🏙️</div>
           <div>
             <h3>Rzeszów</h3>
-            <p>Centrum, Nowe Miasto, Drabinianka</p>
+            <div class="city-count">23 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -427,7 +447,7 @@
           <div class="city-icon">⛰️</div>
           <div>
             <h3>Zakopane</h3>
-            <p>Centrum, Krupówki, Gubałówka</p>
+            <div class="city-count">42 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -436,7 +456,7 @@
           <div class="city-icon">🏛️</div>
           <div>
             <h3>Lublin</h3>
-            <p>Stare Miasto, Czuby, Śródmieście, Wieniawa</p>
+            <div class="city-count">35 mieszkań</div>
             <span class="city-tag">Aktywna</span>
           </div>
         </article>
@@ -801,5 +821,35 @@
   </main>
 
   <script src="main.js"></script>
+  <script>
+  // Zakładki z narzędzi (nBot, Salesforce) — podświetlają Narzędzia zamiast poprzedniej zakładki
+  var TOOL_TABS = ['nbot', 'salesforce'];
+
+  document.querySelectorAll('.tool-item[data-tab]').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var tabId = item.dataset.tab;
+
+      // Ukryj wszystkie strony
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      var page = document.getElementById(tabId);
+      if (page) page.classList.add('active');
+
+      // Usuń active ze wszystkich tabów
+      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+
+      // Podświetl tools-wrapper zamiast zakładki
+      var tw = document.getElementById('toolsWrapper');
+      if (tw) tw.classList.add('tools-active');
+    });
+  });
+
+  // Kliknięcie zwykłej zakładki — zdejmij tools-active
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.addEventListener('click', function() {
+      var tw = document.getElementById('toolsWrapper');
+      if (tw) tw.classList.remove('tools-active');
+    });
+  });
+  </script>
 </body>
 </html>

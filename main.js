@@ -103,7 +103,11 @@ function showPage(pageId) {
     tab.classList.toggle("active", tab.dataset.tab === pageId);
   });
 
-  window.location.hash = pageId;
+  // Używamy history API zamiast location.hash żeby nie triggerować scroll przeglądarki
+  history.replaceState(null, null, "#" + pageId);
+
+  // Przewiń na górę layoutu (nie do elementu, bo header by go przykrył)
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function setupTabs() {
