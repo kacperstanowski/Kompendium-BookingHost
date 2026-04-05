@@ -785,23 +785,63 @@ audio::-webkit-media-controls-panel {
 
 @media (max-width: 768px) {
   .layout {
-    padding: 24px 16px 40px;
+    padding: 20px 14px 40px;
   }
 
+  /* Header na mobile: logo + nav w kolumnie */
   .site-header {
-    padding: 0 16px;
-    height: auto;
-    min-height: 64px;
-    gap: 12px;
     flex-wrap: wrap;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    height: auto;
+    padding: 10px 16px 0;
+    gap: 0;
+    align-items: flex-start;
+    overflow: visible;
   }
 
+  .logo-wrap {
+    padding: 4px 0 10px;
+    flex: 1;
+  }
+
+  /* Badge schowany na mobile */
+  .header-badge {
+    display: none;
+  }
+
+  /* Nav zajmuje całą szerokość pod logo */
   .top-nav {
-    padding: 0 8px;
+    width: 100%;
+    border-left: none !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    flex: 0 0 100%;
+  }
+  .top-nav::-webkit-scrollbar { display: none; }
+
+  .tab {
+    height: 46px;
+    padding: 0 12px;
+    font-size: 0.8rem;
   }
 
+  .tools-tab {
+    height: 46px;
+    padding: 0 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Tools menu na mobile — od lewej */
+  .tools-menu {
+    right: auto;
+    left: 0;
+    width: 220px;
+  }
+
+  /* Gridy */
   .stats-grid,
   .grid-2,
   .grid-3,
@@ -809,12 +849,27 @@ audio::-webkit-media-controls-panel {
     grid-template-columns: 1fr;
   }
 
+  /* Karty miast zwarte */
+  .city-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .city-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .city-card h3 { font-size: 0.95rem; }
+  .city-count { font-size: 0.78rem; }
+
   .expert-card {
     align-items: flex-start;
   }
 
   .page-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .hero-card h2 {
