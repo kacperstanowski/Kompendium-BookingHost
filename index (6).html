@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Kompendium Wiedzy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo-box">BH</div>
+      <div class="logo-text">
+        <div class="logo-title">BookingHost</div>
+        <div class="logo-subtitle">Kompendium wiedzy</div>
+      </div>
+    </div>
+
+    <nav class="top-nav" aria-label="Główna nawigacja">
+      <div class="top-nav-scroll">
+        <button class="tab active" data-tab="start">Start</button>
+        <button class="tab" data-tab="lokalizacje">Lokalizacje</button>
+        <button class="tab" data-tab="faq">FAQ</button>
+        <button class="tab" data-tab="nagrania">Nagrania</button>
+        <button class="tab" data-tab="kontakt">Eksperci</button>
+      </div>
+
+      <!-- Narzędzia dropdown -->
+      <div class="tools-wrapper" id="toolsWrapper">
+        <button class="tools-tab" type="button" id="toolsBtn">
+          Narzędzia
+          <span class="tools-tab-arrow">▾</span>
+        </button>
+        <div class="tools-menu" id="toolsMenu">
+          <div class="tools-menu-header">Wybierz narzędzie</div>
+          <button class="tool-item" data-tab="nbot" type="button">
+            <div class="tool-icon"><img src="nbot-logo.png" alt="nBot" /></div>
+            <div class="tool-info">
+              <div class="tool-name">nBot</div>
+              <div class="tool-desc">Wyszukiwarka ofert najmu z portali</div>
+            </div>
+          </button>
+          <button class="tool-item" data-tab="salesforce" type="button">
+            <div class="tool-icon"><img src="sflogo.jpg" alt="Salesforce" /></div>
+            <div class="tool-info">
+              <div class="tool-name">Salesforce</div>
+              <div class="tool-desc">CRM — leady, kontakty i oferty</div>
+            </div>
+          </button>
+          <a class="tool-item" href="https://www.cloudtalk.io" target="_blank" rel="noopener">
+            <div class="tool-icon"><img src="cloudtalklogo.png" alt="CloudTalk" /></div>
+            <div class="tool-info">
+              <div class="tool-name">CloudTalk</div>
+              <div class="tool-desc">Dzwonienie i monitoring rozmów</div>
+            </div>
+          </a>
+          <a class="tool-item" href="https://calendar.google.com" target="_blank" rel="noopener">
+            <div class="tool-icon"><img src="googlekalendarz-logo.png" alt="Google Kalendarz" /></div>
+            <div class="tool-info">
+              <div class="tool-name">Google Kalendarz</div>
+              <div class="tool-desc">Sprawdzanie dostępności ekspertów</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Materiały dropdown -->
+      <div class="tools-wrapper" id="materialsWrapper">
+        <button class="tools-tab" type="button" id="materialsBtn">
+          Materiały
+          <span class="tools-tab-arrow">▾</span>
+        </button>
+        <div class="tools-menu materials-menu" id="materialsMenu">
+          <div class="tools-menu-header">Materiały dla sprzedaży</div>
+          <button class="tool-item" data-tab="mat-kompleksowa" type="button">
+            <div class="tool-icon">K</div>
+            <div class="tool-info">
+              <div class="tool-name">Oferta Kompleksowa</div>
+              <div class="tool-desc">20% prowizji, 36 miast, pełna obsługa</div>
+            </div>
+          </button>
+          <button class="tool-item" data-tab="mat-smart" type="button">
+            <div class="tool-icon">S</div>
+            <div class="tool-info">
+              <div class="tool-name">Oferta Smart</div>
+              <div class="tool-desc">Wsparcie techniczne, każde miasto PL</div>
+            </div>
+          </button>
+          <button class="tool-item" data-tab="mat-długoterminowy" type="button">
+            <div class="tool-icon">DT</div>
+            <div class="tool-info">
+              <div class="tool-name">Najem Długoterminowy</div>
+              <div class="tool-desc">HostRent, 10% prowizji miesięcznie</div>
+            </div>
+          </button>
+          <button class="tool-item" data-tab="mat-pdf" type="button">
+            <div class="tool-icon">PDF</div>
+            <div class="tool-info">
+              <div class="tool-name">Wszystkie materiały PDF</div>
+              <div class="tool-desc">Dokumenty dla klientów w jednym miejscu</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-badge">Zespół Wsparcia Sprzedaży</div>
+  </header>
+
+  <main class="layout">
+
+    <!-- START -->
+    <section id="start" class="page active">
+      <div class="page-header">
+        <h1>Start</h1>
+        <p>Wewnętrzne centrum wiedzy dla pracowników BookingHost.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-label">Kompendium wiedzy</div>
+        <h2>Jedno miejsce dla najważniejszych procesów, kontaktów i materiałów szkoleniowych</h2>
+        <p>
+          W tym miejscu zebrane są informacje operacyjne dla zespołu: zakres działania w poszczególnych
+          miastach, odpowiedzi na najczęstsze pytania, wzorcowe nagrania rozmów, kontakty do ekspertów
+          oraz instrukcje pracy z nBot i Salesforce.
+        </p>
+        <div class="hero-tip">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5" stroke-linecap="round"/></svg>
+          Nie wiesz czy obsługujemy daną lokalizację? Wejdź w zakładkę <strong>Lokalizacje</strong>, wybierz miasto i wpisz ulicę — system od razu sprawdzi czy adres jest w zasięgu <strong>Lead</strong> lub <strong>nBot</strong>.
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <div class="card-label">Lokalizacje</div>
+          <div class="stat-value">34</div>
+          <div class="stat-desc">Aktywne miasta</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">FAQ</div>
+          <div class="stat-value">12</div>
+          <div class="stat-desc">Najczęstsze pytania z codziennej pracy</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Nagrania</div>
+          <div class="stat-value">10</div>
+          <div class="stat-desc">Przykładowe rozmowy szkoleniowe</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Eksperci</div>
+          <div class="stat-value">16</div>
+          <div class="stat-desc">Bezpośrednie kontakty do wsparcia</div>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="section-head"><h3>Szybki dostęp</h3></div>
+          <div class="quick-links">
+            <button class="quick-link" data-go="lokalizacje">Sprawdź lokalizacje</button>
+            <button class="quick-link" data-go="faq">Otwórz FAQ</button>
+            <button class="quick-link" data-go="nagrania">Przejdź do nagrań</button>
+            <button class="quick-link" data-go="kontakt">Zobacz kontakty do ekspertów</button>
+            <button class="quick-link" data-go="nbot">Instrukcja nBot</button>
+            <button class="quick-link" data-go="salesforce">Instrukcja Salesforce</button>
+            <button class="quick-link" data-go="mat-pdf">Materiały PDF dla klientów</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="section-head"><h3>Aktualności</h3></div>
+          <div class="news-list">
+
+            <a class="news-item news-item--contest" href="https://sites.google.com/bookinghost.com/konkurs-kwiecien2026/strona-g%C5%82%C3%B3wna" target="_blank" rel="noopener">
+              <div class="news-item-icon">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2l2 5h5l-4 3 1.5 5L10 12l-4.5 3L7 10 3 7h5z"/></svg>
+              </div>
+              <div class="news-item-body">
+                <div class="news-item-tag">Konkurs</div>
+                <div class="news-item-title">Konkurs kwiecień 2026</div>
+                <div class="news-item-desc">Kliknij aby zobaczyć szczegóły i zasady konkursu</div>
+              </div>
+              <svg class="news-item-arrow" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 10h10M11 6l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- LOKALIZACJE -->
+    <section id="lokalizacje" class="page">
+      <div class="page-header">
+        <h1>Obsługiwane lokalizacje</h1>
+        <p>Lista miast i regionów, w których świadczymy usługi zarządzania najmem.</p>
+      </div>
+
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.5 13.5L18 18" stroke-linecap="round"/>
+        </svg>
+        <input id="city-search" type="text" placeholder="Szukaj lokalizacji..." />
+      </div>
+
+      <div class="grid-3" id="city-grid">
+        <a class="city-card city-link" data-city="Warszawa" href="warszawa_leaflet.html">
+          <h3>Warszawa</h3>
+          <div class="city-count">887</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Kraków" href="krakow_leaflet.html">
+          <h3>Kraków</h3>
+          <div class="city-count">283</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Wrocław" href="wroclaw_leaflet.html">
+          <h3>Wrocław</h3>
+          <div class="city-count">117</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Poznań" href="poznan_leaflet.html">
+          <h3>Poznań</h3>
+          <div class="city-count">140</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Łódź" href="lodz_leaflet.html">
+          <h3>Łódź</h3>
+          <div class="city-count">95</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Szczecin" href="szczecin_leaflet.html">
+          <h3>Szczecin</h3>
+          <div class="city-count">62</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <a class="city-card city-link" data-city="Gdańsk" href="gdansk_leaflet.html">
+          <h3>Gdańsk</h3>
+          <div class="city-count">78</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </a>
+        <article class="city-card" data-city="Gdynia">
+          <h3>Gdynia</h3>
+          <div class="city-count">45</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Sopot">
+          <h3>Sopot</h3>
+          <div class="city-count">34</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Reda">
+          <h3>Reda</h3>
+          <div class="city-count">8</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Rumia">
+          <h3>Rumia</h3>
+          <div class="city-count">12</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Władysławowo">
+          <h3>Władysławowo</h3>
+          <div class="city-count">22</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Katowice">
+          <h3>Katowice</h3>
+          <div class="city-count">51</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Sosnowiec">
+          <h3>Sosnowiec</h3>
+          <div class="city-count">28</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Gliwice">
+          <h3>Gliwice</h3>
+          <div class="city-count">19</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Chorzów">
+          <h3>Chorzów</h3>
+          <div class="city-count">14</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Zabrze">
+          <h3>Zabrze</h3>
+          <div class="city-count">11</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Będzin">
+          <h3>Będzin</h3>
+          <div class="city-count">9</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Mysłowice">
+          <h3>Mysłowice</h3>
+          <div class="city-count">7</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Bielsko-Biała">
+          <h3>Bielsko-Biała</h3>
+          <div class="city-count">31</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Oświęcim">
+          <h3>Oświęcim</h3>
+          <div class="city-count">15</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Jelenia Góra">
+          <h3>Jelenia Góra</h3>
+          <div class="city-count">18</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Karpacz">
+          <h3>Karpacz</h3>
+          <div class="city-count">24</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Szklarska Poręba">
+          <h3>Szklarska Poręba</h3>
+          <div class="city-count">17</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Kołobrzeg">
+          <h3>Kołobrzeg</h3>
+          <div class="city-count">33</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Police">
+          <h3>Police</h3>
+          <div class="city-count">6</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Międzyzdroje">
+          <h3>Międzyzdroje</h3>
+          <div class="city-count">14</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Świnoujście">
+          <h3>Świnoujście</h3>
+          <div class="city-count">21</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Koszalin">
+          <h3>Koszalin</h3>
+          <div class="city-count">9</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Toruń">
+          <h3>Toruń</h3>
+          <div class="city-count">27</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Rzeszów">
+          <h3>Rzeszów</h3>
+          <div class="city-count">23</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Zakopane">
+          <h3>Zakopane</h3>
+          <div class="city-count">42</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+        <article class="city-card" data-city="Lublin">
+          <h3>Lublin</h3>
+          <div class="city-count">35</div>
+          <div class="city-count-label">mieszkań w zarządzaniu</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="page">
+      <div class="page-header">
+        <h1>Najczęściej zadawane pytania</h1>
+        <p>Odpowiedzi na pytania, z którymi najczęściej spotykamy się w pracy.</p>
+      </div>
+
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.5 13.5L18 18" stroke-linecap="round"/>
+        </svg>
+        <input id="faq-search" type="text" placeholder="Szukaj w FAQ..." />
+      </div>
+
+      <div id="faq-list">
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Co gwarantujemy w ramach 20% prowizji?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „W ramach tej prowizji bierzemy na siebie pełną opiekę nad nieruchomością, tak aby dla Pana/Pani ten najem był całkowicie bezobsługowy. Krótko mówiąc: my pracujemy, Pan/Pani otrzymuje przelew."</p>
+            <br/>
+            <p><strong>1. Pełne bezpieczeństwo i odpowiedzialność.</strong> Przed startem spisujemy szczegółowy protokół zdawczo-odbiorczy. Od tego momentu to my bierzemy pełną odpowiedzialność za gości. Jeśli dojdzie do zniszczenia, uszkodzenia czy kradzieży — my za to odpowiadamy i przywracamy mieszkanie do stanu pierwotnego. Posiadamy profesjonalne ubezpieczenie zarządcy.</p>
+            <br/>
+            <p><strong>2. Maksymalizacja zysków.</strong> Pełny marketing na wszystkich portalach (Booking, Airbnb) oraz aktywne sterowanie cenami — mieszkanie zarabia jak najwięcej w zależności od sezonu i wydarzeń w mieście.</p>
+            <br/>
+            <p><strong>3. Perfekcyjny stan techniczny.</strong> Koordynatorzy w terenie 7 dni w tygodniu. Regularnie sprawdzają jakość sprzątania i naprawiają drobne usterki, zanim staną się problemem. Po zakończeniu współpracy oddajemy mieszkanie w takim samym stanie, w jakim je odebraliśmy.</p>
+            <br/>
+            <p><strong>4. Święty spokój.</strong> Przejmujemy całą komunikację z gośćmi. Pan/Pani nie musi odbierać telefonów o północy ani martwić się o przekazanie kluczy — nasze biuro obsługi czuwa przez cały tydzień.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Ile zarobię na moim mieszkaniu?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „To kluczowe pytanie i podchodzimy do niego bardzo rzetelnie. Nie rzucamy kwot z sufitu, ponieważ każdy lokal jest inny. Naszym celem jest wyciśnięcie z Pana/Pani nieruchomości maksimum rynkowego potencjału."</p>
+            <br/>
+            <p><strong>Jak to sprawdzimy?</strong> Nasz analityk przygotuje bezpłatną estymację przychodów na podstawie realnych danych z mieszkań o podobnym standardzie i lokalizacji. Bierzemy pod uwagę metraż, wyposażenie, widok z okna i bliskość atrakcji.</p>
+            <br/>
+            <p><strong>Dlaczego z nami zarobi Pan/Pani więcej?</strong> Stosujemy systemy revenue management — codziennie dopasowujemy ceny do popytu (koncerty, targi, święta). Dzięki obecności na wielu portalach i statusowi Superhosta utrzymujemy wysokie obłożenie nawet poza sezonem.</p>
+            <br/>
+            <p><strong>Wskazówka dla agenta:</strong> Nigdy nie podawaj kwoty „na oko" przez telefon. Celem rozmowy jest umówienie klienta na kontakt z ekspertem. Słowo „bezpłatna estymacja" zdejmuje z klienta presję i ułatwia decyzję o kolejnym kroku.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>„Nie chcę / nie mam czasu na spotkanie"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „Oczywiście, w pełni to rozumiem — każdy z nas ceni swój czas. To spotkanie jest całkowicie niezobowiązujące i bez żadnych kosztów. To najlepszy sposób, by rzetelnie ocenić potencjał Pana/Pani nieruchomości."</p>
+            <br/>
+            <p><strong>Dlaczego warto?</strong> Przez telefon możemy podać tylko ogólne ramy — dopiero widząc standard wykończenia i układ okien, ekspert przygotuje precyzyjną estymację zarobków. Spotkanie trwa 15–20 minut i można je umówić bezpośrednio w lokalu.</p>
+            <br/>
+            <p><strong>Alternatywa:</strong> Jeśli wizyta osobista jest kłopotliwa, proponujemy 10-minutową rozmowę wideo przez WhatsApp lub Zoom — właściciel pokazuje mieszkanie kamerą, my przygotowujemy wstępny raport.</p>
+            <br/>
+            <p><strong>Zamknięcie:</strong> „Może umówimy się tak: sprawdzimy dostępność eksperta w Pana/Pani okolicy. Woli Pan/Pani dziś o 12 czy jutro o 14?"</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Czy gwarantują Państwo stały dochód?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „W naszym modelu nie stosujemy sztywnego czynszu, ponieważ gramy z Panem/Panią do jednej bramki. Nasze wynagrodzenie to 20% od wypracowanego zysku — zarabiamy tylko wtedy, gdy Pana/Pani mieszkanie zarabia."</p>
+            <br/>
+            <p><strong>Dlaczego to lepsze?</strong> Gdybyśmy gwarantowali stałą, niską kwotę, nie mielibyśmy motywacji, by walczyć o wyższe stawki w sezonie. W naszym modelu robimy wszystko, by wycisnąć z rynku maksimum — bo im więcej zarobi Pan/Pani, tym wyższa jest nasza prowizja.</p>
+            <br/>
+            <p><strong>Bezpieczeństwo:</strong> W najmie krótkoterminowym nie ma ryzyka, że lokator przestanie płacić i nie będzie chciał się wyprowadzić. Ma Pan/Pani pełną kontrolę nad nieruchomością i regularne raporty finansowe.</p>
+            <br/>
+            <p><strong>Zamknięcie:</strong> „Czy bardziej zależy Panu/Pani na sztywnej kwocie co miesiąc, czy na tym, by nieruchomość pracowała na swój maksymalny potencjał rynkowy?"</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Czy mogę sam korzystać z apartamentu?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Odpowiedź:</strong> „Oczywiście! To jedna z największych zalet współpracy z nami. W przeciwieństwie do najmu długoterminowego, nadal jest Pan/Pani u siebie i może korzystać z apartamentu, kiedy tylko ma na to ochotę."</p>
+            <br/>
+            <p><strong>Panel Klienta:</strong> Otrzyma Pan/Pani dostęp do Panelu Klienta. Wystarczy zaznaczyć wybrane daty w kalendarzu — bez dodatkowych opłat (poza opłatą za sprzątanie) czy formalności.</p>
+            <br/>
+            <p><strong>Wyjątkowość oferty:</strong> Jako jedyni na rynku oferujemy pobyty właścicielskie nawet do 6 miesięcy w roku. Można dowolnie łączyć zarabianie na mieszkaniu z własnymi planami urlopowymi.</p>
+            <br/>
+            <p><strong>Standard:</strong> Przyjeżdżając do siebie, zastanie Pan/Pani apartament w nienagannym stanie, profesjonalnie posprzątany zgodnie z naszymi standardami.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Co z bezpieczeństwem? Czy mnie chroni prawo?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „To jedna z najważniejszych różnic na korzyść najmu krótkoterminowego. W naszym modelu całkowicie omijamy problemy związane z ustawą o ochronie praw lokatorów, która w najmie długoterminowym często wiąże właścicielowi ręce."</p>
+            <br/>
+            <p><strong>Brak ryzyka „dzikiego lokatora":</strong> W najmie tradycyjnym, jeśli lokator przestanie płacić, proces eksmisji może trwać latami. U nas taka sytuacja jest prawnie niemożliwa — gość hotelowy po zakończeniu opłaconej rezerwacji po prostu musi opuścić lokal.</p>
+            <br/>
+            <p><strong>Płatność z góry i weryfikacja:</strong> Każdy gość musi dokonać pełnej przedpłaty przed otrzymaniem kluczy. Każdy gość musi zaakceptować regulamin surowo zabraniający palenia, imprez i przyjazdu ze zwierzętami.</p>
+            <br/>
+            <p><strong>Monitoring:</strong> Sprawdzamy stan lokalu po każdym gościu — co kilka dni. W najmie długim nie wie Pan/Pani, co dzieje się w mieszkaniu przez miesiące. My trzymamy rękę na pulsie.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>„Nie jestem zainteresowany/a"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „Oczywiście, szanuję Pana/Pani decyzję. Proszę pozwolić, że przedstawię to jako alternatywną propozycję biznesową, o której warto wiedzieć, mając nieruchomość w tej lokalizacji."</p>
+            <br/>
+            <p><strong>Model „Zarabiaj więcej, rób mniej":</strong> Większość właścicieli wybiera najem długoterminowy z przyzwyczajenia, ale my oferujemy model, w którym zyski są zazwyczaj o 30–50% wyższe, a cała praca i ryzyko przechodzą na nas.</p>
+            <br/>
+            <p><strong>Bezpłatna wartość:</strong> Nawet jeśli nie zdecyduje się Pan/Pani na współpracę teraz, warto mieć bezpłatną analizę potencjału lokalu. To konkretne dane o tym, ile to mieszkanie jest warte na rynku turystycznym.</p>
+            <br/>
+            <p><strong>Wskazówka dla agenta:</strong> Zamiast mówić „Przepraszam, że przeszkadzam", powiedz: „Dzwonię z konkretną propozycją zwiększenia zysku z Pana/Pani lokalu". Jeśli klient twardo odmawia, zastosuj technikę „Na przyszłość" — zostaw otwarte drzwi do kontaktu.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Jakich macie klientów? Kto będzie mieszkał w moim mieszkaniu?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „W BookingHost nie wynajmujemy mieszkań każdemu — prowadzimy staranną selekcję gości, aby zapewnić bezpieczeństwo i nienaganny stan Pana/Pani nieruchomości."</p>
+            <br/>
+            <p><strong>Kto u nas mieszka?</strong> Znaczną część gości stanowią profesjonaliści: uczestnicy targów, szkoleń i pracownicy firm na kontraktach. Gościmy też turystów i osoby prywatne świadomie wybierające apartamenty o wyższym standardzie.</p>
+            <br/>
+            <p><strong>Twarde zasady:</strong> Obowiązuje całkowity zakaz palenia i zakaz przyjmowania zwierząt. Nie realizujemy rezerwacji na jedną noc — ten filtr eliminuje osoby szukające miejsca na przypadkowy nocleg lub imprezę.</p>
+            <br/>
+            <p><strong>Spokój sąsiedzki:</strong> Wybierając gości przyjeżdżających w celach zawodowych lub na spokojne zwiedzanie miasta, dbamy o to, by obecność najmu krótkoterminowego nie była uciążliwa dla otoczenia.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>„Boję się o stan mieszkania — goście zniszczą lokal"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „Paradoksalnie nieruchomości w najmie krótkoterminowym po kilku latach wyglądają lepiej niż te wynajmowane długoterminowo. Wyjaśnię, dlaczego."</p>
+            <br/>
+            <p><strong>Model hotelowy:</strong> W najmie długoterminowym zagląda Pan/Pani do mieszkania raz na pół roku. U nas profesjonalna ekipa sprzątająca jest w lokalu po każdym pobycie — czyli średnio 10–15 razy w miesiącu. Każda rysa i każda usterka są wyłapywane natychmiast.</p>
+            <br/>
+            <p><strong>Własny serwis techniczny (Warszawa):</strong> Jako jedni z nielicznych mamy w Warszawie własny, dedykowany zespół techniczny. Jeśli coś wymaga naprawy, nasz człowiek pojawia się tego samego dnia.</p>
+            <br/>
+            <p><strong>Wspólny cel:</strong> Dbamy o czystość nie tylko dla Pana/Pani, ale przede wszystkim dla naszego biznesu. Jedna negatywna opinia o czystości na Booking.com uderza w nasze zyski — dlatego utrzymanie lokalu w stanie idealnym to nasz absolutny priorytet.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Czy muszę zakładać działalność gospodarczą, żeby z wami współpracować?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Odpowiedź:</strong> „Nie, nie musi Pan/Pani zakładać firmy. Nasz model współpracy jest tak skonstruowany, aby dla Pana/Pani był możliwie zbliżony do zwykłego najmu mieszkania."</p>
+            <br/>
+            <p><strong>My jesteśmy operatorem:</strong> To my prowadzimy działalność gospodarczą i to na nas spoczywają wszelkie obowiązki operacyjne, meldunkowe i rozliczeniowe. Pan/Pani podpisuje z nami jedną umowę, co traktowane jest jako dochód z najmu prywatnego.</p>
+            <br/>
+            <p><strong>Rozliczenie — ryczałt 8,5%:</strong> Jako właściciel rozlicza się Pan/Pani z urzędem skarbowym tak samo jak przy najmie długoterminowym — ryczałtem 8,5% do kwoty 100 tys. zł rocznie. Nie trzeba prowadzić księgowości ani opłacać ZUS.</p>
+            <br/>
+            <p><strong>Wskazówka dla agenta:</strong> Używaj argumentu „Czyste ręce": „Dla Pana/Pani to dochód pasywny. To my zajmujemy się fakturami dla gości, opłatą klimatyczną i raportowaniem. Pan/Pani dostaje przelew na konto raz w miesiącu."</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Kto płaci za media i czynsz do administracji?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Odpowiedź:</strong> „W naszym modelu to Pan/Pani jako właściciel reguluje opłaty stałe (czynsz, media, internet). To rozwiązanie najbardziej przejrzyste i bezpieczne, uwzględnione w naszych prognozach zysku."</p>
+            <br/>
+            <p><strong>Pełna kontrola:</strong> Dzięki temu, że rachunki przychodzą bezpośrednio do Pana/Pani, ma Pan/Pani 100% pewności, że wszystkie zobowiązania są opłacane na bieżąco. My generujemy przychód, który z nawiązką pokrywa te koszty.</p>
+            <br/>
+            <p><strong>Gość hotelowy zużywa mniej:</strong> Goście krótkoterminowi (biznesowi lub turyści) zużywają średnio mniej mediów niż stali lokatorzy — nie robią codziennie wielkiego prania, rzadziej gotują i większość dnia spędzają poza domem.</p>
+            <br/>
+            <p><strong>Wskazówka:</strong> Serwis sprzątający sprawdza stan instalacji po każdym gościu. Jeśli zauważymy awarię, naprawiamy to natychmiast — co chroni właściciela przed niekontrolowanym wzrostem rachunków.</p>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Co jeśli gość zużyje wodę lub prąd ponad normę?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Wstęp:</strong> „To naturalna obawa, ale w praktyce najmu profesjonalnego takie sytuacje niemal się nie zdarzają. Mamy stałe oczy w Pana/Pani mieszkaniu."</p>
+            <br/>
+            <p><strong>System częstej kontroli:</strong> Ekipy sprzątające mają jasną checklistę — po każdym wymeldowaniu sprawdzają, czy wszystkie krany są zakręcone, światła zgaszone, urządzenia wyłączone. W najmie długoterminowym o wycieku dowiedziałby się Pan/Pani po miesiącu z rachunku — u nas wiemy o tym po maksymalnie 2–3 dniach.</p>
+            <br/>
+            <p><strong>Serwis techniczny jako tarcza:</strong> Jeśli sprzątający zauważy, że spłuczka przepuszcza wodę lub uszczelka wymaga wymiany, nasz serwis reaguje natychmiast — nie czekamy, aż rachunek wzrośnie.</p>
+            <br/>
+            <p><strong>Dane:</strong> Średnie zużycie mediów w apartamentach krótkoterminowych jest o ok. 20–30% niższe niż w tradycyjnych mieszkaniach — goście traktują lokal jako bazę wypadową, a nie miejsce do prowadzenia gospodarstwa domowego.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- NAGRANIA -->
+    <section id="nagrania" class="page">
+      <div class="page-header">
+        <h1>Nagrania rozmów</h1>
+        <p>Wzorcowe rozmowy szkoleniowe z właścicielami — materiał do nauki i doskonalenia warsztatu.</p>
+      </div>
+
+      <div class="drive-access-card">
+        <div class="drive-access-left">
+          <div class="drive-access-icon">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none">
+              <path d="M12 2L2 19.5h20L12 2z" fill="#4285F4" opacity="0.15"/>
+              <path d="M8 19.5L2 19.5 8.5 8l3.5 6-4 5.5z" fill="#4285F4"/>
+              <path d="M12 14.5l3.5-6L22 19.5H8l4-5z" fill="#34A853"/>
+              <path d="M8.5 8L12 2l3.5 6H8.5z" fill="#FBBC05"/>
+            </svg>
+          </div>
+          <div class="drive-access-text">
+            <div class="drive-access-label">Google Drive — dostęp na żądanie</div>
+            <h2 class="drive-access-title">Biblioteka nagrań szkoleniowych</h2>
+            <p class="drive-access-desc">
+              Nagrania przechowywane są na zabezpieczonym dysku Google dostępnym wyłącznie dla pracowników BookingHost.
+              Aby uzyskać dostęp, kliknij przycisk i zaloguj się kontem służbowym — dostęp zostanie przyznany automatycznie
+              lub po weryfikacji przez administratora.
+            </p>
+            <div class="drive-access-tags">
+              <span class="drive-tag">Dostęp tylko dla pracowników</span>
+              <span class="drive-tag">Konto służbowe @bookinghost.com</span>
+              <span class="drive-tag">Na żądanie</span>
+            </div>
+          </div>
+        </div>
+        <a class="drive-access-btn" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Przejdź do dysku
+        </a>
+      </div>
+
+      <div class="drive-info-grid">
+        <article class="drive-info-tile">
+          <div class="drive-info-tile-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Bezpieczny dostęp</h4>
+          <p>Nagrania dostępne tylko dla zalogowanych pracowników. Każde odtworzenie jest rejestrowane przez Google Workspace.</p>
+        </article>
+        <article class="drive-info-tile">
+          <div class="drive-info-tile-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4>Zawsze aktualne</h4>
+          <p>Nowe nagrania pojawiają się automatycznie po dodaniu ich do folderu — bez potrzeby aktualizacji strony.</p>
+        </article>
+        <article class="drive-info-tile">
+          <div class="drive-info-tile-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </div>
+          <h4>Scenariusze rozmów</h4>
+          <p>Cold call, retencja, obiekcje, up-sell — nagrania pogrupowane według kategorii identycznych jak w sekcji FAQ.</p>
+        </article>
+      </div>
+
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="page">
+      <div class="page-header">
+        <h1>Kontakt do ekspertek</h1>
+        <p>Bezpośredni kontakt do specjalistek w poszczególnych miastach.</p>
+      </div>
+
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.5 13.5L18 18" stroke-linecap="round"/>
+        </svg>
+        <input id="expert-search" type="text" placeholder="Szukaj ekspertki lub miasta..." />
+      </div>
+
+      <div id="expert-list"></div>
+    </section>
+
+    <!-- NBOT -->
+    <section id="nbot" class="page">
+      <div class="page-header">
+        <h1>nBot — instrukcja obsługi</h1>
+        <p>Wyszukiwarka ogłoszeń najmu z portali OtoDom, OLX i innych. Narzędzie do koordynacji kontaktów w zespole.</p>
+      </div>
+
+      <!-- CZYM JEST -->
+      <div class="info-box">
+        <strong>Czym jest nBot?</strong><br />
+        nBot agreguje ogłoszenia o wynajmie mieszkań z wszystkich głównych portali (OtoDom, OLX i inne) w jednym miejscu. Głównym celem jest <strong>unikanie powielania kontaktów</strong> — dzięki markerom każdy w zespole widzi, które ogłoszenie zostało już przedzwonione i z jakim wynikiem.
+      </div>
+
+      <!-- FILTROWANIE OGŁOSZEŃ -->
+      <div class="guide-section">
+        <h2>Jak filtrować ogłoszenia</h2>
+        <div class="step-list">
+          <article class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Wybierz województwo i miasto</h4>
+              <p>nBot pozwala przełączać się między województwami i wybierać konkretne miasto, którego ogłoszenia chcesz przeglądać.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Ustaw obowiązkowe filtry kategorii</h4>
+              <p>Przed przeglądaniem ogłoszeń zawsze ustaw: <strong>Oferta aktualna → tak</strong>, <strong>Oferta oryginalna → tak</strong>, <strong>Oferent → prywatna</strong>. Interesują nas wyłącznie ogłoszenia od właścicieli — pomijamy pośredników, firmy i aukcje.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Sprawdź numer telefonu</h4>
+              <p>Przy ogłoszeniu musi być widoczny numer kontaktowy właściciela. Jeśli numer nie jest podany — pomijamy to ogłoszenie i przechodzimy do następnego.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- SCREENSHOT filtry -->
+        <div class="nbot-screenshot-wrap">
+          <div class="nbot-screenshot-label">Przykład poprawnie ustawionych filtrów</div>
+          <img src="oferent.png" alt="Filtry nBot — oferent prywatna, oferta aktualna i oryginalna" class="nbot-screenshot" />
+        </div>
+      </div>
+
+      <!-- MARKERY -->
+      <div class="guide-section">
+        <h2>Markery — jak i kiedy zaznaczać</h2>
+        <p class="guide-section-desc">Po każdej próbie kontaktu z ogłoszeniodawcą zaznacz odpowiedni marker. Dzięki temu cały zespół wie, jaki jest status danego ogłoszenia i nie traci czasu na powielanie rozmów.</p>
+
+        <!-- SCREENSHOT dodawania markera -->
+        <div class="nbot-screenshot-wrap" style="margin-bottom: 28px;">
+          <div class="nbot-screenshot-label">Widok dodawania markera przy ogłoszeniu</div>
+          <img src="nbot-dodawaniemarkera.png" alt="Dodawanie markera w nBot" class="nbot-screenshot" />
+        </div>
+
+        <div class="marker-grid">
+
+          <div class="marker-card marker-red">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Nieaktualna</div>
+              <div class="marker-desc">Zaznacz po rozmowie, gdy właściciel potwierdził, że mieszkanie zostało już wynajęte.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-red">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Zły kontakt</div>
+              <div class="marker-desc">Osoba, do której się dodzwoniliśmy, nie wystawiała ogłoszenia — rozmowa była pomyłką.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-gray">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Nie odebrane</div>
+              <div class="marker-desc">Zadzwoniliśmy, ale nikt nie odebrał. Warto spróbować ponownie w innym terminie.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-orange">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Bezpośrednia odmowa</div>
+              <div class="marker-desc">Właściciel nie jest zainteresowany współpracą na żadnej płaszczyźnie i wyraźnie odmawia.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-blue">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Był kontakt</div>
+              <div class="marker-desc">Właściciel wysłuchał oferty i powiedział, że musi się zastanowić — sam się odezwie. Brak ustalonego terminu.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-blue">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Kontakt później</div>
+              <div class="marker-desc">Podobnie jak „Był kontakt", ale umówiliśmy konkretny termin kolejnego telefonu — np. po przemyśleniu lub za kilka dni.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-green">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Umówione</div>
+              <div class="marker-desc">Sukces — właściciel zgodził się na spotkanie lub rozmowę z ekspertem BookingHost. Termin ustalony.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-teal">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Możliwość współpracy w przyszłości</div>
+              <div class="marker-desc">Właściciel może rozważyć najem krótkoterminowy, ale nie teraz — np. za pół roku lub rok. Warto wrócić w przyszłości.</div>
+            </div>
+          </div>
+
+          <div class="marker-card marker-gray">
+            <div class="marker-dot"></div>
+            <div class="marker-body">
+              <div class="marker-name">Zły standard / zła lokalizacja</div>
+              <div class="marker-desc">Po analizie zdjęć i opisu stwierdzono, że mieszkanie nie spełnia standardów lub lokalizacja nie jest akceptowalna dla BookingHost.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ZASADY PRACY -->
+      <div class="guide-section">
+        <h2>Zasady pracy z nBot</h2>
+        <div class="feature-grid">
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>
+            </div>
+            <div>
+              <h4>Marker od razu po rozmowie</h4>
+              <p>Zaznaczaj marker natychmiast po zakończeniu połączenia — nie odkładaj na później, żeby inni z zespołu widzieli aktualny status.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+            </div>
+            <div>
+              <h4>Pomijaj ogłoszenia bez numeru</h4>
+              <p>Jeśli ogłoszenie nie zawiera numeru telefonu właściciela, przejdź do kolejnego. Nie trać czasu na szukanie kontaktu innymi metodami.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 9A7 7 0 1 1 3 9M10 12v-4M10 16v1"/></svg>
+            </div>
+            <div>
+              <h4>Tylko oferty prywatne</h4>
+              <p>Filtry muszą być ustawione na: oferent prywatna, oferta aktualna i oryginalna. Nie dzwonimy do pośredników ani firm.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="4"/><circle cx="14" cy="13" r="4"/><path d="M11.5 10.5l1 1"/></svg>
+            </div>
+            <div>
+              <h4>Sprawdzaj markery przed dzwonieniem</h4>
+              <p>Zanim zadzwonisz, zawsze sprawdź czy ogłoszenie ma już marker. Jeśli tak — nie dzwoń, chyba że marker to „Nie odebrane" lub „Kontakt później".</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SALESFORCE -->
+    <section id="salesforce" class="page">
+      <div class="page-header">
+        <h1>Salesforce — instrukcja</h1>
+        <p>Jak korzystamy z Salesforce CRM w procesach sprzedaży i obsługi właścicieli.</p>
+      </div>
+
+      <div class="info-box">
+        <strong>Czym jest Salesforce?</strong><br />
+        To główny system CRM do obsługi leadów, kontaktów, okazji sprzedażowych, historii komunikacji i raportowania.
+      </div>
+
+      <div class="guide-section">
+        <h2>Podstawy Salesforce</h2>
+        <div class="step-list">
+          <article class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Logowanie i nawigacja</h4>
+              <p>Pracuj na własnym widoku, aktualizuj zadania i kontroluj pipeline na bieżąco.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Lead — nowy właściciel</h4>
+              <p>Po wejściu leada przejmij go, zweryfikuj dane i ustaw właściwy status po pierwszym kontakcie.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Konwersja leada</h4>
+              <p>Po kwalifikacji tworzony jest kontakt i okazja, która trafia do lejka sprzedażowego.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Etapy lejka</h4>
+              <p>Kwalifikacja, prezentacja, oferta, negocjacje, podpisana umowa, wygrana lub przegrana.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>Logowanie aktywności</h4>
+              <p>Po każdej rozmowie lub mailu dodaj krótką notatkę i wynik kontaktu.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <h2>Kluczowe widoki i raporty</h2>
+        <div class="feature-grid">
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
+            </div>
+            <div>
+              <h4>Mój pipeline</h4>
+              <p>Kanban okazji sprzedażowych w podziale na etapy.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 15l4-8 4 6 3-4 3 6"/></svg>
+            </div>
+            <div>
+              <h4>Raport konwersji</h4>
+              <p>Podgląd skuteczności lejka z podziałem na miesiące, miasta i konsultantów.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>
+            </div>
+            <div>
+              <h4>Zadania przeterminowane</h4>
+              <p>Lista spraw wymagających pilnego follow-upu.</p>
+            </div>
+          </article>
+          <article class="feature-tile">
+            <div class="feature-tile-icon">
+              <svg viewBox="0 0 20 20" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.3L10 14.2l-4.8 2.6.9-5.3L2.2 7.7l5.4-.8z"/></svg>
+            </div>
+            <div>
+              <h4>KPI zespołu</h4>
+              <p>Dashboard ze spotkaniami, umowami, konwersją i realizacją celu.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATERIAŁY — OFERTA KOMPLEKSOWA -->
+    <section id="mat-kompleksowa" class="page">
+      <div class="page-header">
+        <h1>Oferta Kompleksowa</h1>
+        <p>Pełna obsługa wynajmu krótkoterminowego — BookingHost zajmuje się wszystkim.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-label">Oferta Kompleksowa</div>
+        <h2>Zarabiaj więcej, nie robiąc nic — my zajmiemy się resztą</h2>
+        <p>
+          BookingHost w ofercie kompleksowej pobiera <strong>20% prowizji od przychodu netto</strong>.
+          Działamy w <strong>36 miastach w Polsce</strong>, obsługując ponad 1 700 mieszkań.
+          Zapewniamy pełne zarządzanie: od profesjonalnych zdjęć, przez dynamiczne ceny,
+          po całodobową obsługę gości i rozliczenia miesięczne w panelu właściciela.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <div class="card-label">Prowizja</div>
+          <div class="stat-value">20%</div>
+          <div class="stat-desc">od przychodu netto — brak opłat wstępnych</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Zasięg</div>
+          <div class="stat-value">36</div>
+          <div class="stat-desc">miast w całej Polsce z pełną obsługą</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Portale</div>
+          <div class="stat-value">90%</div>
+          <div class="stat-desc">podróżujących — Booking, Airbnb, Expedia i inne</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Mieszkania</div>
+          <div class="stat-value">1700+</div>
+          <div class="stat-desc">apartamentów w zarządzaniu</div>
+        </article>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:24px;">
+        <article class="card">
+          <div class="section-head"><h3>Co wchodzi w 20% prowizji?</h3></div>
+          <ul class="bullet-list">
+            <li>Profesjonalna sesja zdjęciowa apartamentu</li>
+            <li>Wystawienie na wszystkich portalach rezerwacyjnych</li>
+            <li>Dynamiczne zarządzanie cenami (algorytmy AI)</li>
+            <li>Całodobowa obsługa gości (check-in/out, komunikacja)</li>
+            <li>Koordynacja sprzątania i przeglądów technicznych</li>
+            <li>Panel właściciela z raportami i rozliczeniami</li>
+            <li>Ubezpieczenie zarządcy</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="section-head"><h3>Jak wygląda rozliczenie?</h3></div>
+          <ul class="bullet-list">
+            <li>Kwota rezerwacji <strong>minus</strong> VAT 8%</li>
+            <li><strong>Minus</strong> prowizja portalu (np. Booking ~15%)</li>
+            <li><strong>Minus</strong> 20% wynagrodzenia BookingHost</li>
+            <li><strong>= Wypłata dla właściciela</strong> (~59% przychodu)</li>
+            <li>Przykład: 10 000 zł brutto → <strong>5 907 zł dla właściciela</strong></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section-head" style="margin-bottom:16px;"><h3>Pobierz materiały</h3></div>
+      <div class="grid-3">
+        <a class="pdf-card" href="oferta_kompleksowa.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Oferta BookingHost</div>
+          <div class="pdf-desc">#1 w obsłudze wynajmu krótkoterminowego</div>
+        </a>
+        <a class="pdf-card" href="rozliczenie_przychodu.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Jak rozliczany jest przychód?</div>
+          <div class="pdf-desc">Schemat rozliczenia z przykładem 10 000 zł</div>
+        </a>
+        <a class="pdf-card" href="przewodnik_panelu.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Przewodnik Panelu Klienta</div>
+          <div class="pdf-desc">Instrukcja obsługi panelu właściciela</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MATERIAŁY — OFERTA SMART -->
+    <section id="mat-smart" class="page">
+      <div class="page-header">
+        <h1>Oferta Smart</h1>
+        <p>Wsparcie techniczne BookingHost dostępne w każdym mieście w Polsce.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-label">Oferta Smart</div>
+        <h2>Twoje miasto, nasze technologie — wynajem krótkoterminowy bez granic</h2>
+        <p>
+          Oferta Smart jest skierowana do właścicieli z <strong>każdego miasta w Polsce</strong>,
+          gdzie BookingHost nie prowadzi pełnej obsługi. Właściciel we własnym zakresie organizuje
+          sprzątanie i przekazanie kluczy — my zapewniamy <strong>pełne wsparcie techniczne</strong>:
+          wystawienie na Booking.com, Airbnb i innych portalach, dynamiczne ceny,
+          obsługę rezerwacji i komunikację z gośćmi.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:24px;">
+        <article class="card">
+          <div class="section-head"><h3>Co zapewnia BookingHost w Smart?</h3></div>
+          <ul class="bullet-list">
+            <li>Wystawienie oferty na wszystkich portalach rezerwacyjnych</li>
+            <li>Dynamiczne zarządzanie cenami (algorytmy cenowe)</li>
+            <li>Obsługa komunikacji z gośćmi 7 dni w tygodniu</li>
+            <li>Panel właściciela z kalendarzem i rozliczeniami</li>
+            <li>Wsparcie przy onboardingu i ustawieniu profilu</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="section-head"><h3>Co organizuje właściciel?</h3></div>
+          <ul class="bullet-list">
+            <li>Sprzątanie po każdym gościu (własna ekipa lub serwis)</li>
+            <li>Przekazanie kluczy gościom (fizycznie lub smart lock)</li>
+            <li>Przeglądy techniczne i naprawy</li>
+            <li>Ubezpieczenie nieruchomości</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section-head" style="margin-bottom:16px;"><h3>Pobierz materiały</h3></div>
+      <div class="grid-3">
+        <a class="pdf-card" href="oferta_kompleksowa.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Oferta BookingHost</div>
+          <div class="pdf-desc">Pełna prezentacja usług BookingHost</div>
+        </a>
+        <a class="pdf-card" href="rozliczenie_przychodu.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Jak rozliczany jest przychód?</div>
+          <div class="pdf-desc">Schemat rozliczenia dla właściciela</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MATERIAŁY — NAJEM DŁUGOTERMINOWY -->
+    <section id="mat-długoterminowy" class="page">
+      <div class="page-header">
+        <h1>Najem Długoterminowy</h1>
+        <p>HostRent by BookingHost — profesjonalne zarządzanie najmem długoterminowym.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-label">HostRent by BookingHost</div>
+        <h2>Spokojny wynajem długoterminowy — znajdziemy sprawdzonego najemcę</h2>
+        <p>
+          Usługa dostępna dla <strong>każdego właściciela w Polsce</strong>. Wystawiamy ogłoszenie,
+          prezentujemy mieszkanie, weryfikujemy najemcę na 4 sposoby (tożsamość, zdolność finansowa,
+          historia kredytowa, historia najmu) i podpisujemy umowę. Miesięczna prowizja to
+          <strong>10% czynszu najmu (min. 350 zł brutto)</strong>.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <div class="card-label">Prowizja</div>
+          <div class="stat-value">10%</div>
+          <div class="stat-desc">miesięcznego czynszu (min. 350 zł)</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Weryfikacja</div>
+          <div class="stat-value">4</div>
+          <div class="stat-desc">etapy sprawdzenia każdego najemcy</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Zasięg</div>
+          <div class="stat-value">PL</div>
+          <div class="stat-desc">Cała Polska — każde miasto</div>
+        </article>
+        <article class="card stat-card">
+          <div class="card-label">Umowa</div>
+          <div class="stat-value">∞</div>
+          <div class="stat-desc">Czas nieokreślony, wypowiedzenie 1 miesiąc</div>
+        </article>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:24px;">
+        <article class="card">
+          <div class="section-head"><h3>5 etapów naszej usługi</h3></div>
+          <ul class="bullet-list">
+            <li><strong>Profesjonalne zdjęcia</strong> i przygotowanie ogłoszenia</li>
+            <li><strong>Poszukiwanie najemcy</strong> — Otodom, OLX, Facebook i inne</li>
+            <li><strong>Weryfikacja</strong> tożsamości i zdolności finansowej</li>
+            <li><strong>Podpisanie umowy</strong> i protokół zdawczo-odbiorczy</li>
+            <li><strong>Bieżąca obsługa</strong> — czynsz, naprawy, kontakt z najemcą</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="section-head"><h3>Jak wygląda rozliczenie?</h3></div>
+          <ul class="bullet-list">
+            <li>Przykład: czynsz 3 500 zł + 500 zł zaliczki = 4 000 zł</li>
+            <li>HostRent pobiera <strong>350 zł (10%)</strong> prowizji</li>
+            <li>Właściciel otrzymuje <strong>3 650 zł</strong> (minus opłaty admin. i prąd)</li>
+            <li>Ubezpieczenie czynszu — rekompensata do <strong>3x czynszu</strong></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section-head" style="margin-bottom:16px;"><h3>Pobierz materiały</h3></div>
+      <div class="grid-3">
+        <a class="pdf-card" href="hostrent_oferta.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Oferta HostRent</div>
+          <div class="pdf-desc">#1 w obsłudze wynajmu długoterminowego</div>
+        </a>
+        <a class="pdf-card" href="hostrent_proces.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Proces HostRent</div>
+          <div class="pdf-desc">7 kroków od oferty do bieżącej obsługi</div>
+        </a>
+        <a class="pdf-card" href="umowa_zarzadzanie_najmem.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+          <div class="pdf-name">Umowa o Zarządzanie Najmem</div>
+          <div class="pdf-desc">Wzór umowy HostRent 2025</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MATERIAŁY PDF — wszystkie dokumenty -->
+    <section id="mat-pdf" class="page">
+      <div class="page-header">
+        <h1>Materiały PDF dla klientów</h1>
+        <p>Wszystkie dokumenty i prezentacje wysyłane właścicielom — w jednym miejscu.</p>
+      </div>
+
+      <!-- OFERTA KOMPLEKSOWA -->
+      <div class="pdf-group">
+        <div class="pdf-group-label">Oferta Kompleksowa</div>
+        <div class="grid-3">
+          <a class="pdf-card" href="oferta_kompleksowa.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Oferta BookingHost</div>
+            <div class="pdf-desc">#1 w obsłudze wynajmu krótkoterminowego</div>
+          </a>
+          <a class="pdf-card" href="rozliczenie_przychodu.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Jak rozliczany jest przychód?</div>
+            <div class="pdf-desc">Schemat rozliczenia z przykładem 10 000 zł</div>
+          </a>
+          <a class="pdf-card" href="przewodnik_panelu.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Przewodnik Panelu Klienta</div>
+            <div class="pdf-desc">Instrukcja obsługi panelu właściciela</div>
+          </a>
+          <a class="pdf-card" href="Lista_kontrolna_.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Lista wyposażenia</div>
+            <div class="pdf-desc">Niezbędne wyposażenie do przyjęcia gości</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- OFERTA SMART -->
+      <div class="pdf-group">
+        <div class="pdf-group-label">Oferta Smart</div>
+        <div class="grid-3">
+          <a class="pdf-card" href="oferta_kompleksowa.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Oferta BookingHost</div>
+            <div class="pdf-desc">Pełna prezentacja usług BookingHost</div>
+          </a>
+          <a class="pdf-card" href="jak_rozliczany_jest_przychód_z_twojego_mieszkania_smart.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Jak rozliczany jest przychód? (Smart)</div>
+            <div class="pdf-desc">Schemat rozliczenia dla oferty Smart</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- NAJEM DŁUGOTERMINOWY -->
+      <div class="pdf-group">
+        <div class="pdf-group-label">Najem Długoterminowy — HostRent</div>
+        <div class="grid-3">
+          <a class="pdf-card" href="hostrent_oferta.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Oferta HostRent</div>
+            <div class="pdf-desc">#1 w obsłudze wynajmu długoterminowego</div>
+          </a>
+          <a class="pdf-card" href="hostrent_proces.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Proces HostRent</div>
+            <div class="pdf-desc">7 kroków od oferty do bieżącej obsługi</div>
+          </a>
+          <a class="pdf-card" href="umowa_zarzadzanie_najmem.pdf" target="_blank" rel="noopener">
+            <div class="pdf-icon-wrap"><img src="pdf.png" alt="PDF" class="pdf-icon" /></div>
+            <div class="pdf-name">Umowa o Zarządzanie Najmem</div>
+            <div class="pdf-desc">Wzór umowy HostRent 2025</div>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="main.js"></script>
+  <script>
+  // ═══════════════════════════════════════════════
+  // DROPDOWN — click toggle, nie hover
+  // Naprawia bug: dwa menu jednocześnie widoczne
+  // ═══════════════════════════════════════════════
+  (function() {
+    const wrappers = document.querySelectorAll('.tools-wrapper');
+
+    function closeAll() {
+      wrappers.forEach(function(w) { w.classList.remove('open'); });
+    }
+
+    wrappers.forEach(function(wrapper) {
+      const btn = wrapper.querySelector('.tools-tab');
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.contains('open');
+        closeAll();
+        if (!isOpen) wrapper.classList.add('open');
+      });
+
+      // Klik wewnątrz menu NIE zamyka
+      wrapper.querySelector('.tools-menu').addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+
+    // Klik poza — zamknij wszystkie
+    document.addEventListener('click', closeAll);
+
+    // Escape zamknij
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeAll();
+    });
+
+    // ── Obsługa narzędzi/materiałów: active state na wrapperze ──
+    var TOOL_TABS = ['nbot', 'salesforce'];
+    var MAT_TABS  = ['mat-kompleksowa', 'mat-smart', 'mat-długoterminowy', 'mat-pdf'];
+
+    function clearWrapperActive() {
+      document.getElementById('toolsWrapper').classList.remove('tools-active');
+      document.getElementById('materialsWrapper').classList.remove('tools-active');
+    }
+
+    document.querySelectorAll('.tool-item[data-tab]').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var tabId = item.dataset.tab;
+
+        // Przełącz stronę
+        document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+        var page = document.getElementById(tabId);
+        if (page) page.classList.add('active');
+
+        // Usuń active ze zwykłych tabów
+        document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+
+        // Podświetl właściwy wrapper
+        clearWrapperActive();
+        if (TOOL_TABS.includes(tabId)) {
+          document.getElementById('toolsWrapper').classList.add('tools-active');
+        } else if (MAT_TABS.includes(tabId)) {
+          document.getElementById('materialsWrapper').classList.add('tools-active');
+        }
+
+        closeAll();
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        history.replaceState(null, null, '#' + tabId);
+      });
+    });
+
+    // Zwykłe taby — zdejmij tools-active
+    document.querySelectorAll('.tab').forEach(function(t) {
+      t.addEventListener('click', function() {
+        clearWrapperActive();
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
