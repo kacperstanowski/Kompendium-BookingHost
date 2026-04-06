@@ -72,14 +72,22 @@ const recordings = [
 ];
 
 const experts = [
-  { name: "Anna Kowalska", city: "Warszawa", phone: "+48 600 100 200", initials: "AK" },
-  { name: "Marta Wiśniewska", city: "Kraków", phone: "+48 601 200 300", initials: "MW" },
-  { name: "Karolina Nowak", city: "Wrocław", phone: "+48 602 300 400", initials: "KN" },
-  { name: "Joanna Lewandowska", city: "Gdańsk", phone: "+48 603 400 500", initials: "JL" },
-  { name: "Agnieszka Zielińska", city: "Poznań", phone: "+48 604 500 600", initials: "AZ" },
-  { name: "Monika Szymańska", city: "Łódź", phone: "+48 605 600 700", initials: "MS" },
-  { name: "Patrycja Woźniak", city: "Zakopane", phone: "+48 606 700 800", initials: "PW" },
-  { name: "Natalia Dąbrowska", city: "Katowice", phone: "+48 607 800 900", initials: "ND" }
+  { name: "Agata Duszeńko",           city: "Wrocław",                                        initials: "AD" },
+  { name: "Agnieszka Lewandowska",    city: "Warszawa",                                       initials: "AL" },
+  { name: "Beata Jagieła",            city: "Warszawa",                                       initials: "BJ" },
+  { name: "Ewelina Zdunek",           city: "Trójmiasto",                                     initials: "EZ" },
+  { name: "Filip Szymaszek",          city: "Łódź",                                           initials: "FS" },
+  { name: "Gabriela Kowalska",        city: "Wrocław",                                        initials: "GK" },
+  { name: "Justyna Siemiennik",       city: "Szczecin",                                       initials: "JS" },
+  { name: "Karol Wieder",             city: "Katowice / Gliwice / Chorzów / Bielsko-Biała",   initials: "KW" },
+  { name: "Karolina Grabeus",         city: "Zakopane · Oferta Smart",                        initials: "KG" },
+  { name: "Katarzyna Okupniarek",     city: "Katowice / Gliwice / Chorzów / Bielsko-Biała",   initials: "KO" },
+  { name: "Katarzyna Puc",            city: "Rzeszów",                                        initials: "KP" },
+  { name: "Magdalena Gruchot",        city: "Poznań",                                         initials: "MG" },
+  { name: "Magdalena Kanik-Drabicka", city: "Najem długoterminowy",                           initials: "MD" },
+  { name: "Małgorzata Królik",        city: "Kraków",                                         initials: "MR" },
+  { name: "Monika Księska",           city: "Lublin",                                         initials: "MK" },
+  { name: "Łukasz Kurdej",            city: "Warszawa",                                       initials: "ŁK" },
 ];
 
 const tagColors = {
@@ -192,14 +200,13 @@ function renderExperts() {
   experts.forEach((expert) => {
     const article = document.createElement("article");
     article.className = "expert-card";
-    article.dataset.search = `${expert.name} ${expert.city} ${expert.phone}`.toLowerCase();
+    article.dataset.search = `${expert.name} ${expert.city}`.toLowerCase();
 
     article.innerHTML = `
       <div class="avatar">${expert.initials}</div>
       <div class="expert-info">
         <h3>${expert.name}</h3>
         <div class="expert-city">📍 ${expert.city}</div>
-        <div class="phone-badge">📞 ${expert.phone}</div>
       </div>
     `;
 
