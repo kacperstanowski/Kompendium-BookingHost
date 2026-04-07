@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookingHost – Gdańsk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lokalizacja.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #leaflet-map { width:100%; height:480px; border-radius:14px; background:#eef4f6; z-index:0; }
+    .district-tooltip { background:rgba(15,25,40,0.88); border:none; border-radius:6px; color:#fff; font-size:0.78rem; font-weight:600; font-family:"DM Sans",sans-serif; padding:4px 10px; box-shadow:0 2px 8px rgba(0,0,0,0.2); white-space:nowrap; }
+    .district-tooltip::before { display:none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <div class="brand-title">BookingHost</div>
+        <div class="brand-subtitle">Mapa obsługi – Gdańsk</div>
+      </div>
+    </div>
+    <a class="back-link" href="index.html#lokalizacje">← Powrót</a>
+  </header>
+
+  <main class="layout">
+    <section class="hero-card">
+      <div class="hero-badge">Gdańsk</div>
+      <h1>Mapa dzielnic Gdańska</h1>
+      <p>Wybierz tryb <strong>Lead</strong> albo <strong>nBot</strong>, aby sprawdzić zakres obsługi w poszczególnych dzielnicach. Kliknij wybraną dzielnicę, aby zobaczyć jej status.</p>
+    </section>
+
+    <section class="controls-card">
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="lead">Lead</button>
+        <button class="mode-btn" data-mode="nbot">nBot</button>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-color covered"></span><span>Obsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color uncovered"></span><span>Nieobsługiwane</span></div>
+        <div class="legend-item"><span class="legend-color selected"></span><span>Wybrana dzielnica</span></div>
+      </div>
+    </section>
+
+    <section class="addr-search-section">
+      <div class="addr-search-header">
+        <div class="addr-search-kicker">Sprawdź adres</div>
+        <h2 class="addr-search-title">Wpisz adres w Gdańsku</h2>
+        <p class="addr-search-desc">Wpisz ulicę i numer domu — dzielnica zostanie podświetlona na mapie.</p>
+      </div>
+      <div class="addr-search-box">
+        <div class="addr-input-wrap">
+          <span class="addr-input-icon">📍</span>
+          <input id="addr-input" type="text" class="addr-input" placeholder="np. Długa 1, Wały Jagiellońskie 10, Grunwaldzka 50..." autocomplete="off" />
+          <button id="addr-btn" class="addr-btn">Sprawdź</button>
+        </div>
+        <div class="addr-examples">
+          Przykłady:
+          <button class="addr-example" data-val="Długa 1">Długa 1</button>
+          <button class="addr-example" data-val="Wały Jagiellońskie 10">Wały Jagiellońskie 10</button>
+          <button class="addr-example" data-val="Grunwaldzka 50">Grunwaldzka 50</button>
+        </div>
+      </div>
+      <div id="addr-result" class="addr-result addr-result--hidden">
+        <div class="addr-result-inner">
+          <div id="addr-result-icon" class="addr-result-icon"></div>
+          <div class="addr-result-content">
+            <div id="addr-result-title" class="addr-result-title"></div>
+            <div id="addr-result-district" class="addr-result-district"></div>
+            <div id="addr-result-detail" class="addr-result-detail"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="city-body">
+      <div class="city-map-area">
+        <div class="city-map-wrap"><div id="leaflet-map"></div></div>
+        <div class="city-legend">
+          <div class="city-legend-title">Dzielnice Gdańska</div>
+          <div class="city-legend-grid">
+            <div class="city-legend-item"><span class="city-legend-name">Śródmieście</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Aniołki</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Brzeźno</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Brętowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Chełm</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Jasień</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Kokoszki</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Krakowiec - Górki Zachodnie</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Letnica</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Matarnia</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Młyniska</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Nowy Port</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Oliwa</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Olszynka</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Orunia - Święty Wojciech - Lipce</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Orunia Górna - Gdańsk Południe</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Osowa</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Piecki-Migowo</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Przymorze Małe</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Przymorze Wielkie</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Przeróbka</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Rudniki</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Siedlce</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Stogi</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Strzyża</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Suchanino</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Ujeścisko - Łostowice</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">VII Dwór</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Wrzeszcz Dolny</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Wrzeszcz Górny</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Wyspa Sobieszewska</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Wzgórze Mickiewicza</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Zaspa-Młyniec</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Zaspa-Rozstaje</span></div>
+            <div class="city-legend-item"><span class="city-legend-name">Żabianka-Wejhera-Jelitkowo-Tysiąclecia</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="city-info-panel">
+        <div>
+          <div class="city-kicker">Szczegóły</div>
+          <h2 id="c-panel-name" class="city-district-name">Gdańsk</h2>
+        </div>
+        <div id="c-panel-status" class="city-status-badge neutral">Wybierz dzielnicę</div>
+        <p id="c-panel-desc" class="city-info-desc">Kliknij dowolną dzielnicę, aby zobaczyć jej status obsługi w wybranym trybie.</p>
+        <div class="city-info-box">
+          <h4>Nieobsługiwane dzielnice</h4>
+          <ul id="c-uncovered-list"></ul>
+        </div>
+        <div class="city-info-box">
+          <h4>Aktualny tryb</h4>
+          <div id="c-panel-mode" class="city-mode-label">Lead</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+  window.cityData = {
+    cityName: "Gdańsk",
+    coverage: {
+      lead: {
+        covered: [
+          "srodmiescie","aniolki","brzezno","bretowo","chelm","jasien",
+          "nowy-port","oliwa","piecki-migowo","przymorze-male","przymorze-wielkie",
+          "siedlce","strzyza","suchanino","wrzeszcz-dolny","wrzeszcz-gorny",
+          "wzgorze-mickiewicza","zaspa-mlyniec","zaspa-rozstaje",
+          "zabianka-wejhera-jelitkowo-tysiaclecia","ujescisko-lostowice",
+          "orunia-swiety-wojciech-lipce","vii-dwor"
+        ],
+        uncovered: [
+          "kokoszki","krakowiec-gorki-zachodnie","letnica","matarnia",
+          "mlyniska","olszynka","osowa","przerobka","rudniki","stogi",
+          "wyspa-sobieszewska","orunia-gorna-gdansk-poludnie"
+        ]
+      },
+      nbot: {
+        covered: [
+          "srodmiescie","aniolki","brzezno","bretowo","chelm","jasien",
+          "nowy-port","oliwa","piecki-migowo","przymorze-male","przymorze-wielkie",
+          "siedlce","strzyza","suchanino","wrzeszcz-dolny","wrzeszcz-gorny",
+          "wzgorze-mickiewicza","zaspa-mlyniec","zaspa-rozstaje",
+          "zabianka-wejhera-jelitkowo-tysiaclecia","ujescisko-lostowice"
+        ],
+        uncovered: [
+          "kokoszki","krakowiec-gorki-zachodnie","letnica","matarnia",
+          "mlyniska","olszynka","osowa","orunia-swiety-wojciech-lipce",
+          "przerobka","rudniki","stogi","vii-dwor",
+          "wyspa-sobieszewska","orunia-gorna-gdansk-poludnie"
+        ]
+      }
+    },
+    districtNames: {
+      "srodmiescie":                          "Śródmieście",
+      "aniolki":                              "Aniołki",
+      "brzezno":                              "Brzeźno",
+      "bretowo":                              "Brętowo",
+      "chelm":                                "Chełm",
+      "jasien":                               "Jasień",
+      "kokoszki":                             "Kokoszki",
+      "krakowiec-gorki-zachodnie":            "Krakowiec - Górki Zachodnie",
+      "letnica":                              "Letnica",
+      "matarnia":                             "Matarnia",
+      "mlyniska":                             "Młyniska",
+      "nowy-port":                            "Nowy Port",
+      "oliwa":                                "Oliwa",
+      "olszynka":                             "Olszynka",
+      "orunia-swiety-wojciech-lipce":         "Orunia - Święty Wojciech - Lipce",
+      "orunia-gorna-gdansk-poludnie":         "Orunia Górna - Gdańsk Południe",
+      "osowa":                                "Osowa",
+      "piecki-migowo":                        "Piecki-Migowo",
+      "przymorze-male":                       "Przymorze Małe",
+      "przymorze-wielkie":                    "Przymorze Wielkie",
+      "przerobka":                            "Przeróbka",
+      "rudniki":                              "Rudniki",
+      "siedlce":                              "Siedlce",
+      "stogi":                                "Stogi",
+      "strzyza":                              "Strzyża",
+      "suchanino":                            "Suchanino",
+      "ujescisko-lostowice":                  "Ujeścisko - Łostowice",
+      "vii-dwor":                             "VII Dwór",
+      "wrzeszcz-dolny":                       "Wrzeszcz Dolny",
+      "wrzeszcz-gorny":                       "Wrzeszcz Górny",
+      "wyspa-sobieszewska":                   "Wyspa Sobieszewska",
+      "wzgorze-mickiewicza":                  "Wzgórze Mickiewicza",
+      "zaspa-mlyniec":                        "Zaspa-Młyniec",
+      "zaspa-rozstaje":                       "Zaspa-Rozstaje",
+      "zabianka-wejhera-jelitkowo-tysiaclecia":"Żabianka-Wejhera-Jelitkowo-Tysiąclecia"
+    },
+    uncoveredLabel: [
+      "Kokoszki","Krakowiec - Górki Zachodnie","Letnica","Matarnia",
+      "Młyniska","Olszynka","Osowa","Przeróbka","Rudniki","Stogi",
+      "Wyspa Sobieszewska","Orunia Górna - Gdańsk Południe"
+    ]
+  };
+  </script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function() {
+    var COLOR_COVERED   = '#24b86b';
+    var COLOR_UNCOVERED = '#e04a4a';
+    var COLOR_LEAD_ONLY = '#f59e0b';
+    var COLOR_SELECTED  = '#0f1928';
+    var currentMode = 'lead', districtLayers = {}, selectedSlug = null, addressMarker = null;
+    var names = window.cityData.districtNames;
+
+    function getColor(slug) {
+      var cov = window.cityData.coverage[currentMode];
+      if (cov.covered.indexOf(slug) !== -1) return COLOR_COVERED;
+      if (cov.uncovered.indexOf(slug) !== -1) {
+        if (currentMode === 'nbot' && window.cityData.coverage.lead.covered.indexOf(slug) !== -1)
+          return COLOR_LEAD_ONLY;
+        return COLOR_UNCOVERED;
+      }
+      return COLOR_COVERED;
+    }
+
+    var map = L.map('leaflet-map', { center:[54.352, 18.646], zoom:11, zoomControl:true, scrollWheelZoom:false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+      subdomains:'abcd', maxZoom:19
+    }).addTo(map);
+
+    fetch('gdansk_dzielnice.geojson')
+      .then(function(r) { return r.json(); })
+      .then(function(g) { loadDistricts(g); })
+      .catch(function() {
+        document.getElementById('leaflet-map').innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#67778b;font-size:0.9rem;">Mapa niedostępna — użyj wyszukiwarki adresów powyżej.</div>';
+      });
+
+    function loadDistricts(geojson) {
+      var gLayer = L.geoJSON(geojson, {
+        style: function(f) { return { fillColor:getColor(f.properties.slug), fillOpacity:0.68, color:'#ffffff', weight:2.5 }; },
+        onEachFeature: function(f, lyr) {
+          var slug = f.properties.slug, nazwa = f.properties.name;
+          lyr.bindTooltip(nazwa, { permanent:false, direction:'center', className:'district-tooltip' });
+          lyr.on('click', function() { selectDistrict(slug, lyr); });
+          lyr.on('mouseover', function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity:0.45 }); });
+          lyr.on('mouseout',  function() { if (selectedSlug !== slug) lyr.setStyle({ fillOpacity:0.68 }); });
+          districtLayers[slug] = lyr;
+        }
+      }).addTo(map);
+      map.fitBounds(gLayer.getBounds(), { padding:[10,10] });
+      updateUncoveredList();
+    }
+
+    function selectDistrict(slug, layer) {
+      if (selectedSlug && districtLayers[selectedSlug])
+        districtLayers[selectedSlug].setStyle({ fillColor:getColor(selectedSlug), fillOpacity:0.68, color:'#ffffff', weight:2.5 });
+      selectedSlug = slug;
+      layer.setStyle({ fillColor:getColor(slug), fillOpacity:0.88, color:COLOR_SELECTED, weight:4 });
+      layer.bringToFront();
+      var dispName = names[slug] || slug;
+      var statusEl = document.getElementById('c-panel-status');
+      var cov = window.cityData.coverage[currentMode];
+      var leadCov = window.cityData.coverage.lead;
+      document.getElementById('c-panel-name').textContent = dispName;
+      document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+      statusEl.style.cssText = '';
+      if (cov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge covered'; statusEl.textContent = 'Obsługiwana';
+        document.getElementById('c-panel-desc').textContent = dispName + ' jest obsługiwana w trybie ' + (currentMode==='lead'?'Lead':'nBot') + '.';
+      } else if (currentMode === 'nbot' && leadCov.covered.indexOf(slug) !== -1) {
+        statusEl.className = 'city-status-badge'; statusEl.style.cssText = 'background:#fff8e1;color:#b45309;border-color:#fbbf24;';
+        statusEl.textContent = 'Tylko Lead (inbound)';
+        document.getElementById('c-panel-desc').textContent = dispName + ' — obsługujemy tylko gdy właściciel sam się zgłosi.';
+      } else {
+        statusEl.className = 'city-status-badge uncovered'; statusEl.textContent = 'Nieobsługiwana';
+        document.getElementById('c-panel-desc').textContent = dispName + ' nie jest obsługiwana w trybie ' + (currentMode==='lead'?'Lead':'nBot') + '.';
+      }
+    }
+
+    function updateUncoveredList() {
+      var list = document.getElementById('c-uncovered-list');
+      list.innerHTML = '';
+      window.cityData.uncoveredLabel.forEach(function(l) { var li = document.createElement('li'); li.textContent = l; list.appendChild(li); });
+    }
+
+    document.querySelectorAll('.mode-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active'); currentMode = btn.dataset.mode;
+        for (var s in districtLayers) {
+          var isSel = s === selectedSlug;
+          districtLayers[s].setStyle({ fillColor:getColor(s), fillOpacity:isSel?0.88:0.68, color:isSel?COLOR_SELECTED:'#ffffff', weight:isSel?4:2.5 });
+        }
+        if (selectedSlug && districtLayers[selectedSlug]) selectDistrict(selectedSlug, districtLayers[selectedSlug]);
+        else {
+          document.getElementById('c-panel-name').textContent = 'Gdańsk';
+          var st = document.getElementById('c-panel-status');
+          st.className = 'city-status-badge neutral'; st.style.cssText = ''; st.textContent = 'Wybierz dzielnicę';
+          document.getElementById('c-panel-desc').textContent = 'Kliknij dowolną dzielnicę, aby zobaczyć jej status obsługi w wybranym trybie.';
+        }
+        document.getElementById('c-panel-mode').textContent = currentMode === 'lead' ? 'Lead' : 'nBot';
+        updateUncoveredList();
+      });
+    });
+
+    var districtMap = {
+      'srodmiescie':'srodmiescie','aniolki':'aniolki','brzezno':'brzezno','bretowo':'bretowo',
+      'chelm':'chelm','jasien':'jasien','kokoszki':'kokoszki','letnica':'letnica',
+      'matarnia':'matarnia','mlyniska':'mlyniska','nowy port':'nowy-port','oliwa':'oliwa',
+      'olszynka':'olszynka','osowa':'osowa','piecki-migowo':'piecki-migowo',
+      'piecki migowo':'piecki-migowo','przymorze male':'przymorze-male',
+      'przymorze wielkie':'przymorze-wielkie','przerobka':'przerobka','rudniki':'rudniki',
+      'siedlce':'siedlce','stogi':'stogi','strzyza':'strzyza','suchanino':'suchanino',
+      'ujescisko':'ujescisko-lostowice','lostowice':'ujescisko-lostowice',
+      'vii dwor':'vii-dwor','wrzeszcz dolny':'wrzeszcz-dolny','wrzeszcz gorny':'wrzeszcz-gorny',
+      'wyspa sobieszewska':'wyspa-sobieszewska','wzgorze mickiewicza':'wzgorze-mickiewicza',
+      'zaspa-mlyniec':'zaspa-mlyniec','zaspa mlyniec':'zaspa-mlyniec',
+      'zaspa-rozstaje':'zaspa-rozstaje','zaspa rozstaje':'zaspa-rozstaje',
+      'zabianka':'zabianka-wejhera-jelitkowo-tysiaclecia','jelitkowo':'zabianka-wejhera-jelitkowo-tysiaclecia',
+      'orunia gorna':'orunia-gorna-gdansk-poludnie','orunia':'orunia-swiety-wojciech-lipce',
+      'krakowiec':'krakowiec-gorki-zachodnie'
+    };
+
+    function normalizeDistrict(str) {
+      if (!str) return null;
+      var s = str.toLowerCase()
+        .replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o').replace(/ś/g,'s')
+        .replace(/ź/g,'z').replace(/ż/g,'z').replace(/ć/g,'c').replace(/ń/g,'n')
+        .replace(/ł/g,'l').replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
+      if (districtMap[s]) return districtMap[s];
+      for (var key in districtMap) { if (s.indexOf(key) !== -1) return districtMap[key]; }
+      return null;
+    }
+
+    async function checkAddress() {
+      var query = input.value.trim(); if (!query) return;
+      showResult('loading','Sprawdzam adres...','','');
+      try {
+        var parts = query.match(/^(.+?)\s+(\d+\w*)\s*$/) || [];
+        var street = parts[1] ? parts[1].trim() : query.trim();
+        var number = parts[2] || '';
+        var fullQuery = (number ? street + ' ' + number : street) + ', Gdańsk';
+        var url = 'https://api.geoapify.com/v1/geocode/search?text=' + encodeURIComponent(fullQuery) +
+          '&filter=countrycode:pl&bias=proximity:18.646,54.352&lang=pl&limit=5&apiKey=bd1229116680495c949ee4b6b64b6cfb';
+        var res = await fetch(url, { mode:'cors' });
+        var data = await res.json();
+        var features = (data.features || []).filter(function(f) {
+          return (f.properties.city || '').toLowerCase().indexOf('gda') !== -1;
+        });
+        if (!features.length) { showResult('unknown','Nie znaleziono adresu w Gdańsku','','Sprawdź pisownię.'); return; }
+        var best = features[0], p = best.properties;
+        var lat = best.geometry.coordinates[1], lon = best.geometry.coordinates[0];
+        if (addressMarker) map.removeLayer(addressMarker);
+        addressMarker = L.circleMarker([lat,lon], { radius:9, fillColor:'#0f1928', fillOpacity:1, color:'#ffffff', weight:3 }).addTo(map);
+        addressMarker.bindPopup('<strong>' + (p.street||'') + ' ' + (p.housenumber||'') + '</strong>').openPopup();
+        map.setView([lat,lon], 14, { animate:true });
+        var candidates = [p.district, p.suburb, p.quarter, p.neighbourhood].filter(Boolean);
+        var slug = null;
+        for (var i=0; i<candidates.length; i++) { slug = normalizeDistrict(candidates[i]); if (slug) break; }
+        var modeLabel = currentMode === 'lead' ? 'Lead' : 'nBot';
+        var shortAddr = [p.street, p.housenumber].filter(Boolean).join(' ');
+        if (slug) {
+          if (districtLayers[slug]) selectDistrict(slug, districtLayers[slug]);
+          var dispName = names[slug] || slug;
+          var cov = window.cityData.coverage[currentMode];
+          var leadCov = window.cityData.coverage.lead;
+          if (cov.covered.indexOf(slug) !== -1)
+            showResult('covered','Tak, ten adres obsługujemy!','Dzielnica: '+dispName,'Tryb: '+modeLabel+' · '+shortAddr);
+          else if (currentMode==='nbot' && leadCov.covered.indexOf(slug) !== -1)
+            showResult('lead-only','Obsługujemy tylko gdy właściciel sam się zgłosi','Dzielnica: '+dispName+' — tylko tryb Lead','Aktualny tryb: nBot · '+shortAddr);
+          else
+            showResult('uncovered','Tego adresu nie obsługujemy','Dzielnica: '+dispName,'Tryb: '+modeLabel+' · '+shortAddr);
+        } else {
+          showResult('unknown','Adres znaleziony na mapie','Nie udało się automatycznie określić dzielnicy',shortAddr);
+        }
+      } catch(e) { showResult('unknown','Błąd połączenia','','Sprawdź połączenie z internetem i spróbuj ponownie.'); }
+    }
+
+    function showResult(state,title,district,detail) {
+      var result = document.getElementById('addr-result');
+      result.className = 'addr-result addr-result--' + state;
+      document.getElementById('addr-result-icon').textContent = state==='covered'?'✅':state==='uncovered'?'❌':state==='lead-only'?'⚠️':state==='loading'?'⏳':'ℹ️';
+      document.getElementById('addr-result-title').textContent = title;
+      document.getElementById('addr-result-district').textContent = district;
+      document.getElementById('addr-result-detail').textContent = detail;
+    }
+
+    var input = document.getElementById('addr-input');
+    var btn   = document.getElementById('addr-btn');
+    btn.addEventListener('click', checkAddress);
+    input.addEventListener('keydown', function(e) { if (e.key==='Enter') checkAddress(); });
+    document.querySelectorAll('.addr-example').forEach(function(b) {
+      b.addEventListener('click', function() { input.value = b.dataset.val; checkAddress(); });
+    });
+  })();
+  </script>
+</body>
+</html>

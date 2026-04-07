@@ -1103,6 +1103,238 @@ body {
 
 .news-item:hover .news-item-arrow { transform: translateX(3px); }
 
+/* ── PROCESS FLOW ────────────────────────────────── */
+.process-flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.process-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.process-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.process-step-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.process-arrow {
+  color: var(--text-2);
+  flex-shrink: 0;
+}
+
+/* ── TRAINING CARD ───────────────────────────────── */
+.training-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.training-card-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  background: #F8FAFB;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.training-card-header svg { color: var(--teal-dark); flex-shrink: 0; }
+
+/* ── TRAINING CHECKLIST ──────────────────────────── */
+.training-checklist {
+  list-style: none;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.training-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.training-checklist li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.training-checklist li::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--teal);
+  background: var(--teal-dim);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-label {
+  font-weight: 700;
+  color: var(--navy);
+  flex-shrink: 0;
+  min-width: 130px;
+}
+
+/* ── TRAINING ALERT ──────────────────────────────── */
+.training-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 18px;
+  background: #FFFBEB;
+  border: 1px solid #FCD34D;
+  border-left: 4px solid #F59E0B;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: #78350F;
+  line-height: 1.6;
+}
+
+.training-alert svg { color: #F59E0B; flex-shrink: 0; margin-top: 1px; }
+.training-alert strong { color: #92400E; }
+
+/* ── TRAINING TWO COL ────────────────────────────── */
+.training-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0 18px 18px;
+  gap: 12px;
+}
+
+.training-two-item {
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid transparent;
+}
+
+.training-two-item--green {
+  background: rgba(0,184,122,0.07);
+  border-color: rgba(0,184,122,0.2);
+}
+
+.training-two-item--blue {
+  background: rgba(59,130,246,0.07);
+  border-color: rgba(59,130,246,0.2);
+}
+
+.training-two-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+
+.training-two-desc {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+
+/* ── SF FORM GRID ────────────────────────────────── */
+.sf-form-grid {
+  padding: 0 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sf-form-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  align-items: center;
+}
+
+.sf-form-row:last-child { border-bottom: none; }
+
+.sf-form-field {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.sf-form-value {
+  font-size: 0.875rem;
+  color: var(--navy);
+  line-height: 1.5;
+}
+
+.sf-muted { color: var(--text-2); font-style: italic; }
+
+.sf-badge {
+  display: inline-block;
+  background: var(--teal-dim);
+  color: var(--teal-dark);
+  border: 1px solid var(--border-2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.sf-warning {
+  color: #E53E3E;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 640px) {
+  .process-flow { flex-direction: column; align-items: flex-start; }
+  .process-arrow { transform: rotate(90deg); }
+  .sf-form-row { grid-template-columns: 1fr; gap: 3px; }
+  .training-two-col { grid-template-columns: 1fr; }
+  .check-label { min-width: unset; }
+}
+
 /* ── DRIVE ACCESS CARD ───────────────────────────── */
 .drive-access-card {
   background: var(--surface);
